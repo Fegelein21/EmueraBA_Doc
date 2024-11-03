@@ -1254,7 +1254,7 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_TRANSITION str spriteAnime, int useTransisiton, intArray2D bezierPointArray, int bezierPointCount`**
 
-为指定SpriteAnime的当前帧启用或禁用过渡效果，该过渡效果将以上一帧作为变换起点，以当前帧作为变换终点。  
+为指定SpriteAnime的当前帧启用或禁用过渡效果，该过渡效果将以前一帧作为变换起点，以当前帧作为变换终点。  
 可传入一个用于描述贝塞尔曲线的数组以获得非匀速的过渡效果。
 
 * 仅以下属性会受到过渡效果的影响：
@@ -1801,7 +1801,7 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEPOSY int spineID`**
 
-获取指定Spine动画的偏移位置。
+获取指定Spine动画的绘制位置。
 
 :::tip[参数]
 * **int spineID**
@@ -1810,7 +1810,7 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 :::tip[返回值]
 * **RESULT:0**
-  * 返回Spine动画的偏移位置。
+  * 返回Spine动画的绘制位置。
 :::
 
 ----
@@ -2324,7 +2324,7 @@ PRINTSL MODULEPATH("MyMod")			; 打印“mod/MyMod v1.0/”
 
 **`int GETRESOURCEEXT strArray1D array(, int option = 1P0 | 1P1)`**
 
-获取所有受支持的资源文件扩展名，扩展名不带 `.` 号，且全部为小写。
+获取所有启动器支持的资源文件扩展名，扩展名不带 `.` 号，且全部为小写。
 
 :::tip[参数]
 * **strArray1D array**
@@ -2340,10 +2340,25 @@ PRINTSL MODULEPATH("MyMod")			; 打印“mod/MyMod v1.0/”
 
 :::note[使用例]
 ```
-GETRESOURCEEXT LOCALS
-PRINTSL LOCALS:0			; bmp
-PRINTSL LOCALS:1			; jpg
-PRINTSL LOCALS:2			; jpeg
+GETRESOURCEEXT LOCALS, 1P0
+PRINTS "Image Ext:" 
+FOR LOCAL, 0, RESULT
+	PRINTS " "
+	PRINTS LOCALS:LOCAL
+NEXT
+PRINTL
+
+GETRESOURCEEXT LOCALS, 1P1
+PRINTS "Audio Ext:" 
+FOR LOCAL, 0, RESULT
+	PRINTS " "
+	PRINTS LOCALS:LOCAL
+NEXT
+PRINTL
+
+; 输出结果
+; Image Ext: bmp jpg jpeg png webp tiff exif gif
+; Audio Ext: mp3 mpeg3 wav wave flac fla aiff aif aifc aac adt adts m2ts mp2 3g2 3gp2 3gp 3gpp m4a m4v mp4v mp4 mov asf wm wmv wma mp1 avi ac3 ec3
 ```
 :::
 

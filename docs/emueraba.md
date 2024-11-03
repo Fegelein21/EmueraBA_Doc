@@ -182,6 +182,9 @@ aris_spine, aris.atlas, aris.skel
 之后可在代码中使用 [**`SPINECREATE`**](new_com#spinecreate)、[**`CBGSETSPINE`**](new_com#cbgsetspine) 等指令加载并显示Spine动画到屏幕画面上。
 
 ```erb title="SPINE相关指令的使用示例："
+; 设置动画刷新间隔，单位为毫秒
+SETANIMETIMER 1000 / 60
+
 ; 创建一个Spine动画到自行指定的ID中
 SPINECREATE 0, "aris_spine"
 

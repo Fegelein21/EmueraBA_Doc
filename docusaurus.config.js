@@ -20,7 +20,7 @@ const config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'fegelein21', // Usually your GitHub org/user name.
+  organizationName: 'Fegelein21', // Usually your GitHub org/user name.
   projectName: 'EmueraBA_Doc', // Usually your repo name.
   deploymentBranch: 'gh-pages', // 部署的分支，默认 gh-pages
   trailingSlash: false,

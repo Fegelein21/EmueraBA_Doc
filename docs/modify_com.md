@@ -621,7 +621,11 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 ----
 #### SPRITEANIMEADDFRAME
 
-**`int SPRITEANIMECREATE str sprite, int GID`**
+**`int SPRITEANIMEADDFRAME str sprite, int delay`**
+
+新增以上1种参数格式。
+
+该指令仅对非内置SpriteAnime有效。
 
 ----
 #### SPRITEDISPOSE
