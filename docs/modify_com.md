@@ -567,6 +567,8 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 新增以上4种参数格式，且 `colorMatrix` 参数可传入任意整数数组。  
 传入 `colorMatrix` 参数时，该颜色矩阵仅在本次绘制时生效，绘制完成后会被自动清除。
 
+所有参数格式的 `destWidth` 和 `destHeight` 参数可传入 `负数` 以绘制翻转的图像。
+
 由于图形库的更换，颜色矩阵的使用方式已变更，具体请参阅 [**`GSETCOLORMATRIX`**](new_com#gsetcolormatrix) 指令中的说明。
 
 ----
@@ -578,6 +580,8 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 新增以上2种参数格式，且 `colorMatrix` 参数可传入任意整数数组。  
 传入 `colorMatrix` 参数时，该颜色矩阵仅在本次绘制时生效，绘制完成后会被自动清除。
+
+所有参数格式的 `destWidth` 和 `destHeight` 参数可传入 `负数` 以绘制翻转的图像。
 
 由于图形库的更换，颜色矩阵的使用方式已变更，具体请参阅 [**`GSETCOLORMATRIX`**](new_com#gsetcolormatrix) 指令中的说明。
 
@@ -599,6 +603,15 @@ GSAVE 0, "sav/New Folder/image"		;会导出sav/New Folder/image.png文件。
 GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png文件。
 ```
 :::
+
+----
+#### SETANIMETIMER
+
+**`void SETANIMETIMER int interval(, int duration)`**
+
+新增第2参数 `duration` ，用于指定刷新动画的持续时间，单位为毫秒。持续时间过后会自动停止刷新动画。
+
+该指令在 [**`TINPUT`**](https://evilmask.gitlab.io/emuera.em.doc/Reference/TINPUT.html) 或者 [**`INPUTMOUSEKEY`**](#inputmousekey) 之类的计时等待的情况下仍会继续刷新动画。
 
 ----
 #### SPRITECREATE
@@ -624,6 +637,8 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 **`int SPRITEANIMEADDFRAME str sprite, int delay`**
 
 新增以上1种参数格式。
+
+该指令可接受 `delay` 为0的延时帧，可用于制作变换效果。
 
 该指令仅对非内置SpriteAnime有效。
 

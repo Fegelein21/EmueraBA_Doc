@@ -1120,6 +1120,23 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 :::
 
 ----
+#### SPRITEANIMEFRAMECOUNT
+
+**`int SPRITEANIMEFRAMECOUNT str spriteAnime`**
+
+获取指定SpriteAnime的已添加的帧数量。
+
+:::tip[参数]
+* **str spriteAnime**
+  * 指定SpriteAnime名称。
+:::
+
+:::tip[返回值]
+* **RESULT:0**
+  * 返回指定SpriteAnime的帧数量。SpriteAnime未创建时返回 `0` 。
+:::
+
+----
 #### SPRITEANIMERESETTIME
 
 **`int SPRITEANIMERESETTIME str spriteAnime`**
@@ -1577,7 +1594,7 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 :::tip[返回值]
 * **RESULT:0**
-  * 指示是否成功创建新的内置Sprite，成功时返回 `非0` 。已存在同名的内置Sprite、指定的框选区域与图像无交集时返回 `0` 。
+  * 指示是否成功创建新的内置Sprite，成功时返回 `非0` 。已存在同名的内置Sprite、指定的框选区域与图像不相交时返回 `0` 。
 :::
 
 ----
@@ -1743,9 +1760,9 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 * **int destY**
   * 指定目标Y位置。
 * **int destWidth**
-  * 指定目标宽度。
+  * 指定目标宽度，可传入 `负数` 以绘制翻转的图像。
 * **int destHeight**
-  * 指定目标高度。
+  * 指定目标高度，可传入 `负数` 以绘制翻转的图像。
 * **int srcX**
   * 指定源X位置。
 * **int srcY**

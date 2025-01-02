@@ -172,6 +172,8 @@ MyMusic3,MyMusic3.wav,70,00:01:30,15000
 
 添加了对 [**`Spine 运行时`**](https://zh.esotericsoftware.com/spine-runtimes) 的支持，目前可读取Spine动画文件并通过 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp) 来渲染绘制画面。
 
+目前仅支持读取 `3.8.xx` 版本的Spine资源。
+
 添加Spine资源的方法与添加图像资源类似，请将Spine资源文件放置在 `resources` 文件夹下并创建csv文件，在csv文件中填写如下内容：
 
 ```csv title="Spine资源的填写格式与示例内容："
@@ -234,6 +236,8 @@ CBGSETSPINE 0, 0, 0, 1
 [**`GDRAWGWITHMASK`**](modify_com#gdrawgwithmask) 的绘制结果受 alpha值 和 blue值 影响。
 
 由于图形库的更换，[**`GDRAWG`**](modify_com#gdrawg)、[**`GDRAWSPRITE`**](modify_com#gdrawsprite) 指令的颜色矩阵的使用方式已变更，具体请参阅 [**`GSETCOLORMATRIX`**](new_com#gsetcolormatrix) 指令中的说明。
+
+[**`SETANIMETIMER`**](modify_com#setanimetimer) 指令在 [**`TINPUT`**](https://evilmask.gitlab.io/emuera.em.doc/Reference/TINPUT.html) 或者 [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) 之类的计时等待的情况下仍会继续刷新动画。
 
 [**`SPRITECREATE`**](modify_com#spritecreate)、[**`SPRITEANIMECREATE`**](modify_com#spriteanimecreate) 指令在创建Sprite前会释放已创建的非内置Sprite，即无需在创建前调用 [**`SPRITEDISPOSE`**](modify_com#spritedispose) 指令。如果已存在同名的内置Sprite则会创建失败。
 

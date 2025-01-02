@@ -94,11 +94,11 @@ const config = {
             type: 'localeDropdown',
             position: 'right',
           },
-          // {
-            // href: '/',
-            // label: 'GitHub',
-            // position: 'right',
-          // },
+          {
+            href: 'https://github.com/Fegelein21/EmueraBA_Doc',
+            label: 'GitHub',
+            position: 'right',
+          },
         ],
       },
       // footer: {
