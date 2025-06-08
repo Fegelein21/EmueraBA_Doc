@@ -163,7 +163,7 @@ MyMusic2,MyMusic2.m4a,80,00:01:30
 MyMusic3,MyMusic3.wav,70,00:01:30,15000
 ```
 
-`시작 시간`과 `재생 길이`는 `TimeSpan` 또는 `ms(밀리초)` 값을 받습니다. `TimeSpan` 서식은 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 문서 예시 참조.
+CSV 파일의 `시작 시간`과 `재생 시간` 속성은 `TimeSpan` 또는 `ms(밀리초)` 값을 허용합니다. `TimeSpan` 서식은 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 문서 예시 참조.
 
 오디오 기능에 대한 자세한 내용은 [**`오디오 관련`**](new_com#AudioRelated) 명령어를 참조하세요.
 

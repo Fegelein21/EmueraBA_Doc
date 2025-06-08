@@ -163,7 +163,7 @@ MyMusic2,MyMusic2.m4a,80,00:01:30
 MyMusic3,MyMusic3.wav,70,00:01:30,15000
 ```
 
-`開始時間` と `再生時間` は `TimeSpan` または `ミリ秒(ms)` 値を受け入れます。`TimeSpan` の書式については、[**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) ドキュメントの例を参照してください。
+CSVファイル内の`開始時間`と`再生時間`プロパティは、`TimeSpan`または`ms（ミリ秒）`の値を受け入れます。`TimeSpan` の書式については、[**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) ドキュメントの例を参照してください。
 
 オーディオ機能の詳細については、[**`オーディオ関連`**](new_com#AudioRelated) コマンドをご参照ください。
 

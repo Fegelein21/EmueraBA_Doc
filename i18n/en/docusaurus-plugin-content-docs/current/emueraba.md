@@ -163,7 +163,7 @@ MyMusic2,MyMusic2.m4a,80,00:01:30
 MyMusic3,MyMusic3.wav,70,00:01:30,15000
 ```
 
-`Start Time` and `Duration` accept `TimeSpan` or `ms (milliseconds)` values. Refer to the [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) documentation for the `TimeSpan` format.
+The `Start Time` and `Duration` properties in the CSV file can accept either `TimeSpan` or `ms (milliseconds)` values. Refer to the [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) documentation for the `TimeSpan` format.
 
 Please refer to the [**`Audio-related`**](new_com#AudioRelated) commands to learn more about audio features.
 
