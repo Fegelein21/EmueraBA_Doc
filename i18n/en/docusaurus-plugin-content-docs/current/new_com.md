@@ -1,61 +1,62 @@
 ---
 sidebar_position: 3
-sidebar_label: 新增指令
+sidebar_label: New Commands
 ---
 
-# 新增指令
+# New Commands {#NewCom}
 
-### 文本处理相关
+### Text Processing Related {#TextProcessRelated}
 
 ----
 #### CHARATUW
 
 **`str CHARATUW str text, int position`**
 
-使用方式与 [**`CHARATU`**](https://osdn.net/projects/emuera/wiki/excom#h5-CHARATU.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E.2C.20.3C.E6.96.87.E5.AD.97.E4.BD.8D.E7.BD.AE.3E) 指令类似，获取文本中指定位置的字符。
+Similar in usage to the [**`CHARATU`**](https://osdn.net/projects/emuera/wiki/excom#h5-CHARATU.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E.2C.20.3C.E6.96.87.E5.AD.97.E4.BD.8D.E7.BD.AE.3E) command, retrieves the character at the specified position in the text.
 
-该指令会将复杂的Emoji字符视为一个整字。
+This command treats complex Emoji characters as a single character.
 
-:::tip[参数]
-* **str text**
-  * 指定文本。
-* **int position**
-  * 指定字符位置。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text.
+- **int position**
+  - Specifies the character position.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回指定位置的字符串。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the string at the specified position.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL CHARATUW("A👨‍👩‍👧‍👦A", 1)			;打印“👨‍👩‍👧‍👦”
+PRINTSL CHARATUW("A👨‍👩‍👧‍👦A", 1)			;Prints "👨‍👩‍👧‍👦"
 ```
 :::
 
 ----
 #### FINDEMOJI
 
-**`int FINDEMOJI str text, strArray1D array`**
+**`int FINDEMOJI str text, strArray array`**
 
-寻找文本中所有的Emoji字符，并将找到的结果输出到 `array` 数组中
+Finds all Emoji characters in the text and outputs the results to the `array`.
 
-:::tip[参数]
-* **str text**
-  * 指定文本。
-* **strArray1D array**
-  * 指定接收查找结果的数组。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text.
+- **strArray array**
+  - Specifies any string-type array to receive the Emoji character results.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回找到的Emoji字符数量。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of Emoji characters found.  
+    The number retrieved may be limited by the length of the last dimension of the receiving array.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTVL FINDEMOJI("A👨‍👩‍👧‍👦AA😀A", LOCALS)		;打印“2”，LOCALS:0 ="👨‍👩‍👧‍👦"，LOCALS:1 ="😀"
+PRINTVL FINDEMOJI("A👨‍👩‍👧‍👦AA😀A", LOCALS)		;Prints "2", LOCALS:0 ="👨‍👩‍👧‍👦", LOCALS:1 ="😀"
 ```
 :::
 
@@ -64,26 +65,26 @@ PRINTVL FINDEMOJI("A👨‍👩‍👧‍👦AA😀A", LOCALS)		;打印“2”�
 
 **`str FLOATTOSTR int value, int div(, str format = "")`**
 
-用于实现对浮点数的格式化文本处理。
+Used for formatting floating-point numbers into text.
 
-:::tip[参数]
-* **int value**
-  * 指定被除数。
-* **int div**
-  * 指定除数，当除数为 `0` 时会报错。
-* **str format = ""**
-  * 指定字符串格式。
+:::tip[Parameters]
+- **int value**
+  - Specifies the dividend.
+- **int div**
+  - Specifies the divisor. An error occurs if the divisor is `0`.
+- **str format = ""**
+  - Specifies the string format.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回字符串结果。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the string result.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL FLOATTOSTR(13, 23)			;打印“0.5652174”
-PRINTSL FLOATTOSTR(13, 23, "0.00")		;打印“0.57”
+PRINTSL FLOATTOSTR(13, 23)			;Prints "0.5652174"
+PRINTSL FLOATTOSTR(13, 23, "0.00")		;Prints "0.57"
 ```
 :::
 
@@ -92,26 +93,26 @@ PRINTSL FLOATTOSTR(13, 23, "0.00")		;打印“0.57”
 
 **`str REPLACEBYARRAY str source, str match, strArray1D replaceArray`**
 
-从 [**`REPLACE`**](modify_com#replace) 指令中分离出来的新指令，替换文本时会以 `replaceArray` 数组中的字符串来依次填补。
+A new command derived from the [**`REPLACE`**](modify_com#replace) command, replaces text by sequentially filling in strings from the `replaceArray`.
 
-:::tip[参数]
-* **str text**
-  * 指定需要处理的文本。
-* **str match**
-  * 指定需要匹配的文本。
-* **strArray1D replaceArray**
-  * 指定用于替补的字符串数组。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text to be processed.
+- **str match**
+  - Specifies the text to be matched.
+- **strArray1D replaceArray**
+  - Specifies the string array for replacement.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回字符串结果。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the string result.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 LOCALS '= "111", "222", "333"
-PRINTSL REPLACEBYARRAY("A A-A", "A", LOCALS)		; 打印“111 222-333”
+PRINTSL REPLACEBYARRAY("A A-A", "A", LOCALS)		; Prints "111 222-333"
 ```
 :::
 
@@ -120,24 +121,24 @@ PRINTSL REPLACEBYARRAY("A A-A", "A", LOCALS)		; 打印“111 222-333”
 
 **`str STRAPPEND (str delimiter = ",", anyParams value)`**
 
-实现 [**`string.join`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.join?view=netframework-4.8#system-string-join(system-string-system-string())) 拼合文本。
+Implements [**`string.join`**](https://learn.microsoft.com/dotnet/api/system.string.join?view=netframework-4.8#system-string-join(system-string-system-string())) for concatenating text.
 
-:::tip[参数]
-* **str delimiter = ","**
-  * 指定用于拼合文本的分隔符， 可省略 `(",")` 。
-* **anyParams value**
-  * 指定0个或多个参数值。
+:::tip[Parameters]
+- **str delimiter = ","**
+  - Specifies the delimiter for concatenating text. Can be omitted `(",")`.
+- **anyParams value**
+  - Specifies zero or more parameter values.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回拼合字符串结果。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the concatenated string result.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL STRAPPEND(, "aaa", 222, 33)		;打印“aaa,222,33”
-PRINTSL STRAPPEND("__", "aaa", 222, 33)		;打印“aaa__222__33”
+PRINTSL STRAPPEND(, "aaa", 222, 33)		;Prints "aaa,222,33"
+PRINTSL STRAPPEND("__", "aaa", 222, 33)		;Prints "aaa__222__33"
 ```
 :::
 
@@ -146,32 +147,32 @@ PRINTSL STRAPPEND("__", "aaa", 222, 33)		;打印“aaa__222__33”
 
 **`int STRFINDUW str text, str word(, int start = 0)`**
 
-使用方式与 [**`STRFINDU`**](https://osdn.net/projects/emuera/wiki/excom#h5-STRFINDU.20.3C.E6.A4.9C.E7.B4.A2.E5.AF.BE.E8.B1.A1.3E.2C.20.3C.E6.A4.9C.E7.B4.A2.E3.81.99.E3.82.8B.E6.96.87.E5.AD.97.E5.88.97.3E.7B.2C.20.3C.E9.96.8B.E5.A7.8B.E3.82.A4.E3.83.B3.E3.83.87.E3.83.83.E3.82.AF.E3.82.B9.3E.7D) 指令类似，搜索文本中的指定字符串并获取索引位置。
+Similar in usage to the [**`STRFINDU`**](https://osdn.net/projects/emuera/wiki/excom#h5-STRFINDU.20.3C.E6.A4.9C.E7.B4.A2.E5.AF.BE.E8.B1.A1.3E.2C.20.3C.E6.A4.9C.E7.B4.A2.E3.81.99.E3.82.8B.E6.96.87.E5.AD.97.E5.88.97.3E.7B.2C.20.3C.E9.96.8B.E5.A7.8B.E3.82.A4.E3.83.B3.E3.83.87.E3.83.83.E3.82.AF.E3.82.B9.3E.7D) command, searches for the specified string in the text and retrieves its index position.
 
-该指令会将复杂的Emoji字符视为一个整字。
+This command treats complex Emoji characters as a single character.
 
-:::tip[参数]
-* **str text**
-  * 指定文本。
-* **str word**
-  * 指定搜索的字符串。
-* **int start = 0**
-  * 指定搜索的起始位置，可省略 `(0)` 。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text.
+- **str word**
+  - Specifies the string to search for.
+- **int start = 0**
+  - Specifies the starting position for the search. Can be omitted `(0)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回搜索到的索引位置，未找到时返回 `-1` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the index position found. Returns `-1` if not found.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTVL STRFINDUW("啊😀A啊B", "A")		;打印“2”
+PRINTVL STRFINDUW("啊😀A啊B", "A")		;Prints "2"
 ```
 :::
 
 ----
-#### STRFINDLAST 系列
+#### STRFINDLAST Series {#STRFINDLAST_Series}
 
 **`int STRFINDLAST str text, str word(, int start = lastIndex)`**
 
@@ -179,33 +180,33 @@ PRINTVL STRFINDUW("啊😀A啊B", "A")		;打印“2”
 
 **`int STRFINDLASTUW str text, str word(, int start = lastIndex)`**
 
-使用方式与 [**`STRFIND`**](modify_com#strfind) 指令类似，以“倒序”的方式搜索文本中的指定字符串并获取索引位置。
+Similar in usage to the [**`STRFIND`**](modify_com#strfind) command, searches for the specified string in the text in "reverse order" and retrieves its index position.
 
-**`STRFINDLAST`** 指令在处理Emoji字符时会通过计算显示宽度得出字符长度。
+The **`STRFINDLAST`** command calculates character length by display width when processing Emoji characters.
 
-**`STRFINDLASTUW`** 指令会将复杂的Emoji字符视为一个整字。
+The **`STRFINDLASTUW`** command treats complex Emoji characters as a single character.
 
-:::tip[参数]
-* **str text**
-  * 指定文本。
-* **str word**
-  * 指定搜索的字符串。
-* **int start = lastIndex**
-  * 指定搜索的起始位置，可省略 `(最后的索引位置)` 。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text.
+- **str word**
+  - Specifies the string to search for.
+- **int start = lastIndex**
+  - Specifies the starting position for the search. Can be omitted `(last index position)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回搜索到的索引位置，未找到时返回 `-1` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the index position found. Returns `-1` if not found.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTVL STRFINDLAST("啊A啊BA", "B")		;打印“5”
-PRINTVL STRFINDLAST("啊A啊BA", "A", 2)		;打印“2”
-PRINTVL STRFINDLAST("啊A啊BA", "A", 1)		;打印“-1”
-PRINTVL STRFINDLASTU("啊A啊BA", "B")		;打印“3”
-PRINTVL STRFINDLASTUW("😀A啊B😀A", "B")	;打印“3”
+PRINTVL STRFINDLAST("啊A啊BA", "B")		;Prints "5"
+PRINTVL STRFINDLAST("啊A啊BA", "A", 2)		;Prints "2"
+PRINTVL STRFINDLAST("啊A啊BA", "A", 1)		;Prints "-1"
+PRINTVL STRFINDLASTU("啊A啊BA", "B")		;Prints "3"
+PRINTVL STRFINDLASTUW("😀A啊B😀A", "B")	;Prints "3"
 ```
 :::
 
@@ -214,23 +215,23 @@ PRINTVL STRFINDLASTUW("😀A啊B😀A", "B")	;打印“3”
 
 **`str STRFORMAT str formatText(, anyParams value)`**
 
-实现 [**`string.format`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.format?view=netframework-4.8#Starting) 格式化文本处理。
+Implements [**`string.format`**](https://learn.microsoft.com/dotnet/api/system.string.format?view=netframework-4.8#Starting) for formatting text.
 
-:::tip[参数]
-* **str formatText**
-  * 指定字符串格式文本。
-* **anyParams value**
-  * 指定0个或多个参数值。
+:::tip[Parameters]
+- **str formatText**
+  - Specifies the format string.
+- **anyParams value**
+  - Specifies zero or more parameter values.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回字符串结果，格式化失败时返回原文本。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the formatted string result. Returns the original text if formatting fails.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL STRFORMAT("aaa_{0}__{1}", 222, "33")	;打印“aaa_222__33”
+PRINTSL STRFORMAT("aaa_{0}__{1}", 222, "33")	;Prints "aaa_222__33"
 ```
 :::
 
@@ -239,28 +240,28 @@ PRINTSL STRFORMAT("aaa_{0}__{1}", 222, "33")	;打印“aaa_222__33”
 
 **`int STRLENSUW str text`**
 
-使用方式与 [**`STRLENSU`**](https://osdn.net/projects/emuera/wiki/excom#h5-STRLENSU.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E) 指令类似，根据Unicode编码获取文本的字符数。
+Similar in usage to the [**`STRLENSU`**](https://osdn.net/projects/emuera/wiki/excom#h5-STRLENSU.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E) command, retrieves the number of characters in the text based on Unicode encoding.
 
-该指令会将复杂的Emoji字符视为一个整字。
+This command treats complex Emoji characters as a single character.
 
-:::tip[参数]
-* **str text**
-  * 指定文本。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回指定文本的字符数。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of characters in the specified text.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTVL STRLENSUW("A👪A")		;打印“3”
+PRINTVL STRLENSUW("A👪A")		;Prints "3"
 ```
 :::
 
 ----
-#### STRREMOVE 系列
+#### STRREMOVE Series {#STRREMOVE_Series}
 
 **`str STRREMOVE str text(, int start = 0, int count = totalLength)`**
 
@@ -268,33 +269,33 @@ PRINTVL STRLENSUW("A👪A")		;打印“3”
 
 **`str STRREMOVEUW str text(, int start = 0, int count = totalLength)`**
 
-实现 [**`string.remove`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.remove?view=netframework-4.8) 移除指定范围内的文本。
+Implements [**`string.remove`**](https://learn.microsoft.com/dotnet/api/system.string.remove?view=netframework-4.8) to remove text within a specified range.
 
-**`STRREMOVE`** 指令在处理Emoji字符时会通过计算显示宽度得出字符长度。  
-如果文本的选定位置处在长字符的中间，则后退到该字符的起始位置。也就是说，卡在起始位置的字符会被计入，卡在末尾位置的字符会被无视。
+The **`STRREMOVE`** command calculates character length by display width when processing Emoji characters.  
+If the selected position is in the middle of a long character, it retreats to the start position of that character. In other words, characters at the start position will be included, while those at the end position will be ignored.
 
-**`STRREMOVEUW`** 指令会将复杂的Emoji字符视为一个整字。
+The **`STRREMOVEUW`** command treats complex Emoji characters as a single character.
 
-:::tip[参数]
-* **str text**
-  * 指定需要处理的文本。
-* **int start = 0**
-  * 指定移除文本的起始位置，可省略 `(0)` 。
-* **int count = totalLength**
-  * 指定移除文本的字符数，可省略 `(文本总长度)` 。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text to be processed.
+- **int start = 0**
+  - Specifies the starting position for removal. Can be omitted `(0)`.
+- **int count = totalLength**
+  - Specifies the number of characters to remove. Can be omitted `(total length of text)`.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回字符串结果。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the string result.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL STRREMOVE("１２３４５６", 2, 3)			;打印“１３４５６”。
-PRINTSL STRREMOVEU("１２３４５６", 3)			;打印“１２３”。
-PRINTSL STRREMOVEU("１２３４５６", 0, 3)			;打印“４５６”。
-PRINTSL STRREMOVEUW("１２３４👨‍👩‍👧‍👦５６", 2, 3)		;打印“１２５６”。
+PRINTSL STRREMOVE("１２３４５６", 2, 3)			;Prints "１３４５６".
+PRINTSL STRREMOVEU("１２３４５６", 3)			;Prints "１２３".
+PRINTSL STRREMOVEU("１２３４５６", 0, 3)			;Prints "４５６".
+PRINTSL STRREMOVEUW("１２３４👨‍👩‍👧‍👦５６", 2, 3)		;Prints "１２５６".
 ```
 :::
 
@@ -303,28 +304,28 @@ PRINTSL STRREMOVEUW("１２３４👨‍👩‍👧‍👦５６", 2, 3)		;打�
 
 **`int STRSPLIT str text, strArray array(, str delimiter = ",")`**
 
-使用方式与 [**`SPLIT`**](modify_com#split) 指令类似，根据指定的字符串来分割文本。
+The usage is similar to the [**`SPLIT`**](modify_com#split) command, splitting text based on the specified string.
 
-:::tip[参数]
-* **str text**
-  * 指定需要分割的文本。
-* **strArray array**
-  * 指定用于保存分割文本的数组。
-* **str delimiter = ","**
-  * 指定用于分割文本的分隔符， 可省略 `(",")` 。
+:::tip[Parameters]
+- **str text**
+  - Specifies the text to be split.
+- **strArray array**
+  - Specifies the array to store the split text.
+- **str delimiter = ","**
+  - Specifies the delimiter used to split the text. Can be omitted `(",")`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回分割后的字符串个数。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of split strings.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-LOCAL = STRSPLIT("111,AAA,22", LOCALS)			;LOCAL的值赋为3。
-PRINTSL LOCALS:0					;打印“111”。
-LOCAL = STRSPLIT("111,AAA__22", LOCALS, "__")		;LOCAL的值赋为2。
-PRINTSL LOCALS:1					;打印“22”。
+LOCAL = STRSPLIT("111,AAA,22", LOCALS)         ;The value of LOCAL is assigned as 3.
+PRINTSL LOCALS:0                ;Prints "111".
+LOCAL = STRSPLIT("111,AAA__22", LOCALS, "__")  ;The value of LOCAL is assigned as 2.
+PRINTSL LOCALS:1                ;Prints "22".
 ```
 :::
 
@@ -333,27 +334,27 @@ PRINTSL LOCALS:1					;打印“22”。
 
 **`str STRTRIM str text(, str trimChars, int trimDirection = 0)`**
 
-实现 [**`string.trim`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.trim?view=netframework-4.8) 移除文本前后的指定字符。
+Implements [**`string.trim`**](https://learn.microsoft.com/dotnet/api/system.string.trim?view=netframework-4.8) to remove specified characters from the beginning and/or end of a string.
 
-:::tip[参数]
-* **str text**
-  * 指定需要处理的文本。
-* **str trimChars**
-  * 指定需要移除的字符，省略该参数时视为移除系统预设的多种空白字符，例如空格、制表符等。
-* **int trimDirection = 0**
-  * 指定移除方向， `1` = 移除前部， `2` = 移除后部，其他值为前后移除。
+:::tip[Parameters]
+- **str text**
+  - The text to process.
+- **str trimChars**
+  - Characters to remove. If omitted, default whitespace characters (e.g., spaces, tabs) are removed.
+- **int trimDirection = 0**
+  - Direction to trim: `1` = trim start, `2` = trim end, other values = trim both.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回字符串结果。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the processed string.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL STRTRIM(" 111 AAA  22  ")			;打印“111 AAA  22”。
-PRINTSL STRTRIM(" 111 AAA  22  ", " 12")		;打印“AAA”。
-PRINTSL STRTRIM(" 111 AAA  22  ", " 12", 1)		;打印“AAA  22  ”。
+PRINTSL STRTRIM(" 111 AAA  22  ")            ; Prints "111 AAA  22".
+PRINTSL STRTRIM(" 111 AAA  22  ", " 12")     ; Prints "AAA".
+PRINTSL STRTRIM(" 111 AAA  22  ", " 12", 1)  ; Prints "AAA  22  ".
 ```
 :::
 
@@ -362,28 +363,28 @@ PRINTSL STRTRIM(" 111 AAA  22  ", " 12", 1)		;打印“AAA  22  ”。
 
 **`str SUBSTRINGUW str text(, int start = 0, int length = totalLength)`**
 
-使用方式与 [**`SUBSTRINGU`**](https://osdn.net/projects/emuera/wiki/excom#h5-SUBSTRINGU.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E.2C.20.3C.E6.95.B0.E5.BC.8F.3E.2C.20.3C.E6.95.B0.E5.BC.8F.3E) 指令类似，根据指定的位置和长度来截取文本。
+Similar to [**`SUBSTRINGU`**](https://osdn.net/projects/emuera/wiki/excom#h5-SUBSTRINGU.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E.2C.20.3C.E6.95.B0.E5.BC.8F.3E.2C.20.3C.E6.95.B0.E5.BC.8F.3E), extracts a substring based on position and length.
 
-该指令会将复杂的Emoji字符视为一个整字。
+This command treats complex Emoji characters as a single unit.
 
-:::tip[参数]
-* **str text**
-  * 指定文本。
-* **int start = 0**
-  * 指定截取的起始位置，可省略 `(0)` 。
-* **int length = totalLength**
-  * 指定截取长度， 输入值为 `负数` 时将截取文本总长度。
+:::tip[Parameters]
+- **str text**
+  - The input text.
+- **int start = 0**
+  - Starting position (default: `0`).
+- **int length = totalLength**
+  - Length to extract. Negative values extract the entire remaining string.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回截取出的文本。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the extracted substring.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL SUBSTRINGUW("A👪BAB👪A", 0, 4)		;打印“A👪BA”
-PRINTSL SUBSTRINGUW("A👪BAB👪A", 5)		;打印“👪A”
+PRINTSL SUBSTRINGUW("A👪BAB👪A", 0, 4)  ; Prints "A👪BA".
+PRINTSL SUBSTRINGUW("A👪BAB👪A", 5)    ; Prints "👪A".
 ```
 :::
 
@@ -392,242 +393,1054 @@ PRINTSL SUBSTRINGUW("A👪BAB👪A", 5)		;打印“👪A”
 
 **`int TRYTOINT str text`**
 
-使用方式与 [**`TOINT`**](https://osdn.net/projects/emuera/wiki/excom#h5-TOINT.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E) 指令类似，可避免 ISNUMERIC + TOINT 的功能重复问题。
+Similar to [**`TOINT`**](https://osdn.net/projects/emuera/wiki/excom#h5-TOINT.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E), converts a string to an integer without redundant checks like `ISNUMERIC + TOINT`.
 
-:::tip[参数]
-* **str text**
-  * 指定需要转换成整数的字符串。
+:::tip[Parameters]
+- **str text**
+  - The string to convert.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否转换成功，成功时返回 `非0` 。
-* **RESULT:1**
-  * 返回转换结果，转换失败时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful.
+- **RESULT:1**
+  - Returns the converted integer. On failure, returns `0`.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 LOCAL = TRYTOINT("IO") ? RESULT:1 # 10
 ```
 :::
 
 ----
-### 变量、数组相关
+### Variables and Arrays {#VarAndArrayRelated}
 
-----
+---
 #### ARRAYBIT
 
 **`int ARRAYBIT anyArray array, str keyName(, int dimension = lastDim, str delimiter = ",")`**
 
-根据第2参数 `keyName` 中指定的多个索引键名来检索第1参数 `array` 中的各个索引键所在的索引值，并将索引值进行或值(OR)叠加。
+Retrieves the index values corresponding to the specified keys in the `keyName` parameter from the `array` and performs a bitwise OR operation on these values.
 
-除了检索数组的索引键来作为索引值，也可以将第3参数 `dimension` 指定为 `0` 以直接检索数组内的元素来作为索引值。
+The instruction can also directly retrieve elements from the array as index values by setting the `dimension` parameter to `0`.
 
-若未找到指定的索引键、或者索引值的范围在 `0 - 63` 之外，则会直接报错。
+If a specified key is not found or the index value is outside the range of `0–63`, an error will be raised.
 
-该指令为实验性功能，旨在利用系统会将合适的代码重构为常量的特性来提高程序的运行效率。
+This is an experimental feature designed to improve program execution efficiency by leveraging the system's ability to optimize suitable code into constants.
 
-:::tip[参数]
-* **anyArray array**
-  * 指定任意数组。
-* **str keyName**
-  * 指定需要叠加索引值的索引键名。
-* **int dimension = lastDim**
-  * 指定数组的索引键所在的维数，省略时使用数组最后一维。当该参数指定为 `0` 时，检索数组内的元素来作为索引值。
-* **str delimiter = ","**
-  * 指定用于分割键名的分隔符， 可省略 `(",")` 。
+:::tip[Parameters]
+- **anyArray array**
+  - Specifies any array.
+- **str keyName**
+  - Specifies the key names whose index values are to be ORed.
+- **int dimension = lastDim**
+  - Specifies the dimension of the array where the keys are located. If omitted, the last dimension is used. Setting this to `0` retrieves array elements directly as index values.
+- **str delimiter = ","**
+  - Specifies the delimiter used to split the key names. Can be omitted `(",")`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回所有索引值叠加后的或值。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the bitwise OR result of all index values.
 :::
 
-:::note[使用例]
-```erh title="EXAMPLE_ARRAY.erh文件"
+:::note[Example]
+```erh title="EXAMPLE_ARRAY.erh file"
 #DIMS EXAMPLE_ARRAY, 20 = "VALUE_0", "VALUE_1", "VALUE_2", "VALUE_3"
 ```
 
-```erd title="EXAMPLE_ARRAY.erd文件"
+```erd title="EXAMPLE_ARRAY.erd file"
 0,AAA
 1,BBB
 2,CCC
 3,DDD
 ```
 
-```erb title="erb文件"
+```erb title="erb file"
 LOCAL = ARRAYBIT(EXAMPLE_ARRAY, "AAA, BBB, DDD")	; LOCAL = 0B1011
-; 上述代码的运行效果相当于：
+; Equivalent to:
 LOCAL = 1 << GETNUM(EXAMPLE_ARRAY, "AAA")
 LOCAL |= 1 << GETNUM(EXAMPLE_ARRAY, "BBB")
 LOCAL |= 1 << GETNUM(EXAMPLE_ARRAY, "DDD")
 
 LOCAL = ARRAYBIT(EXAMPLE_ARRAY, "VALUE_0, VALUE_2", 0)	; LOCAL = 0B0101
-; 上述代码的运行效果相当于：
+; Equivalent to:
 LOCAL = 1 << ARRAYFIND(EXAMPLE_ARRAY, "VALUE_0")
 LOCAL |= 1 << ARRAYFIND(EXAMPLE_ARRAY, "VALUE_2")
 ```
 :::
 
-----
+---
+#### ARRAYRESIZE
+
+**`void ARRAYRESIZE anyArray1D array, int size1D(, int keepData = 0)`**
+
+**`void ARRAYRESIZE anyArray2D array, int size1D, int size2D(, int keepData = 0)`**
+
+**`void ARRAYRESIZE anyArray3D array, int size1D, int size2D, int size3D(, int keepData = 0)`**
+
+This instruction resizes the specified array.
+
+The `array` parameter must be a user-defined array variable with the **`RESIZE`** keyword:
+
+- The **`RESIZE`** keyword can only be used with user-defined array variables and can coexist with **`GLOBAL`**, **`STATIC`**, or **`DYNAMIC`** keywords.
+- `LOCAL` and `LOCALS` array variables inherently include the `RESIZE` keyword.
+
+The total length of the array must not exceed `1,000,000` when specifying dimensions.  
+If the specified dimensions match the current array size and `keepData` is `non-zero`, no action is taken.
+
+Static arrays retain their resized state until reset to their original size by the [**`RESETDATA`**](https://osdn.net/projects/emuera/wiki/excom#h5-RESETDATA) instruction.  
+Dynamic arrays are only resized within the current function stack and do not affect arrays created in subsequent function stacks.
+
+:::tip[Parameters]
+- **anyArray1|2|3D array**
+  - Specifies the array to resize.
+- **int size1D**
+  - Specifies the length of the first dimension.
+- **int size2D**
+  - Specifies the length of the second dimension.
+- **int size3D**
+  - Specifies the length of the third dimension.
+- **int keepData = 0**
+  - Specifies whether to retain the original data. If `non-zero`, the data is preserved.
+:::
+
+:::note[Example]
+```
+@TEST
+#LOCALSIZE 1
+#DIM DYNAMIC RESIZE DYNAMIC_ARRAY, 1, 1
+#DIM STATIC_ARRAY, 1, 1, 1
+
+ARRAYRESIZE LOCAL, 2		; Resizes the LOCAL array in the TEST function.
+ARRAYRESIZE DYNAMIC_ARRAY, 2, 2	; Resizes the DYNAMIC_ARRAY.
+CALL TEST_1(DYNAMIC_ARRAY, STATIC_ARRAY)
+
+@TEST_1(REF_ARRAY1, REF_ARRAY2)
+#DIM REF REF_ARRAY1, 0, 0
+#DIM REF REF_ARRAY2, 0, 0, 0
+
+ARRAYRESIZE REF_ARRAY1, 2, 2	; Resizes the referenced DYNAMIC_ARRAY.
+ARRAYRESIZE REF_ARRAY2, 2, 2, 2	; Raises an error because STATIC_ARRAY lacks the RESIZE keyword.
+```
+:::
+
+---
 #### ARRAYTIDY
 
 **`int ARRAYTIDY anyArray array(, int start = 0, int end = lastDimLength, same emptyVal)`**
 
-该指令可整理数组中的元素之间的空值，以得到一个没有空隙、元素连贯的数组。
+This instruction compacts the elements of an array, removing gaps to create a contiguous array.
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
+For multi-dimensional arrays, only the last dimension is processed, and previous dimension indices must be specified manually.
 
-:::tip[参数]
-* **anyArray array**
-  * 指定需要整理的任意数组。
-* **int start = 0**
-  * 指定整理的开始索引。
-* **int end = lastDimLength**
-  * 指定整理的结束索引+1，省略时使用数组最后一维的长度。
-* **same emptyVal**
-  * 指定处理时会被视作空值的数值或字符串，可省略( `0` 或 `空字符串` )。
+:::tip[Parameters]
+- **anyArray array**
+  - Specifies the array to compact.
+- **int start = 0**
+  - Specifies the starting index for compaction.
+- **int end = lastDimLength**
+  - Specifies the end index (exclusive) for compaction. If omitted, the length of the last dimension is used.
+- **same emptyVal**
+  - Specifies the value treated as empty (e.g., `0` or an empty string). The type must match the array's element type. Can be omitted.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回整理完毕后的元素个数。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of elements after compaction.
 :::
 
-----
+---
 #### ARRAYFIND, ARRAYFINDLAST
 
 **`int ARRAYFIND anyArray array, same target(, int start = 0, int end = lastDimLength, int option = 0)`**
 
 **`int ARRAYFINDLAST anyArray array, same target(, int start = 0, int end = lastDimLength, int option = 0)`**
 
-使用方式与 [**`FINDELEMENT, FINDLASTELEMENT`**](modify_com#findelement-findlastelement) 指令类似，用于检索数组中符合要求的元素。
+Similar to [**`FINDELEMENT, FINDLASTELEMENT`**](modify_com#findelement-findlastelement), these instructions search for elements in an array that match the specified criteria.
 
-该指令默认 `不使用正则匹配` 、 `不使用部分匹配` 且 `区分大小写` ，可通过指定 `option` 参数调整处理选项。
+By default, the search is case-sensitive, does not use partial matching, and does not use regular expressions. These behaviors can be adjusted via the `option` parameter.
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
+For multi-dimensional arrays, only the last dimension is processed, and previous dimension indices must be specified manually.
 
-:::tip[参数]
-* **anyArray array**
-  * 指定需要检索的任意数组。
-* **same target**
-  * 指定需要检索的内容。
-* **int start = 0**
-  * 指定检索的开始索引。
-* **int end = lastDimLength**
-  * 指定检索的结束索引+1，省略时使用数组最后一维的长度。
-* **int option = 0**
-  * 指定处理选项：
-    *  `1P0` = 使用部分匹配
-    *  `1P1` = 忽略大小写
-    *  `1P2` = 反转判断结果
-    *  `1P3` = 使用正则匹配
+:::tip[Parameters]
+- **anyArray array**
+  - Specifies the array to search.
+- **same target**
+  - Specifies the search target. The type must match the array's element type.
+- **int start = 0**
+  - Specifies the starting index for the search.
+- **int end = lastDimLength**
+  - Specifies the end index (exclusive) for the search. If omitted, the length of the last dimension is used.
+- **int option = 0**
+  - Specifies search options:
+    - `1P0` = Partial matching
+    - `1P1` = Case-insensitive
+    - `1P2` = Invert match
+    - `1P3` = Regular expression
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回符合检索要求的首个索引值，未找到时返回 `-1` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the index of the first matching element. Returns `-1` if no match is found.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 #DIMS ARRAY, 10
 #DIM CHARADATA CARRAY_2D, 10, 10
-PRINTVL ARRAYFIND(ARRAY, "AA", 0, 8, 1P0 | 1P1)		;检索 ARRAY:0 至 ARRAY:7 中包含"AA"且忽略大小写的元素
-PRINTVL ARRAYFIND(ARRAY, "AA", 0, 8, 1P2)		;检索 ARRAY:0 至 ARRAY:7 中不等于"AA"的元素
-PRINTVL ARRAYFINDLAST(ARRAY, "AA", 0, 8, 1P2)		;从后往前检索 ARRAY:0 至 ARRAY:7 中不等于"AA"的元素
-PRINTVL ARRAYFIND(ARRAY, "\\d+", 0, 8, 1P0 | 1P3)	;检索 ARRAY:0 至 ARRAY:7 中部分匹配到"\\d+"的元素
-PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D:3:5 至 CARRAY_2D:3:9 中等于22的元素
+PRINTVL ARRAYFIND(ARRAY, "AA", 0, 8, 1P0 | 1P1)	; Searches ARRAY:0 to ARRAY:7 for elements containing "AA" (case-insensitive).
+PRINTVL ARRAYFIND(ARRAY, "AA", 0, 8, 1P2)		; Searches ARRAY:0 to ARRAY:7 for elements not equal to "AA".
+PRINTVL ARRAYFINDLAST(ARRAY, "AA", 0, 8, 1P2)		; Searches ARRAY:0 to ARRAY:7 in reverse for elements not equal to "AA".
+PRINTVL ARRAYFIND(ARRAY, "\\d+", 0, 8, 1P0 | 1P3)	; Searches ARRAY:0 to ARRAY:7 for elements partially matching "\\d+".
+PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		; Searches CARRAY_2D:3:5 to CARRAY_2D:3:9 for elements equal to 22.
 ```
 :::
 
-----
+---
 #### VARLENGTH
 
 **`int VARLENGTH anyArray array(, int dimension)`**
 
-使用方式与 [**`VARSIZE`**](modify_com#varsize) 指令类似，获取数组各维数的长度。
+Similar to [**`VARSIZE`**](modify_com#varsize), this instruction retrieves the length of each dimension of an array.
 
-省略第2参数 `dimension` 时，该指令将返回数组最后一维的长度，且传入 `负数` 时可获取数组的总长度。
+If the `dimension` parameter is omitted, it returns the length of the last dimension. A negative value returns the total length of the array.
 
-:::tip[参数]
-* **anyArray array**
-  * 指定任意数组。
-* **int dimension**
-  * 指定数组的维数，省略时将返回数组最后一维的长度，且传入 `负数` 时可获取数组的总长度。
+:::tip[Parameters]
+- **anyArray array**
+  - Specifies any array.
+- **int dimension**
+  - Specifies the dimension. If omitted, returns the length of the last dimension. A negative value returns the total length.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回指定维数的数组长度。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the length of the specified dimension.
+:::
+
+---
+### List Related {#ListRelated}
+
+----
+#### LISTSIZE
+
+**`int LISTSIZE anyList list`**
+
+**`int LISTSIZE anyDict_anyList dictList`**
+
+Gets the number of elements in the specified list.
+
+To get the number of lists in a dictionary of lists, use the [**`DICTITEMCOUNT`**](new_com#dictitemcount) command.
+
+:::tip[Parameters]
+- **anyList list**
+  - Specifies any list.
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of elements in the specified list.
 :::
 
 ----
-### 输入相关
+#### LISTCLEAR
+
+**`int LISTCLEAR anyList list(, int start = 0, int count = listCount)`**
+
+**`int LISTCLEAR anyDict_anyList dictList(, int start = 0, int count = listCount)`**
+
+Removes elements within the specified range from the given list.
+
+:::tip[Parameters]
+- **anyList list**
+  - Specifies any list.
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **int start = 0**
+  - Specifies the starting position for removal. Can be omitted `(0)`.
+- **int count = listCount**
+  - Specifies the number of elements to remove. Can be omitted `(number of elements in the list)`.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
+:::
+
+----
+#### LISTADD
+
+**`int LISTADD anyList list, same value(, int index = listCount)`**
+
+**`int LISTADD anyDict_anyList dictList, same value(, int index = listCount)`**
+
+Adds the specified element to the given list.
+
+:::tip[Parameters]
+- **anyList list**
+  - Specifies any list.
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **same value**
+  - Specifies the element to add. The value type must match the type of the first parameter.
+- **int index = listCount**
+  - Specifies the position to add the element. Can be omitted `(end of the list)`.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the index position where the element was added.
+:::
+
+----
+#### LISTFIND
+
+**`int LISTFIND anyList list, same value(, int start = 0, int count = listCount)`**
+
+**`int LISTFIND anyDict_anyList dictList, same value(, int start = 0, int count = listCount)`**
+
+Searches for the specified element in the given list.
+
+:::tip[Parameters]
+- **anyList list**
+  - Specifies any list.
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **same value**
+  - Specifies the element to search for. The value type must match the type of the first parameter.
+- **int start = 0**
+  - Specifies the starting position for the search. Can be omitted `(0)`.
+- **int count = listCount**
+  - Specifies the number of elements to search. Can be omitted `(number of elements in the list)`.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the index position of the found element. Returns `(-1)` if not found.
+:::
+
+----
+#### LISTREMOVE
+
+**`int LISTREMOVE anyList list, same value`**
+
+**`int LISTREMOVE anyDict_anyList dictList, same value`**
+
+Removes the specified element from the given list.
+
+:::tip[Parameters]
+- **anyList list**
+  - Specifies any list.
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **same value**
+  - Specifies the element to remove. The value type must match the type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the removal result. Returns `non-zero` if the element was found and removed, otherwise returns `0`.
+:::
+
+----
+#### LISTREMOVEAT
+
+**`int LISTREMOVEAT anyList list, int index`**
+
+**`int LISTREMOVEAT anyDict_anyList dictList, int index`**
+
+Removes the element at the specified index position from the given list.
+
+:::tip[Parameters]
+- **anyList list**
+  - Specifies any list.
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **int index**
+  - Specifies the index position of the element to remove.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
+:::
+
+----
+#### LISTCOPY
+
+**`int LISTCOPY anyList srcList, sameArray destArray`**
+
+**`int LISTCOPY anyList srcList, sameList destList`**
+
+**`int LISTCOPY anyList srcList, sameHashList destHashList`**
+
+**`int LISTCOPY anyList srcList, anyDict_sameList destDictList`**
+
+**`int LISTCOPY anyList srcList, anyDict_sameHashList destDictHashList`**
+
+**`int LISTCOPY anyDict_anyList srcDictList, sameArray destArray`**
+
+**`int LISTCOPY anyDict_anyList srcDictList, sameList destList`**
+
+**`int LISTCOPY anyDict_anyList srcDictList, sameHashList destHashList`**
+
+**`int LISTCOPY anyDict_anyList srcDictList, anyDict_sameList destDictList`**
+
+**`int LISTCOPY anyDict_anyList srcDictList, anyDict_sameHashList destDictHashList`**
+
+Copies all elements from the specified source list to the target array or list.
+
+:::tip[Parameters]
+- **anyList srcList**
+  - Specifies any source list.
+- **anyDict_anyList srcDictList**
+  - Specifies any source dictionary of lists.
+- **sameArray destArray**
+  - Specifies the target array. The value type must match the type of the first parameter.
+- **sameList destList**
+  - Specifies the target list. The value type must match the type of the first parameter.
+- **sameHashList destHashList**
+  - Specifies the target hash list. The value type must match the type of the first parameter.
+- **anyDict_sameList destDictList**
+  - Specifies the target dictionary of lists. The value type must match the type of the first parameter.
+- **anyDict_sameHashList destDictHashList**
+  - Specifies the target dictionary of hash lists. The value type must match the type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - For target arrays, returns the number of successfully copied elements. For target lists and dictionaries of lists, returns the total number of elements after copying.
+:::
+
+----
+### Hash List Related {#HashListRelated}
+
+----
+#### HASHLISTSIZE
+
+**`int HASHLISTSIZE anyHashList list`**
+
+**`int HASHLISTSIZE anyDict_anyHashList dictList`**
+
+Gets the number of elements in the specified hash list.
+
+To get the number of hash lists in a dictionary of hash lists, use the [**`DICTITEMCOUNT`**](new_com#dictitemcount) command.
+
+:::tip[Parameters]
+- **anyHashList list**
+  - Specifies any hash list.
+- **anyDict_anyHashList dictList**
+  - Specifies any dictionary of hash lists.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of elements in the specified hash list.
+:::
+
+----
+#### HASHLISTCLEAR
+
+**`int HASHLISTCLEAR anyHashList list`**
+
+**`int HASHLISTCLEAR anyDict_anyHashList dictList`**
+
+Clears all elements from the specified hash list.
+
+:::tip[Parameters]
+- **anyHashList list**
+  - Specifies any hash list.
+- **anyDict_anyHashList dictList**
+  - Specifies any dictionary of hash lists.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
+:::
+
+----
+#### HASHLISTADD
+
+**`int HASHLISTADD anyHashList list, same value`**
+
+**`int HASHLISTADD anyDict_anyHashList dictList, same value`**
+
+Adds the specified value to the given hash list.
+
+:::tip[Parameters]
+- **anyHashList list**
+  - Specifies any hash list.
+- **anyDict_anyHashList dictList**
+  - Specifies any dictionary of hash lists.
+- **same value**
+  - Specifies the value to add. The value type must match the type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the addition result. Returns `non-zero` if the value was successfully added, or `0` if the value already exists.
+:::
+
+----
+#### HASHLISTHAS
+
+**`int HASHLISTHAS anyHashList list, same value`**
+
+**`int HASHLISTHAS anyDict_anyHashList dictList, same value`**
+
+Checks if the specified value exists in the given hash list.
+
+:::tip[Parameters]
+- **anyHashList list**
+  - Specifies any hash list.
+- **anyDict_anyHashList dictList**
+  - Specifies any dictionary of hash lists.
+- **same value**
+  - Specifies the value to check. The value type must match the type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the check result. Returns `non-zero` if the value exists, otherwise returns `0`.
+:::
+
+----
+#### HASHLISTREMOVE
+
+**`int HASHLISTREMOVE anyHashList list, same value`**
+
+**`int HASHLISTREMOVE anyDict_anyHashList dictList, same value`**
+
+Removes the specified value from the given hash list.
+
+:::tip[Parameters]
+- **anyHashList list**
+  - Specifies any hash list.
+- **anyDict_anyHashList dictList**
+  - Specifies any dictionary of hash lists.
+- **same value**
+  - Specifies the value to remove. The value type must match the type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the removal result. Returns `non-zero` if the value was found and removed, otherwise returns `0`.
+:::
+
+----
+#### HASHLISTCOPY
+
+**`int HASHLISTCOPY anyHashList srcList, sameArray destArray`**
+
+**`int HASHLISTCOPY anyHashList srcList, sameList destList`**
+
+**`int HASHLISTCOPY anyHashList srcList, sameHashList destHashList`**
+
+**`int HASHLISTCOPY anyHashList srcList, anyDict_sameList destDictList`**
+
+**`int HASHLISTCOPY anyHashList srcList, anyDict_sameHashList destDictHashList`**
+
+**`int HASHLISTCOPY anyDict_anyHashList srcDictList, sameArray destArray`**
+
+**`int HASHLISTCOPY anyDict_anyHashList srcDictList, sameList destList`**
+
+**`int HASHLISTCOPY anyDict_anyHashList srcDictList, sameHashList destHashList`**
+
+**`int HASHLISTCOPY anyDict_anyHashList srcDictList, anyDict_sameList destDictList`**
+
+**`int HASHLISTCOPY anyDict_anyHashList srcDictList, anyDict_sameHashList destDictHashList`**
+
+Copies all elements from the specified source hash list to the target array or list.
+
+:::tip[Parameters]
+- **anyHashList srcList**
+  - Specifies any source hash list.
+- **anyDict_anyHashList srcDictList**
+  - Specifies any source dictionary of hash lists.
+- **sameArray destArray**
+  - Specifies the target array. The value type must match the type of the first parameter.
+- **sameList destList**
+  - Specifies the target list. The value type must match the type of the first parameter.
+- **sameHashList destHashList**
+  - Specifies the target hash list. The value type must match the type of the first parameter.
+- **anyDict_sameList destDictList**
+  - Specifies the target dictionary of lists. The value type must match the type of the first parameter.
+- **anyDict_sameHashList destDictHashList**
+  - Specifies the target dictionary of hash lists. The value type must match the type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - For target arrays, returns the number of successfully copied elements. For target lists and dictionaries of lists, returns the total number of elements after copying.
+:::
+
+----
+### Dictionary Related {#DictRelated}
+
+----
+#### DICTSIZE
+
+**`int DICTSIZE anyanyDict dict`**
+
+**`int DICTSIZE anyDict_anyanyDict dictDict`**
+
+Gets the number of elements in the specified dictionary.
+
+To get the number of dictionaries in a dictionary of dictionaries, use the [**`DICTITEMCOUNT`**](new_com#dictitemcount) command.
+
+:::tip[Parameters]
+- **anyanyDict dict**
+  - Specifies any dictionary.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of elements in the specified dictionary.
+:::
+
+----
+#### DICTCLEAR
+
+**`int DICTCLEAR anyanyDict dict`**
+
+**`int DICTCLEAR anyDict_anyanyDict dictDict`**
+
+Clears all elements from the specified dictionary.
+
+:::tip[Parameters]
+- **anyanyDict dict**
+  - Specifies any dictionary.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
+:::
+
+----
+#### DICTADD
+
+**`int DICTADD anyanyDict dict, sameAsKey key, same value`**
+
+**`int DICTADD anyDict_anyanyDict dictDict, sameAsKey key, same value`**
+
+Adds the specified key and value to the given dictionary. If the key already exists, the addition will not occur.
+
+:::tip[Parameters]
+- **anyanyDict dict**
+  - Specifies any dictionary.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **sameAsKey key**
+  - Specifies the key name. The key type must match the key type of the first parameter.
+- **same value**
+  - Specifies the value. The value type must match the value type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the addition result. Returns `non-zero` if the key and value were successfully added, or `0` if the key already exists.
+:::
+
+----
+#### DICTHAS
+
+**`int DICTHAS anyanyDict dict, sameAsKey key`**
+
+**`int DICTHAS anyDict_anyanyDict dictDict, sameAsKey key`**
+
+Checks if the specified key exists in the given dictionary.
+
+:::tip[Parameters]
+- **anyanyDict dict**
+  - Specifies any dictionary.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **sameAsKey key**
+  - Specifies the key name. The key type must match the key type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the check result. Returns `non-zero` if the key exists, otherwise returns `0`.
+:::
+
+----
+#### DICTREMOVE
+
+**`int DICTREMOVE anyanyDict dict, sameAsKey key`**
+
+**`int DICTREMOVE anyDict_anyanyDict dictDict, sameAsKey key`**
+
+Removes the specified key-value pair from the given dictionary.
+
+:::tip[Parameters]
+- **anyanyDict dict**
+  - Specifies any dictionary.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **sameAsKey key**
+  - Specifies the key name. The key type must match the key type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the removal result. Returns `non-zero` if the key was found and removed, otherwise returns `0`.
+:::
+
+----
+#### DICTTRYGET
+
+**`int DICTTRYGET anyanyDict dict, same outValue`**
+
+**`int DICTTRYGET anyDict_anyanyDict dictDict, same outValue`**
+
+Attempts to find and retrieve the value associated with the specified key in the given dictionary. This command will not raise an error if the key is not found.
+
+:::tip[Parameters]
+- **anyanyDict dict**
+  - Specifies any dictionary.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **same outValue**
+  - Specifies the variable to receive the value. The value type must match the value type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the search result. Returns `non-zero` if the key was found and the value was output to **outValue**, otherwise returns `0`.
+:::
+
+----
+#### DICTGETKEYS
+
+**`int DICTGETKEYS anyanyDict srcDict, sameAsKeyArray destArray`**
+
+**`int DICTGETKEYS anyanyDict srcDict, sameAsKeyList destList`**
+
+**`int DICTGETKEYS anyanyDict srcDict, sameAsKeyHashList destHashList`**
+
+**`int DICTGETKEYS anyanyDict srcDict, anyDict_sameAsKeyList destDictList`**
+
+**`int DICTGETKEYS anyanyDict srcDict, anyDict_sameAsKeyHashList destDictHashList`**
+
+**`int DICTGETKEYS anyDict_anyanyDict srcDictDict, sameAsKeyArray destArray`**
+
+**`int DICTGETKEYS anyDict_anyanyDict srcDictDict, sameAsKeyList destList`**
+
+**`int DICTGETKEYS anyDict_anyanyDict srcDictDict, sameAsKeyHashList destHashList`**
+
+**`int DICTGETKEYS anyDict_anyanyDict srcDictDict, anyDict_sameAsKeyList destDictList`**
+
+**`int DICTGETKEYS anyDict_anyanyDict srcDictDict, anyDict_sameAsKeyHashList destDictHashList`**
+
+Copies all keys from the specified source dictionary to the target array or list.
+
+:::tip[Parameters]
+- **anyanyDict srcDict**
+  - Specifies any source dictionary.
+- **anyDict_anyanyDict srcDictDict**
+  - Specifies any source dictionary of dictionaries.
+- **sameAsKeyArray destArray**
+  - Specifies the target array. The value type must match the key type of the first parameter.
+- **sameAsKeyList destList**
+  - Specifies the target list. The value type must match the key type of the first parameter.
+- **sameAsKeyHashList destHashList**
+  - Specifies the target hash list. The value type must match the key type of the first parameter.
+- **anyDict_sameAsKeyList destDictList**
+  - Specifies the target dictionary of lists. The value type must match the key type of the first parameter.
+- **anyDict_sameAsKeyHashList destDictHashList**
+  - Specifies the target dictionary of hash lists. The value type must match the key type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - For target arrays, returns the number of successfully copied elements. For target lists and dictionaries of lists, returns the total number of elements after copying.
+:::
+
+----
+#### DICTGETVALUES
+
+**`int DICTGETVALUES anyanyDict srcDict, sameArray destArray`**
+
+**`int DICTGETVALUES anyanyDict srcDict, sameList destList`**
+
+**`int DICTGETVALUES anyanyDict srcDict, sameHashList destHashList`**
+
+**`int DICTGETVALUES anyanyDict srcDict, anyDict_sameList destDictList`**
+
+**`int DICTGETVALUES anyanyDict srcDict, anyDict_sameHashList destDictHashList`**
+
+**`int DICTGETVALUES anyDict_anyanyDict srcDictDict, sameArray destArray`**
+
+**`int DICTGETVALUES anyDict_anyanyDict srcDictDict, sameList destList`**
+
+**`int DICTGETVALUES anyDict_anyanyDict srcDictDict, sameHashList destHashList`**
+
+**`int DICTGETVALUES anyDict_anyanyDict srcDictDict, anyDict_sameList destDictList`**
+
+**`int DICTGETVALUES anyDict_anyanyDict srcDictDict, anyDict_sameHashList destDictHashList`**
+
+Copies all values from the specified source dictionary to the target array or list.
+
+:::tip[Parameters]
+- **anyanyDict srcDict**
+  - Specifies any source dictionary.
+- **anyDict_anyanyDict srcDictDict**
+  - Specifies any source dictionary of dictionaries.
+- **sameAsKeyArray destArray**
+  - Specifies the target array. The value type must match the value type of the first parameter.
+- **sameAsKeyList destList**
+  - Specifies the target list. The value type must match the value type of the first parameter.
+- **sameAsKeyHashList destHashList**
+  - Specifies the target hash list. The value type must match the value type of the first parameter.
+- **anyDict_sameAsKeyList destDictList**
+  - Specifies the target dictionary of lists. The value type must match the value type of the first parameter.
+- **anyDict_sameAsKeyHashList destDictHashList**
+  - Specifies the target dictionary of hash lists. The value type must match the value type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - For target arrays, returns the number of successfully copied elements. For target lists and dictionaries of lists, returns the total number of elements after copying.
+:::
+
+----
+#### DICTCOPY
+
+**`int DICTCOPY anyanyDict srcDict, sameAsKeysameAsKeyDict destDict`**
+
+**`int DICTCOPY anyanyDict srcDict, anyDict_sameAsKeysameDict destDictDict`**
+
+**`int DICTCOPY anyDict_anyanyDict srcDictDict, sameAsKeysameAsKeyDict destDict`**
+
+**`int DICTCOPY anyDict_anyanyDict srcDictDict, anyDict_sameAsKeysameDict destDictDict`**
+
+Copies all elements from the specified source dictionary to the target dictionary.
+
+:::tip[Parameters]
+- **anyanyDict srcDict**
+  - Specifies any source dictionary.
+- **anyDict_anyanyDict srcDictDict**
+  - Specifies any source dictionary of dictionaries.
+- **sameAsKeysameAsKeyDict destDict**
+  - Specifies the target dictionary. The key and value types must match those of the first parameter.
+- **anyDict_sameAsKeysameDict destDictDict**
+  - Specifies the target dictionary of dictionaries. The secondary key and value types must match those of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - For target arrays, returns the number of successfully copied elements. For target lists and dictionaries of lists, returns the total number of elements after copying.
+:::
+
+----
+### Dictionary Collection Related {#DictItemRelated}
+
+----
+#### DICTITEMCREATE
+
+**`int DICTITEMCREATE anyDict_anyList dictList, sameAsDictKey dictKey`**
+
+**`int DICTITEMCREATE anyDict_anyHashList dictHashList, sameAsDictKey dictKey`**
+
+**`int DICTITEMCREATE anyDict_anyanyDict dictDict, sameAsDictKey dictKey`**
+
+Creates a new collection in the specified dictionary collection variable.
+
+:::tip[Parameters]
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **anyDict_anyHashList dictHashList**
+  - Specifies any dictionary of hash lists.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **sameAsDictKey dictKey**
+  - Specifies the key name to create. The key type must match the key type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the key was successfully created, or `0` if a collection with the same key already exists.
+:::
+
+----
+#### DICTITEMEXIST
+
+**`int DICTITEMEXIST anyDict_anyList dictList, sameAsDictKey dictKey`**
+
+**`int DICTITEMEXIST anyDict_anyHashList dictHashList, sameAsDictKey dictKey`**
+
+**`int DICTITEMEXIST anyDict_anyanyDict dictDict, sameAsDictKey dictKey`**
+
+Checks if the specified key exists in the given dictionary collection variable.
+
+:::tip[Parameters]
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **anyDict_anyHashList dictHashList**
+  - Specifies any dictionary of hash lists.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **sameAsDictKey dictKey**
+  - Specifies the key name to check. The key type must match the key type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the key exists, otherwise returns `0`.
+:::
+
+----
+#### DICTITEMRELEASE
+
+**`int DICTITEMRELEASE anyDict_anyList dictList, sameAsDictKey dictKey`**
+
+**`int DICTITEMRELEASE anyDict_anyHashList dictHashList, sameAsDictKey dictKey`**
+
+**`int DICTITEMRELEASE anyDict_anyanyDict dictDict, sameAsDictKey dictKey`**
+
+Removes the specified key and its collection from the given dictionary collection variable.
+
+:::tip[Parameters]
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **anyDict_anyHashList dictHashList**
+  - Specifies any dictionary of hash lists.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+- **sameAsDictKey dictKey**
+  - Specifies the key name to remove. The key type must match the key type of the first parameter.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the key was found and removed, otherwise returns `0`.
+:::
+
+----
+#### DICTITEMRELEASEALL
+
+**`int DICTITEMRELEASEALL anyDict_anyList dictList`**
+
+**`int DICTITEMRELEASEALL anyDict_anyHashList dictHashList`**
+
+**`int DICTITEMRELEASEALL anyDict_anyanyDict dictDict`**
+
+Removes all keys and their collections from the specified dictionary collection variable.
+
+:::tip[Parameters]
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **anyDict_anyHashList dictHashList**
+  - Specifies any dictionary of hash lists.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
+:::
+
+----
+#### DICTITEMCOUNT
+
+**`int DICTITEMCOUNT anyDict_anyList dictList`**
+
+**`int DICTITEMCOUNT anyDict_anyHashList dictHashList`**
+
+**`int DICTITEMCOUNT anyDict_anyanyDict dictDict`**
+
+Gets the number of collections in the specified dictionary collection variable.
+
+:::tip[Parameters]
+- **anyDict_anyList dictList**
+  - Specifies any dictionary of lists.
+- **anyDict_anyHashList dictHashList**
+  - Specifies any dictionary of hash lists.
+- **anyDict_anyanyDict dictDict**
+  - Specifies any dictionary of dictionaries.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of collections in the dictionary collection variable.
+:::
+
+----
+### Input Related {#InputRelated}
 
 ----
 #### CHKKEYDATA
 
 **`int CHKKEYDATA int keyData(, str keyName, int modifier)`**
 
-检查用户输入的 `keyData` 键码值是否与指定的 `keyName` 按键名和 `modifier` 修改键匹配。`keyData` 键码值可通过 [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) 指令获取。
+Checks if the user-input `keyData` key code matches the specified `keyName` key name and `modifier` modifier key. The `keyData` key code can be obtained via the [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) command.
 
-具体的 `keyName` 按键名对应列表请参阅 [**`Keys 枚举`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.windows.forms.keys?view=netframework-4.8) 文档。
+For a list of specific `keyName` key names, refer to the [**`Keys Enumeration`**](https://learn.microsoft.com/dotnet/api/system.windows.forms.keys?view=netframework-4.8) documentation.
 
-:::tip[参数]
-* **int keyData**
-  * 指定用户输入的键码值数据。
-* **str keyName**
-  * 指定需要匹配的按键名，按键名无视大小写，可省略。
-* **int modifier**
-  * 指定需要匹配的修改键，可省略。
-    *  `1P0` = Shift
-    *  `1P1` = Ctrl
-    *  `1P2` = Alt
+:::tip[Parameters]
+- **int keyData**
+  - Specifies the user-input key code data.
+- **str keyName**
+  - Specifies the key name to match. The key name is case-insensitive and can be omitted.
+- **int modifier**
+  - Specifies the modifier key to match. Can be omitted.
+    - `1P0` = Shift
+    - `1P1` = Ctrl
+    - `1P2` = Alt
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功匹配指定的按键名和修改键，成功时返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the key name and modifier key match successfully.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 INPUTMOUSEKEY 0
 IF RESULT:0 == 3
-  PRINTVL CHKKEYDATA(RESULT:2, "A")		; 检查用户是否键入 "A"
-  PRINTVL CHKKEYDATA(RESULT:2, , 1P0 | 1P1)	; 检查用户是否键入 "Ctrl + Shift"
-  PRINTVL CHKKEYDATA(RESULT:2, "/", 1P1 | 1P2)	; 检查用户是否键入 "Ctrl + Alt + /"
+  PRINTVL CHKKEYDATA(RESULT:2, "A")         ; Checks if the user pressed "A"
+  PRINTVL CHKKEYDATA(RESULT:2, , 1P0 | 1P1) ; Checks if the user pressed "Ctrl + Shift"
+  PRINTVL CHKKEYDATA(RESULT:2, "/", 1P1 | 1P2) ; Checks if the user pressed "Ctrl + Alt + /"
 ENDIF
 ```
 :::
 
 ----
-### 图像相关
+### Image Related {#ImageRelated}
 
 ----
 #### ASYNCGDRAWG
 
-该指令的调用方式与 [**`GDRAWG`**](modify_com#gdrawg) 指令相同，用于异步进行绘图操作以避免长时间的程序停滞。
+This command is called in the same way as the [**`GDRAWG`**](modify_com#gdrawg) command and is used for asynchronous drawing operations to avoid prolonged program stagnation.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call the [**`ASYNCWAITALL`**](#asyncwaitall) command to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[返回值]
-* **RESULT:0**
-  * 成功发送异步任务时返回 `非0` ，指定的图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the asynchronous task was successfully sent, or `0` if the specified image was not created.
 :::
 
 ----
 #### ASYNCGDRAWSPRITE
 
-该指令的调用方式与 [**`GDRAWSPRITE`**](modify_com#gdrawsprite) 指令相同，用于异步进行绘图操作以避免长时间的程序停滞。
+This command is called in the same way as the [**`GDRAWSPRITE`**](modify_com#gdrawsprite) command and is used for asynchronous drawing operations to avoid prolonged program stagnation.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call the [**`ASYNCWAITALL`**](#asyncwaitall) command to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[返回值]
-* **RESULT:0**
-  * 成功发送异步任务时返回 `非0` ，指定的图像或Sprite未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the asynchronous task was successfully sent, or `0` if the specified image or sprite was not created.
 :::
 
 ----
@@ -635,13 +1448,13 @@ ENDIF
 
 **`int ASYNCGCREATEFROMFILE int GID, str filepath`**
 
-该指令的调用方式与 [**`GCREATEFROMFILE`**](modify_com#gcreatefromfile) 指令相同，用于异步加载指定的图像文件以避免长时间的程序停滞。
+This command is called in the same way as the [**`GCREATEFROMFILE`**](modify_com#gcreatefromfile) command and is used to asynchronously load the specified image file to avoid prolonged program stagnation.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call the [**`ASYNCWAITALL`**](#asyncwaitall) command to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[返回值]
-* **RESULT:0**
-  * 总是返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
 :::
 
 ----
@@ -649,13 +1462,13 @@ ENDIF
 
 **`int ASYNCGDISPOSE int GID`**
 
-该指令的调用方式与 [**`GDISPOSE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GDISPOSE.20int.20ID) 指令相同，用于与其他异步指令配合使用以释放图像。
+This command is called in the same way as the [**`GDISPOSE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GDISPOSE.20int.20ID) command and is used in conjunction with other asynchronous commands to release images.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call the [**`ASYNCWAITALL`**](#asyncwaitall) command to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[返回值]
-* **RESULT:0**
-  * 成功发送异步任务时返回 `非0` ，指定的图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the asynchronous task was successfully sent, or `0` if the specified image was not created.
 :::
 
 ----
@@ -663,18 +1476,18 @@ ENDIF
 
 **`int ASYNCSPRITELOAD str sprite`**
 
-该指令用于异步加载指定的Sprite所引用的图像以避免长时间的程序停滞。
+This command is used to asynchronously load the image referenced by the specified sprite to avoid prolonged program stagnation.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call the [**`ASYNCWAITALL`**](#asyncwaitall) command to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[参数]
-* **str sprite**
-  * 指定想要异步加载的Sprite名称。
+:::tip[Parameters]
+- **str sprite**
+  - Specifies the name of the sprite to load asynchronously.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 成功发送异步任务、或Sprite已加载图像时返回 `非0` ，未找到Sprite时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the asynchronous task was successfully sent or if the sprite's image is already loaded, or `0` if the sprite was not found.
 :::
 
 ----
@@ -682,29 +1495,29 @@ ENDIF
 
 **`void ASYNCWAITALL`**
 
-该指令用于强制等待所有异步任务直到完成。
+This command forces the program to wait for all asynchronous tasks to complete.
 
 ----
 #### GETBEZIERPATH
 
 **`int GETBEZIERPATH intArray2|3D pointArray, int pointCount, intArray2D outputArray, int outputCount`**
 
-用于生成贝塞尔曲线，并将曲线上所有的坐标点存入到 `outputArray` 数组中。
+Generates a Bézier curve and stores all coordinate points on the curve into the `outputArray` array.
 
-:::tip[参数]
-* **intArray2|3D pointArray**
-  * 指定生成曲线的起点、多个控制点、终点坐标，数组最后一维的长度必须 `大于等于2` 。
-* **int pointCount**
-  * 指定 `pointArray` 中的坐标点数量。
-* **intArray2D outputArray**
-  * 生成曲线的坐标将会存入到该数组中，数组最后一维的长度必须 `大于等于2` 。
-* **int outputCount**
-  * 指定生成坐标点的数量。
+:::tip[Parameters]
+- **intArray2|3D pointArray**
+  - Specifies the coordinates of the starting point, multiple control points, and ending point of the curve. The length of the last dimension of the array must be `greater than or equal to 2`.
+- **int pointCount**
+  - Specifies the number of coordinate points in `pointArray`.
+- **intArray2D outputArray**
+  - The generated curve coordinates will be stored in this array. The length of the last dimension of the array must be `greater than or equal to 2`.
+- **int outputCount**
+  - Specifies the number of coordinate points to generate.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功执行指令，成功时返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the command was successfully executed.
 :::
 
 ----
@@ -712,26 +1525,26 @@ ENDIF
 
 **`int GETBEZIERPOINT intArray2|3D pointArray, int pointCount, int t, int tMax`**
 
-根据指定的控制点和路程来获取贝塞尔曲线上的坐标点。
+Retrieves the coordinate point on the Bézier curve based on the specified control points and path.
 
-:::tip[参数]
-* **intArray2|3D pointArray**
-  * 指定生成曲线的起点、多个控制点、终点坐标，数组最后一维的长度必须 `大于等于2` 。
-* **int pointCount**
-  * 指定 `pointArray` 中的坐标点数量。
-* **int t**
-  * 指定需要的坐标点所在的路程。
-* **int tMax**
-  * 指定最大路程。
+:::tip[Parameters]
+- **intArray2|3D pointArray**
+  - Specifies the coordinates of the starting point, multiple control points, and ending point of the curve. The length of the last dimension of the array must be `greater than or equal to 2`.
+- **int pointCount**
+  - Specifies the number of coordinate points in `pointArray`.
+- **int t**
+  - Specifies the path position of the desired coordinate point.
+- **int tMax**
+  - Specifies the maximum path length.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功执行指令，成功时返回 `非0` 。
-* **RESULT:1**
-  * 坐标点的X值。
-* **RESULT:2**
-  * 坐标点的Y值。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the command was successfully executed.
+- **RESULT:1**
+  - The X-coordinate of the point.
+- **RESULT:2**
+  - The Y-coordinate of the point.
 :::
 
 ----
@@ -739,23 +1552,23 @@ ENDIF
 
 **`void GDISPOSEALL`**
 
-释放并清空所有Graphics图像。
+Releases and clears all Graphics images.
 
 ----
 #### GENABLED
 
 **`int GENABLED int GID`**
 
-获取指定图像的 `ENABLED` 值，该值用于控制该图像是否能最终绘制到屏幕上。
+Gets the `ENABLED` value of the specified image, which controls whether the image can ultimately be drawn on the screen.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回指定图像的 `ENABLED` 值。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the `ENABLED` value of the specified image. Returns `0` if the image was not created.
 :::
 
 ----
@@ -763,18 +1576,18 @@ ENDIF
 
 **`int GSETENABLED int GID, int enabled`**
 
-该指令用于在保持图像的位置信息的前提下，控制该图像是否能最终绘制到屏幕上。
+This command controls whether the image can ultimately be drawn on the screen while maintaining its positional information.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int enabled**
-  * 指定该图像是否绘制。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int enabled**
+  - Specifies whether the image should be drawn.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the setting was successful, or `0` if the image was not created.
 :::
 
 ----
@@ -782,24 +1595,24 @@ ENDIF
 
 **`int GFILLELLIPSE int GID, int x, int y, int width, int height`**
 
-用于绘制椭圆图形，使用方式与 [**`GFILLRECTANGLE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GFILLRECTANGLE.20int.20ID.2C.20int.20x.2C.20int.20y.2C.20int.20width.2C.20int.20height) 指令类似，通过 [**`GSETBRUSH`**](https://osdn.net/projects/emuera/wiki/excom#h5-GSETBRUSH.20int.20ID.2C.20int.20cARGB) 指令来指定颜色。
+Used to draw an ellipse, similar in usage to the [**`GFILLRECTANGLE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GFILLRECTANGLE.20int.20ID.2C.20int.20x.2C.20int.20y.2C.20int.20width.2C.20int.20height) command. The color is specified using the [**`GSETBRUSH`**](https://osdn.net/projects/emuera/wiki/excom#h5-GSETBRUSH.20int.20ID.2C.20int.20cARGB) command.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int x**
-  * 指定椭圆的X位置。
-* **int y**
-  * 指定椭圆的Y位置。
-* **int width**
-  * 指定椭圆宽度。
-* **int height**
-  * 指定椭圆高度。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int x**
+  - Specifies the X position of the ellipse.
+- **int y**
+  - Specifies the Y position of the ellipse.
+- **int width**
+  - Specifies the width of the ellipse.
+- **int height**
+  - Specifies the height of the ellipse.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功绘制图形，成功时返回 `非0` ，指定的图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the drawing was successful. Returns `non-zero` on success, `0` if the specified image does not exist.
 :::
 
 ----
@@ -807,28 +1620,28 @@ ENDIF
 
 **`int GFILLROUNDRECT int GID, int x, int y, int width, int height, int radiusX(, int radiusY)`**
 
-用于绘制圆角矩形，使用方式与 [**`GFILLRECTANGLE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GFILLRECTANGLE.20int.20ID.2C.20int.20x.2C.20int.20y.2C.20int.20width.2C.20int.20height) 指令类似，通过 [**`GSETBRUSH`**](https://osdn.net/projects/emuera/wiki/excom#h5-GSETBRUSH.20int.20ID.2C.20int.20cARGB) 指令来指定颜色。
+Used to draw a rounded rectangle, similar in usage to the [**`GFILLRECTANGLE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GFILLRECTANGLE.20int.20ID.2C.20int.20x.2C.20int.20y.2C.20int.20width.2C.20int.20height) command. The color is specified using the [**`GSETBRUSH`**](https://osdn.net/projects/emuera/wiki/excom#h5-GSETBRUSH.20int.20ID.2C.20int.20cARGB) command.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int x**
-  * 指定圆角矩形的X位置。
-* **int y**
-  * 指定圆角矩形的Y位置。
-* **int width**
-  * 指定圆角矩形宽度。
-* **int height**
-  * 指定圆角矩形高度。
-* **int radiusX**
-  * 指定圆角的X半径。
-* **int radiusY**
-  * 指定圆角的Y半径，省略时使用 `radiusX` 相同值。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int x**
+  - Specifies the X position of the rounded rectangle.
+- **int y**
+  - Specifies the Y position of the rounded rectangle.
+- **int width**
+  - Specifies the width of the rounded rectangle.
+- **int height**
+  - Specifies the height of the rounded rectangle.
+- **int radiusX**
+  - Specifies the X radius of the rounded corners.
+- **int radiusY**
+  - Specifies the Y radius of the rounded corners. If omitted, uses the same value as `radiusX`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功绘制图形，成功时返回 `非0` ，指定的图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the drawing was successful. Returns `non-zero` on success, `0` if the specified image does not exist.
 :::
 
 ----
@@ -836,22 +1649,22 @@ ENDIF
 
 **`int GRESAMPLESAVE int GID, any fileName, int width, int height`**
 
-使用方式与 [**`GSAVE`**](modify_com#gsave-gload) 指令类似，通过更高质量的重采样来生成更清晰的缩放图像并保存为文件，但代价是耗时更长。
+Similar in usage to the [**`GSAVE`**](modify_com#gsave-gload) command, this command generates a higher-quality resampled image for clearer scaling and saves it to a file, at the cost of longer processing time.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **any fileName**
-  * 指定保存的文件序号或文件路径。
-* **int width**
-  * 指定缩放宽度。
-* **int height**
-  * 指定缩放高度。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **any fileName**
+  - Specifies the file number or file path to save to.
+- **int width**
+  - Specifies the scaled width.
+- **int height**
+  - Specifies the scaled height.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功保存为文件，成功时返回 `非0` ，指定的图像未创建、文件路径不合法、保存文件出错时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the file was saved successfully. Returns `non-zero` on success, `0` if the specified image does not exist, the file path is invalid, or an error occurs during saving.
 :::
 
 ----
@@ -859,16 +1672,16 @@ ENDIF
 
 **`int GRESETMATRIX int GID`**
 
-重置指定图像的变换矩阵。
+Resets the transformation matrix of the specified image.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置图像的变换矩阵，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the transformation matrix was successfully reset. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -876,24 +1689,24 @@ ENDIF
 
 **`int GRESETSTATE int GID`**
 
-重置指定图像的所有附加状态，具体的重置内容如下：
+Resets all additional states of the specified image. The following states are reset:
 
-* `BRUSH`的颜色重置为默认文字颜色。
-* `PEN`的颜色重置为默认文字颜色，笔粗重置为`1`，所有划线效果被重置。
-* 抗锯齿效果重置为`1(开启)`。
-* 过滤质量重置为`3(高质量)`。
-* 模糊效果被清除。
-* `ColorMatrix(颜色矩阵)`被清除。
-* `TransformMatrix(变换矩阵)`被重置。
+- `BRUSH` color is reset to the default text color.
+- `PEN` color is reset to the default text color, thickness is reset to `1`, and all line effects are reset.
+- Anti-aliasing is reset to `1 (enabled)`.
+- Filter quality is reset to `3 (high quality)`.
+- Blur effects are cleared.
+- `ColorMatrix` is cleared.
+- `TransformMatrix` is reset.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功重置图像的状态，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the image states were successfully reset. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -901,20 +1714,20 @@ ENDIF
 
 **`int GSETANTIALIAS int GID(, int mode = 0)`**
 
-用于设置图像绘制时是否启用抗锯齿。
+Sets whether anti-aliasing is enabled for image drawing.
 
-所有新创建的图像默认开启抗锯齿。
+All newly created images have anti-aliasing enabled by default.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int mode = 0**
-  * 指定是否启用抗锯齿，输入 `非0` 开启抗锯齿，否则为关闭，可省略 `(0)` 。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int mode = 0**
+  - Specifies whether to enable anti-aliasing. Input `non-zero` to enable, `0` to disable. Can be omitted `(0)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的抗锯齿，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether anti-aliasing was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -922,20 +1735,20 @@ ENDIF
 
 **`int GSETBLUR int GID(, int blur = 0)`**
 
-用于设置图像绘制时是否启用模糊效果。
+Sets whether blur effects are enabled for image drawing.
 
-所有新创建的图像默认无模糊效果。
+All newly created images have no blur effects by default.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int blur = 0**
-  * 指定模糊程度，输入范围为 `0-100`，省略或输入 `0` 将会清除模糊效果。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int blur = 0**
+  - Specifies the blur intensity, ranging from `0-100`. Omit or input `0` to clear blur effects.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的模糊效果，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the blur effect was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -943,25 +1756,25 @@ ENDIF
 
 **`int GSETCOLORMATRIX int GID(, intArray colorMatrix)`**
 
-用于设置图像绘制时是否启用颜色矩阵。
+Sets whether a color matrix is enabled for image drawing.
 
-颜色矩阵数组至少需要 `4行 x 5列` 大小，前4列的输入范围为 `0-510` ，即前4列支持2倍过饱和，第5列的输入范围为 `0-255` 。
+The color matrix array must be at least `4 rows x 5 columns`. The first 4 columns accept values from `0-510` (supporting 2x oversaturation), and the 5th column accepts values from `0-255`.
 
-不需要颜色矩阵时请再次调用该指令并省略第2参数 `colorMatrix` 。
+To disable the color matrix, call this command again and omit the `colorMatrix` parameter.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **intArray colorMatrix**
-  * 指定任意整数数组作为颜色矩阵，省略该参数将会清除已有的颜色矩阵。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **intArray colorMatrix**
+  - Specifies any integer array as the color matrix. Omitting this parameter clears any existing color matrix.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的颜色矩阵，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the color matrix was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 #DIM COLOR_MATRIX, 4, 5
 
@@ -980,20 +1793,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int GSETQUALITY int GID(, int quality = 3)`**
 
-用于设置图像绘制时的过滤质量等级，该设置会影响缩放图像时的清晰度。
+Sets the filter quality level for image drawing, which affects the clarity of scaled images.
 
-所有新创建的图像默认使用 `3(高质量)` 。
+All newly created images default to `3 (high quality)`.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int quality = 3**
-  * 指定质量等级，输入范围为 `0-3` ， `0` = 无过滤， `1` = 低质量， `2` = 中质量， `3` = 高质量。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int quality = 3**
+  - Specifies the quality level, ranging from `0-3`:
+    - `0` = No filtering
+    - `1` = Low quality
+    - `2` = Medium quality
+    - `3` = High quality
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的过滤质量，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the filter quality was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -1001,26 +1818,26 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int GSETSCALE int GID, int scaleX, int scaleY(, int posX = 0, int posY = 0)`**
 
-为图像的变换矩阵附加 `缩放` 效果。
+Adds a `scaling` effect to the image's transformation matrix.
 
-附加后的效果无法撤销，只能通过调用 [**`GRESETMATRIX`**](#gresetmatrix) 指令全部重置。
+Once applied, the effect cannot be undone unless the entire matrix is reset using the [**`GRESETMATRIX`**](#gresetmatrix) command.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int scaleX**
-  * 指定X缩放量，输入 `100` 即为 `100%` 。
-* **int scaleY**
-  * 指定Y缩放量，输入 `100` 即为 `100%` 。
-* **int posX = 0**
-  * 指定缩放中心点的X位置，可省略 `(0)` 。
-* **int posY = 0**
-  * 指定缩放中心点的Y位置，可省略 `(0)` 。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int scaleX**
+  - Specifies the X scaling factor. Input `100` for `100%`.
+- **int scaleY**
+  - Specifies the Y scaling factor. Input `100` for `100%`.
+- **int posX = 0**
+  - Specifies the X position of the scaling center point. Can be omitted `(0)`.
+- **int posY = 0**
+  - Specifies the Y position of the scaling center point. Can be omitted `(0)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的变换矩阵，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the transformation matrix was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -1028,22 +1845,22 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int GSETSKEW int GID, int skewX, int skewY`**
 
-为图像的变换矩阵附加 `倾斜` 效果。
+Adds a `skew` effect to the image's transformation matrix.
 
-附加后的效果无法撤销，只能通过调用 [**`GRESETMATRIX`**](#gresetmatrix) 指令全部重置。
+Once applied, the effect cannot be undone unless the entire matrix is reset using the [**`GRESETMATRIX`**](#gresetmatrix) command.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int skewX**
-  * 指定X倾斜量，输入 `100` 即为 `100%` 。
-* **int skewY**
-  * 指定Y倾斜量，输入 `100` 即为 `100%` 。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int skewX**
+  - Specifies the X skew factor. Input `100` for `100%`.
+- **int skewY**
+  - Specifies the Y skew factor. Input `100` for `100%`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的变换矩阵，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the transformation matrix was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -1053,24 +1870,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int GSETROTATE int GID, int angle, int posX = 0, int posY = 0`**
 
-为图像的变换矩阵附加 `旋转` 效果。
+Adds a `rotation` effect to the image's transformation matrix.
 
-附加后的效果无法撤销，只能通过调用 [**`GRESETMATRIX`**](#gresetmatrix) 指令全部重置。
+Once applied, the effect cannot be undone unless the entire matrix is reset using the [**`GRESETMATRIX`**](#gresetmatrix) command.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int angle**
-  * 指定旋转角度。
-* **int posX = 0**
-  * 指定旋转中心点的X位置，可省略 `(0)` 。
-* **int posY = 0**
-  * 指定旋转中心点的Y位置，可省略 `(0)` 。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int angle**
+  - Specifies the rotation angle.
+- **int posX = 0**
+  - Specifies the X position of the rotation center point. Can be omitted `(0)`.
+- **int posY = 0**
+  - Specifies the Y position of the rotation center point. Can be omitted `(0)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的变换矩阵，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the transformation matrix was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -1078,22 +1895,22 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int GSETTRANSLATE int GID, int translateX, int translateY`**
 
-为图像的变换矩阵附加 `平移` 效果。
+Adds a `translation` effect to the image's transformation matrix.
 
-附加后的效果无法撤销，只能通过调用 [**`GRESETMATRIX`**](#gresetmatrix) 指令全部重置。
+Once applied, the effect cannot be undone unless the entire matrix is reset using the [**`GRESETMATRIX`**](#gresetmatrix) command.
 
-:::tip[参数]
-* **int GID**
-  * 指定图像ID。
-* **int translateX**
-  * 指定平移的X向量。
-* **int translateY**
-  * 指定平移的Y向量。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **int translateX**
+  - Specifies the X translation vector.
+- **int translateY**
+  - Specifies the Y translation vector.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置了图像的变换矩阵，成功时返回 `非0` 。图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the transformation matrix was successfully set. Returns `non-zero` on success, `0` if the image does not exist.
 :::
 
 ----
@@ -1101,22 +1918,39 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEANIMECLEARFRAME str spriteAnime(, int removeStart = 0, int removeCount = frameCount)`**
 
-清除指定SpriteAnime的帧。
+Clears frames from the specified SpriteAnime.
 
-该指令仅对非内置SpriteAnime有效。
+This command only works for non-built-in SpriteAnime.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int removeStart = 0**
-  * 指定清除的起始位置。
-* **int removeCount = frameCount**
-  * 指定清除的帧个数，省略时将会清除从 `removeStart` 开始的所有帧。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int removeStart = 0**
+  - Specifies the starting position for clearing.
+- **int removeCount = frameCount**
+  - Specifies the number of frames to clear. If omitted, clears all frames from `removeStart` onward.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功清除，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the frames were successfully cleared. Returns `non-zero` on success, `0` if the SpriteAnime does not exist or is built-in.
+:::
+
+----
+#### SPRITEANIMEFRAMECOUNT
+
+**`int SPRITEANIMEFRAMECOUNT str spriteAnime`**
+
+Gets the number of frames added to the specified SpriteAnime.
+
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of frames in the SpriteAnime. Returns `0` if the SpriteAnime does not exist.
 :::
 
 ----
@@ -1124,16 +1958,35 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEANIMERESETTIME str spriteAnime`**
 
-重置指定SpriteAnime的播放时间，使动画从第一帧重新开始。
+Resets the playback time of the specified SpriteAnime, causing the animation to restart from the first frame.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the playback time was successfully reset. Returns `non-zero` on success, `0` if the SpriteAnime does not exist.
+:::
+
+----
+#### SPRITEANIMEOFFSETTIME
+
+**`int SPRITEANIMEOFFSETTIME str spriteAnime, int offsetTime`**
+
+Adds an offset to the playback time of the specified SpriteAnime.
+
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int offsetTime**
+  - Specifies the time offset.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the offset was successfully applied. Returns `non-zero` on success, `0` if the SpriteAnime does not exist.
 :::
 
 ----
@@ -1145,32 +1998,32 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_SETG str spriteAnime, int GID, int x, int y, int width, int height, int posX, int posY`**
 
-为指定SpriteAnime的当前帧设置图像，每一帧只有最后设置的图像类型会生效。
+Sets the image for the current frame of the specified SpriteAnime. Only the last set image type for each frame takes effect.
 
-该指令仅对非内置SpriteAnime有效。
+This command only works for non-built-in SpriteAnime.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int GID**
-  * 指定图像ID。
-* **int x**
-  * 指定框选的位置X。
-* **int y**
-  * 指定框选的位置Y。
-* **int width**
-  * 指定框选的宽度。
-* **int height**
-  * 指定框选的高度。
-* **int posX**
-  * 指定框选的绘制位置X。
-* **int posY**
-  * 指定框选的绘制位置Y。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int GID**
+  - Specifies the image ID.
+- **int x**
+  - Specifies the X position of the selection box.
+- **int y**
+  - Specifies the Y position of the selection box.
+- **int width**
+  - Specifies the width of the selection box.
+- **int height**
+  - Specifies the height of the selection box.
+- **int posX**
+  - Specifies the X drawing position of the selection box.
+- **int posY**
+  - Specifies the Y drawing position of the selection box.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the image was successfully set. Returns `non-zero` on success, `0` if the SpriteAnime does not exist or is built-in.
 :::
 
 ----
@@ -1182,32 +2035,32 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_SETSPRITE str spriteAnime, str sprite, int x, int y, int width, int height, int posX, int posY`**
 
-为指定SpriteAnime的当前帧设置Sprite图像，每一帧只有最后设置的图像类型会生效。
+Sets a Sprite image for the current frame of the specified SpriteAnime. Only the last set image type will take effect for each frame.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **str sprite**
-  * 指定Sprite。
-* **int x**
-  * 指定框选的位置X。
-* **int y**
-  * 指定框选的位置Y。
-* **int width**
-  * 指定框选的宽度。
-* **int height**
-  * 指定框选的高度。
-* **int posX**
-  * 指定框选的绘制位置X。
-* **int posY**
-  * 指定框选的绘制位置Y。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **str sprite**
+  - Specifies the Sprite.
+- **int x**
+  - Specifies the X position of the selection area.
+- **int y**
+  - Specifies the Y position of the selection area.
+- **int width**
+  - Specifies the width of the selection area.
+- **int height**
+  - Specifies the height of the selection area.
+- **int posX**
+  - Specifies the X drawing position of the selection area.
+- **int posY**
+  - Specifies the Y drawing position of the selection area.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1219,32 +2072,32 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_SETSPINE str spriteAnime, int spineID, int x, int y, int width, int height, int posX, int posY`**
 
-为指定SpriteAnime的当前帧设置Spine动画，每一帧只有最后设置的图像类型会生效。
+Sets a Spine animation for the current frame of the specified SpriteAnime. Only the last set image type will take effect for each frame.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int spineID**
-  * 指定SpineID。
-* **int x**
-  * 指定框选的X位置。
-* **int y**
-  * 指定框选的Y位置。
-* **int width**
-  * 指定框选的宽度。
-* **int height**
-  * 指定框选的高度。
-* **int posX**
-  * 指定框选的X绘制位置。
-* **int posY**
-  * 指定框选的Y绘制位置。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int spineID**
+  - Specifies the SpineID.
+- **int x**
+  - Specifies the X position of the selection area.
+- **int y**
+  - Specifies the Y position of the selection area.
+- **int width**
+  - Specifies the width of the selection area.
+- **int height**
+  - Specifies the height of the selection area.
+- **int posX**
+  - Specifies the X drawing position of the selection area.
+- **int posY**
+  - Specifies the Y drawing position of the selection area.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1254,30 +2107,30 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_TRANSITION str spriteAnime, int useTransisiton, intArray2D bezierPointArray, int bezierPointCount`**
 
-为指定SpriteAnime的当前帧启用或禁用过渡效果，该过渡效果将以上一帧作为变换起点，以当前帧作为变换终点。  
-可传入一个用于描述贝塞尔曲线的数组以获得非匀速的过渡效果。
+Enables or disables transition effects for the current frame of the specified SpriteAnime. The transition effect will use the previous frame as the starting point and the current frame as the endpoint.  
+A Bezier curve array can be provided to achieve non-linear transition effects.
 
-* 仅以下属性会受到过渡效果的影响：
-  * 变换矩阵
-  * 颜色矩阵
-  * 模糊效果
+- Only the following properties are affected by the transition effect:
+  - Transformation matrix
+  - Color matrix
+  - Blur effect
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int useTransisiton**
-  * 指定启用或禁用过渡效果。
-* **intArray2D bezierPointArray**
-  * 指定用于描述贝塞尔曲线的数组。
-* **int bezierPointCount**
-  * 指定数组中的坐标点个数。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int useTransisiton**
+  - Specifies whether to enable or disable the transition effect.
+- **intArray2D bezierPointArray**
+  - Specifies the array describing the Bezier curve.
+- **int bezierPointCount**
+  - Specifies the number of coordinate points in the array.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1285,24 +2138,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_TRANSLATE str spriteAnime, int translateX, int translateY`**
 
-为指定SpriteAnime的当前帧的变换矩阵附加 `平移` 效果。
+Applies a `translation` effect to the transformation matrix of the current frame of the specified SpriteAnime.
 
-附加后的效果无法撤销，只能通过调用 [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) 指令重置当前帧的变换矩阵。
+Once applied, the effect cannot be undone unless the transformation matrix is reset using the [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) instruction.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int translateX**
-  * 指定平移的X向量。
-* **int translateY**
-  * 指定平移的Y向量。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int translateX**
+  - Specifies the X translation vector.
+- **int translateY**
+  - Specifies the Y translation vector.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1312,28 +2165,28 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_SCALE str spriteAnime, int scaleX, int scaleY, int posX, int posY`**
 
-为指定SpriteAnime的当前帧的变换矩阵附加 `缩放` 效果。
+Applies a `scaling` effect to the transformation matrix of the current frame of the specified SpriteAnime.
 
-附加后的效果无法撤销，只能通过调用 [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) 指令重置当前帧的变换矩阵。
+Once applied, the effect cannot be undone unless the transformation matrix is reset using the [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) instruction.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int scaleX**
-  * 指定X缩放量，输入 `100` 即为 `100%` 。
-* **int scaleY**
-  * 指定Y缩放量，输入 `100` 即为 `100%` 。
-* **int posX = 0**
-  * 指定缩放中心点的X位置，可省略 `(0)` 。
-* **int posY = 0**
-  * 指定缩放中心点的Y位置，可省略 `(0)` 。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int scaleX**
+  - Specifies the X scaling factor (e.g., `100` = `100%`).
+- **int scaleY**
+  - Specifies the Y scaling factor (e.g., `100` = `100%`).
+- **int posX = 0**
+  - Specifies the X position of the scaling center (optional, default `0`).
+- **int posY = 0**
+  - Specifies the Y position of the scaling center (optional, default `0`).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1343,26 +2196,26 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_ROTATE str spriteAnime, int angle, int posX, int posY`**
 
-为指定SpriteAnime的当前帧的变换矩阵附加 `旋转` 效果。
+Applies a `rotation` effect to the transformation matrix of the current frame of the specified SpriteAnime.
 
-附加后的效果无法撤销，只能通过调用 [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) 指令重置当前帧的变换矩阵。
+Once applied, the effect cannot be undone unless the transformation matrix is reset using the [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) instruction.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int angle**
-  * 指定旋转角度。
-* **int posX**
-  * 指定旋转中心点的X位置，可省略 `(0)` 。
-* **int posY**
-  * 指定旋转中心点的Y位置，可省略 `(0)` 。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int angle**
+  - Specifies the rotation angle.
+- **int posX**
+  - Specifies the X position of the rotation center (optional, default `0`).
+- **int posY**
+  - Specifies the Y position of the rotation center (optional, default `0`).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1370,24 +2223,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_SKEW str spriteAnime, int skewX, int skewY`**
 
-为指定SpriteAnime的当前帧的变换矩阵附加 `倾斜` 效果。
+Applies a `skew` effect to the transformation matrix of the current frame of the specified SpriteAnime.
 
-附加后的效果无法撤销，只能通过调用 [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) 指令重置当前帧的变换矩阵。
+Once applied, the effect cannot be undone unless the transformation matrix is reset using the [**`SPRITEFRAME_RESETMATRIX`**](#spriteframe_resetmatrix) instruction.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int skewX**
-  * 指定X倾斜量，输入 `100` 即为 `100%` 。
-* **int skewY**
-  * 指定Y倾斜量，输入 `100` 即为 `100%` 。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int skewX**
+  - Specifies the X skew factor (e.g., `100` = `100%`).
+- **int skewY**
+  - Specifies the Y skew factor (e.g., `100` = `100%`).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1395,18 +2248,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_RESETMATRIX str spriteAnime`**
 
-重置指定SpriteAnime的当前帧的变换矩阵。
+Resets the transformation matrix of the current frame of the specified SpriteAnime.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1414,24 +2267,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_COLORMATRIX str spriteAnime(, intArray colorMatrix)`**
 
-为指定SpriteAnime的当前帧设置颜色矩阵。
+Sets a color matrix for the current frame of the specified SpriteAnime.
 
-颜色矩阵数组至少需要 `4行 x 5列` 大小，前4列的输入范围为 `0-510` ，即前4列支持2倍过饱和，第5列的输入范围为 `0-255` 。
+The color matrix array must be at least `4 rows x 5 columns`. The first 4 columns accept values in the range `0-510` (supporting 2x oversaturation), and the 5th column accepts values in the range `0-255`.
 
-不需要颜色矩阵时请再次调用该指令并省略第2参数 `colorMatrix` 。
+To remove the color matrix, call this instruction again and omit the `colorMatrix` parameter.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **intArray colorMatrix**
-  * 指定任意整数数组作为颜色矩阵，省略该参数将会清除已有的颜色矩阵。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **intArray colorMatrix**
+  - Specifies an integer array as the color matrix. Omitting this parameter will clear any existing color matrix.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1439,20 +2292,20 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEFRAME_BLUR str spriteAnime(, int blur = 0)`**
 
-为指定SpriteAnime的当前帧设置模糊效果。
+Sets a blur effect for the current frame of the specified SpriteAnime.
 
-该指令仅对非内置SpriteAnime有效。
+This instruction only works for non-built-in SpriteAnimes.
 
-:::tip[参数]
-* **str spriteAnime**
-  * 指定SpriteAnime名称。
-* **int blur = 0**
-  * 指定模糊程度，输入范围为 `0-100`，省略或输入 `0` 将会清除模糊效果。
+:::tip[Parameters]
+- **str spriteAnime**
+  - Specifies the SpriteAnime name.
+- **int blur = 0**
+  - Specifies the blur intensity (range `0-100`). Omitting or setting to `0` will clear the blur effect.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。SpriteAnime未创建、SpriteAnime是内置时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the SpriteAnime is not created or is built-in.
 :::
 
 ----
@@ -1460,16 +2313,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEENABLED str sprite`**
 
-获取指定Sprite图像的 `ENABLED` 值，该值用于控制该图像是否能最终绘制到屏幕上。
+Gets the `ENABLED` value of the specified Sprite image, which determines whether the image is drawn on the screen.
 
-:::tip[参数]
-* **str sprite**
-  * 指定Sprite图像。
+:::tip[Parameters]
+- **str sprite**
+  - Specifies the Sprite image.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回指定Sprite图像的 `ENABLED` 值。Sprite图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the `ENABLED` value of the Sprite. Returns `0` if the Sprite is not created.
 :::
 
 ----
@@ -1477,18 +2330,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITESETENABLED str sprite, int enabled`**
 
-该指令用于在保持Sprite图像的位置信息的前提下，控制该图像是否能最终绘制到屏幕上。
+Controls whether the specified Sprite image is drawn on the screen while preserving its positional information.
 
-:::tip[参数]
-* **str sprite**
-  * 指定Sprite图像。
-* **int enabled**
-  * 指定该Sprite图像是否绘制。
+:::tip[Parameters]
+- **str sprite**
+  - Specifies the Sprite image.
+- **int enabled**
+  - Specifies whether the Sprite should be drawn.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Sprite图像未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Sprite is not created.
 :::
 
 ----
@@ -1496,16 +2349,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEEXIST str sprite`**
 
-使用方式与 [**`SPRITECREATED`**](https://osdn.net/projects/emuera/wiki/excom#h5-SPRITECREATED.20str.20spriteName) 指令类似，检索有无指定Sprite但不会触发其引用图像的自动加载机制。
+Similar to the [**`SPRITECREATED`**](https://osdn.net/projects/emuera/wiki/excom#h5-SPRITECREATED.20str.20spriteName) instruction, this checks for the existence of a specified Sprite without triggering its auto-loading mechanism for referenced images.
 
-:::tip[参数]
-* **str sprite**
-  * 指定需要检索的Sprite名称。
+:::tip[Parameters]
+- **str sprite**
+  - Specifies the Sprite name to check.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否检索到指定的Sprite，找到时返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the Sprite exists.
 :::
 
 ----
@@ -1515,30 +2368,30 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPRITEEXTEND str newSprite, str srcSprite, int x, int y, int width, int height, int posX, int posY`**
 
-根据已有的Sprite来创建新的非内置Sprite，新Sprite的框选区域会受限于原Sprite的大小。
+Creates a new non-built-in Sprite based on an existing Sprite. The selection area of the new Sprite is constrained by the size of the original Sprite.
 
-:::tip[参数]
-* **str newSprite**
-  * 指定新Sprite名称。
-* **str srcSprite**
-  * 指定原Sprite名称。
-* **int x**
-  * 指定框选的X位置。
-* **int y**
-  * 指定框选的Y位置。
-* **int width**
-  * 指定框选的宽度。
-* **int height**
-  * 指定框选的高度。
-* **int posX**
-  * 指定新Sprite的X绘制位置。
-* **int posY**
-  * 指定新Sprite的Y绘制位置。
+:::tip[Parameters]
+- **str newSprite**
+  - Specifies the name of the new Sprite.
+- **str srcSprite**
+  - Specifies the name of the source Sprite.
+- **int x**
+  - Specifies the X position of the selection area.
+- **int y**
+  - Specifies the Y position of the selection area.
+- **int width**
+  - Specifies the width of the selection area.
+- **int height**
+  - Specifies the height of the selection area.
+- **int posX**
+  - Specifies the X drawing position of the new Sprite.
+- **int posY**
+  - Specifies the Y drawing position of the new Sprite.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功创建新的非内置Sprite，成功时返回 `非0` 。新Sprite与原Sprite同名、已存在同名的内置Sprite、原Sprite不存在、原Sprite不是单图类型的Sprite时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the new Sprite has the same name as the source Sprite, a built-in Sprite with the same name already exists, the source Sprite does not exist, or the source Sprite is not a single-image type Sprite.
 :::
 
 ----
@@ -1552,56 +2405,56 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int CONSTSPRITECREATE str sprite, str imgPath, int x, int y, int width, int height, int posX, int posY`**
 
-根据指定的 `imgPath` 图像文件路径来创建新的内置Sprite。
+Creates a new built-in Sprite based on the specified `imgPath` image file path.
 
-该操作会取代已存在的非内置Sprite。
+This operation will replace any existing non-built-in Sprite with the same name.
 
-:::tip[参数]
-* **str sprite**
-  * 指定新Sprite名称。
-* **str imgPath**
-  * 指定图像文件路径。
-* **int x**
-  * 指定框选的X位置。
-* **int y**
-  * 指定框选的Y位置。
-* **int width**
-  * 指定框选的宽度。
-* **int height**
-  * 指定框选的高度。
-* **int posX**
-  * 指定新Sprite的X绘制位置。
-* **int posY**
-  * 指定新Sprite的Y绘制位置。
+:::tip[Parameters]
+- **str sprite**
+  - Specifies the name of the new Sprite.
+- **str imgPath**
+  - Specifies the image file path.
+- **int x**
+  - Specifies the X position of the selection area.
+- **int y**
+  - Specifies the Y position of the selection area.
+- **int width**
+  - Specifies the width of the selection area.
+- **int height**
+  - Specifies the height of the selection area.
+- **int posX**
+  - Specifies the X drawing position of the new Sprite.
+- **int posY**
+  - Specifies the Y drawing position of the new Sprite.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功创建新的内置Sprite，成功时返回 `非0` 。已存在同名的内置Sprite、指定的框选区域与图像无交集时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if a built-in Sprite with the same name already exists or the specified selection area does not intersect with the image.
 :::
 
 ----
-### SPINE相关
+### SPINE-Related {#SpineRelated}
 
 ----
 #### SPINECREATE
 
 **`int SPINECREATE int spineID, str spineResource`**
 
-根据csv资源文件中定义的Spine资源来创建Spine动画到指定的 `spineID` 中。
+Creates a Spine animation at the specified `spineID` based on the Spine resource defined in the CSV resource file.
 
-该指令在创建Spine动画前会释放已创建的Spine动画，即无需在创建前调用 [**`SPINEDISPOSE`**](#spinedispose) 指令。
+This instruction will release any previously created Spine animation before creating a new one, so there is no need to call [**`SPINEDISPOSE`**](#spinedispose) beforehand.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **str spineResource**
-  * 指定Spine资源名称，名称忽略大小写。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **str spineResource**
+  - Specifies the Spine resource name (case-insensitive).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功创建Spine动画，成功时返回 `非0` 。Spine动画资源不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine resource does not exist.
 :::
 
 ----
@@ -1609,22 +2462,22 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINECREATEFROMFILE int spineID, str atlasFile, str dataFile`**
 
-根据指定的 `atlas文件` 和 `data文件(.skel或.json)` 来创建Spine动画到指定的 `spineID` 中。
+Creates a Spine animation at the specified `spineID` based on the given `atlas file` and `data file (.skel or .json)`.
 
-该指令在创建Spine动画前会释放已创建的Spine动画，即无需在创建前调用 [**`SPINEDISPOSE`**](#spinedispose) 指令。
+This instruction will release any previously created Spine animation before creating a new one, so there is no need to call [**`SPINEDISPOSE`**](#spinedispose) beforehand.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **str atlasFile**
-  * 指定Spine动画的atlas文件。
-* **str dataFile**
-  * 指定Spine动画的.skel文件或.json文件。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **str atlasFile**
+  - Specifies the atlas file for the Spine animation.
+- **str dataFile**
+  - Specifies the .skel or .json file for the Spine animation.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功创建Spine动画，成功时返回 `非0` 。文件不存在、文件格式不符合时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the files do not exist or are in an invalid format.
 :::
 
 ----
@@ -1632,16 +2485,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINECREATED int spineID`**
 
-检查指定的Spine动画是否已创建。
+Checks whether the specified Spine animation has been created.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否已创建Spine动画，已创建时返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the Spine animation exists.
 :::
 
 ----
@@ -1649,18 +2502,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEDISPOSE int spineID(, int disposeImg = 0)`**
 
-移除指定的Spine动画。
+Removes the specified Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int disposeImg = 0**
-  * 指定是否释放该Spine动画所引用的图像，输入 `非0` 时将会释放图像。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int disposeImg = 0**
+  - Specifies whether to release the images referenced by this Spine animation. Input `non-zero` to release images.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 总是返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
 :::
 
 ----
@@ -1668,16 +2521,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEDISPOSEALL (int disposeImg = 0)`**
 
-移除所有Spine动画。
+Removes all Spine animations.
 
-:::tip[参数]
-* **int disposeImg = 0**
-  * 指定是否释放所有Spine动画所引用的图像，输入 `非0` 时将会释放图像。
+:::tip[Parameters]
+- **int disposeImg = 0**
+  - Specifies whether to release all images referenced by Spine animations. Input `non-zero` to release images.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 总是返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Always returns `non-zero`.
 :::
 
 ----
@@ -1685,16 +2538,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEENABLED int spineID`**
 
-获取指定Spine动画的 `ENABLED` 值，该值用于控制该Spine动画是否能最终绘制到屏幕上。
+Gets the `ENABLED` value of the specified Spine animation, which determines whether the animation will be rendered on screen.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回指定Spine动画的 `ENABLED` 值。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the `ENABLED` value of the Spine animation. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -1702,18 +2555,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINESETENABLED int spineID, int enabled`**
 
-该指令用于在保持Spine动画的位置信息的前提下，控制该Spine动画是否能最终绘制到屏幕上。
+Controls whether the specified Spine animation will be rendered on screen while preserving its positional information.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int enabled**
-  * 指定该Spine动画是否绘制。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int enabled**
+  - Specifies whether the Spine animation should be rendered.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -1729,50 +2582,50 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int GDRAWSPINE int GID, int spineID, int destX, int destY, int destWidth, int destHeight, int srcX, int srcY, int srcWidth, int srcHeight(, intArray colorMatrix)`**
 
-使用方式与 [**`GDRAWG`**](modify_com#gdrawg) 指令类似，在指定的 `GID` 图像上绘制 `spineID` Spine动画。
+Similar to the [**`GDRAWG`**](modify_com#gdrawg) instruction, this draws the specified `spineID` Spine animation on the target image `GID`.
 
-`colorMatrix` 颜色矩阵的使用方式请参阅 [**`GSETCOLORMATRIX`**](#gsetcolormatrix) 指令中的说明。
+For `colorMatrix` usage, refer to the [**`GSETCOLORMATRIX`**](#gsetcolormatrix) instruction.
 
-:::tip[参数]
-* **int GID**
-  * 指定目标图像ID。
-* **int spineID**
-  * 指定源SpineID。
-* **int destX**
-  * 指定目标X位置。
-* **int destY**
-  * 指定目标Y位置。
-* **int destWidth**
-  * 指定目标宽度。
-* **int destHeight**
-  * 指定目标高度。
-* **int srcX**
-  * 指定源X位置。
-* **int srcY**
-  * 指定源Y位置。
-* **int srcWidth**
-  * 指定源宽度。
-* **int srcHeight**
-  * 指定源高度。
-* **intArray colorMatrix**
-  * 指定任意整数数组作为颜色矩阵，可省略。该颜色矩阵仅在本次绘制时生效，绘制完成后会被自动清除。
+:::tip[Parameters]
+- **int GID**
+  - Specifies the target image ID.
+- **int spineID**
+  - Specifies the source SpineID.
+- **int destX**
+  - Specifies the target X position.
+- **int destY**
+  - Specifies the target Y position.
+- **int destWidth**
+  - Specifies the target width. Negative values will flip the image.
+- **int destHeight**
+  - Specifies the target height. Negative values will flip the image.
+- **int srcX**
+  - Specifies the source X position.
+- **int srcY**
+  - Specifies the source Y position.
+- **int srcWidth**
+  - Specifies the source width.
+- **int srcHeight**
+  - Specifies the source height.
+- **intArray colorMatrix**
+  - Specifies an integer array as the color matrix (optional). The matrix only applies to this draw operation and will be cleared afterward.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功绘制，成功时返回 `非0` 。指定的图像或Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the specified image or Spine animation doesn't exist.
 :::
 
 ----
 #### ASYNCGDRAWSPINE
 
-该指令的调用方式与 [**`GDRAWSPINE`**](#gdrawspine) 指令相同，用于异步进行绘图操作以避免长时间的程序停滞。
+This instruction has the same usage as [**`GDRAWSPINE`**](#gdrawspine), performing drawing operations asynchronously to avoid prolonged program stalls.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call [**`ASYNCWAITALL`**](#asyncwaitall) to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[返回值]
-* **RESULT:0**
-  * 成功发送异步任务时返回 `非0` ，指定的图像或Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the asynchronous task was successfully sent. Returns `0` if the specified image or Spine animation doesn't exist.
 :::
 
 ----
@@ -1780,18 +2633,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int ASYNCSPINELOAD int spineID`**
 
-该指令用于异步加载指定的Spine动画所引用的图像以避免长时间的程序停滞。
+Asynchronously loads the images referenced by the specified Spine animation to avoid prolonged program stalls.
 
-发送异步任务后，可调用 [**`ASYNCWAITALL`**](#asyncwaitall) 指令使程序强制等待所有异步任务直到完成。
+After sending an asynchronous task, you can call [**`ASYNCWAITALL`**](#asyncwaitall) to force the program to wait for all asynchronous tasks to complete.
 
-:::tip[参数]
-* **int spineID**
-  * 指定想要异步加载的SpineID。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID to load asynchronously.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 成功发送异步任务时返回 `非0` ，Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the asynchronous task was successfully sent. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -1801,16 +2654,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEPOSY int spineID`**
 
-获取指定Spine动画的偏移位置。
+Gets the rendering position of the specified Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回Spine动画的偏移位置。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the rendering position of the Spine animation.
 :::
 
 ----
@@ -1820,16 +2673,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINESRCY int spineID`**
 
-获取指定Spine动画的原坐标轴位置，获取的值会受到 [**`SPINESETSCALE`**](#spinesetscale) 指令的影响。
+Gets the original axis position of the specified Spine animation. The returned values are affected by the [**`SPINESETSCALE`**](#spinesetscale) instruction.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回Spine动画的原坐标轴位置。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the original axis position of the Spine animation.
 :::
 
 ----
@@ -1839,16 +2692,16 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEHEIGHT int spineID`**
 
-获取指定Spine动画的宽度或高度，获取的值会受到 [**`SPINESETSCALE`**](#spinesetscale) 指令的影响。
+Gets the width or height of the specified Spine animation. The returned values are affected by the [**`SPINESETSCALE`**](#spinesetscale) instruction.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回Spine动画的宽度或高度。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the width or height of the Spine animation.
 :::
 
 ----
@@ -1858,24 +2711,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEMOVE int spineID, int offsetX, int offsetY`**
 
-使用方式与 [**`SPRITESETPOS`**](https://osdn.net/projects/emuera/wiki/excom#h5-SPRITESETPOS.20str.20spriteName.2C.20int.20posx.2C.20int.20posy)、[**`SPRITEMOVE`**](https://osdn.net/projects/emuera/wiki/excom#h5-SPRITEMOVE.20str.20spriteName.2C.20int.20movex.2C.20int.20movey) 指令类似，用于设置或偏移指定Spine动画的绘制位置。
+Similar to [**`SPRITESETPOS`**](https://osdn.net/projects/emuera/wiki/excom#h5-SPRITESETPOS.20str.20spriteName.2C.20int.20posx.2C.20int.20posy) and [**`SPRITEMOVE`**](https://osdn.net/projects/emuera/wiki/excom#h5-SPRITEMOVE.20str.20spriteName.2C.20int.20movex.2C.20int.20movey), this sets or offsets the rendering position of the specified Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int posX**
-  * 指定X绘制位置。
-* **int posY**
-  * 指定Y绘制位置。
-* **int offsetX**
-  * 指定X绘制位置的偏移量。
-* **int offsetY**
-  * 指定Y绘制位置的偏移量。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int posX**
+  - Specifies the X rendering position.
+- **int posY**
+  - Specifies the Y rendering position.
+- **int offsetX**
+  - Specifies the X position offset.
+- **int offsetY**
+  - Specifies the Y position offset.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -1885,26 +2738,26 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINESETSCALE int spineID, int scaleX, int scaleY`**
 
-设置指定Spine动画的缩放比例。
+Sets the scaling factor for the specified Spine animation.
 
-* 该指令会影响以下指令的输出结果：
-  * [**`SPINESRCX, SPINESRCY`**](#spinesrcx-spinesrcy)
-  * [**`SPINEWIDTH, SPINEHEIGHT`**](#spinewidth-spineheight)
+- This instruction affects the output of:
+  - [**`SPINESRCX, SPINESRCY`**](#spinesrcx-spinesrcy)
+  - [**`SPINEWIDTH, SPINEHEIGHT`**](#spinewidth-spineheight)
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int scale**
-  * 指定整体缩放量，输入 `100` 即为 `100%` 。
-* **int scaleX**
-  * 指定X缩放量，输入 `100` 即为 `100%` 。
-* **int scaleY**
-  * 指定Y缩放量，输入 `100` 即为 `100%` 。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int scale**
+  - Specifies the overall scaling factor (e.g., `100` = `100%`).
+- **int scaleX**
+  - Specifies the X-axis scaling factor (e.g., `100` = `100%`).
+- **int scaleY**
+  - Specifies the Y-axis scaling factor (e.g., `100` = `100%`).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -1914,20 +2767,20 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEHASSKIN int spineID, str skinName`**
 
-检查指定Spine动画是否存在指定的动画或皮肤。
+Checks whether the specified Spine animation contains the specified animation or skin.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **str animName**
-  * 指定动画名称，名称忽略大小写。
-* **str skinName**
-  * 指定皮肤名称，名称忽略大小写。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **str animName**
+  - Specifies the animation name (case-insensitive).
+- **str skinName**
+  - Specifies the skin name (case-insensitive).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否存在指定的动画或皮肤，存在时返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if the specified animation or skin exists.
 :::
 
 ----
@@ -1935,22 +2788,22 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINESETANIM int spineID, int trackIndex, str animName(, int isLoop = 0)`**
 
-为指定Spine动画设置指定的动画。若动画名称为空，则会清除指定的通道序号中原有的动画。
+Sets the specified animation for the Spine animation. If the animation name is empty, it clears the animation in the specified track.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int trackIndex**
-  * 指定动画的通道序号。
-* **str animName**
-  * 指定动画名称，名称忽略大小写。若动画名称为空，则会清除指定的通道序号中原有的动画。
-* **int isLoop = 0**
-  * 指定动画是否循环。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int trackIndex**
+  - Specifies the animation track index.
+- **str animName**
+  - Specifies the animation name (case-insensitive). If empty, clears the animation in the specified track.
+- **int isLoop = 0**
+  - Specifies whether the animation should loop.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置动画，成功设置、成功清除时返回 `非0` 。Spine动画未创建、指定的动画不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful (including successful clearing). Returns `0` if the Spine animation doesn't exist or the specified animation doesn't exist.
 :::
 
 ----
@@ -1958,24 +2811,24 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEADDANIM int spineID, int trackIndex, str animName(, int isLoop = 0, int delay = 1000)`**
 
-为指定Spine动画叠加指定的动画。
+Adds the specified animation to the Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int trackIndex**
-  * 指定动画的通道序号。
-* **str animName**
-  * 指定动画名称，名称忽略大小写。
-* **int isLoop = 0**
-  * 指定动画是否循环。
-* **int delay = 1000**
-  * 指定动画的播放延时，单位为毫秒。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int trackIndex**
+  - Specifies the animation track index.
+- **str animName**
+  - Specifies the animation name (case-insensitive).
+- **int isLoop = 0**
+  - Specifies whether the animation should loop.
+- **int delay = 1000**
+  - Specifies the animation delay in milliseconds.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功叠加动画，成功时返回 `非0` 。Spine动画未创建、指定的动画不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist or the specified animation doesn't exist.
 :::
 
 ----
@@ -1983,18 +2836,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINESETSKIN int spineID, str skinName`**
 
-为指定Spine动画设置指定的皮肤。
+Sets the specified skin for the Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **str skinName**
-  * 指定皮肤名称，名称忽略大小写。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **str skinName**
+  - Specifies the skin name (case-insensitive).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置皮肤，成功时返回 `非0` 。Spine动画未创建、指定的皮肤不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist or the specified skin doesn't exist.
 :::
 
 ----
@@ -2004,18 +2857,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINEUPDATETIME int spineID, int millsec`**
 
-为指定Spine动画设置或推进指定的播放时间。
+Sets or advances the playback time of the specified Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int millsec**
-  * 指定播放时间，单位为毫秒。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int millsec**
+  - Specifies the playback time in milliseconds.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -2023,18 +2876,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINETIMESCALE int spineID, int timeScale`**
 
-为指定Spine动画设置指定的时间倍数，该属性用于控制Spine动画的播放速度。
+Sets the time multiplier for the specified Spine animation, controlling its playback speed.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int timeScale**
-  * 指定时间倍数，输入 `100` 即为 `100%` 。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int timeScale**
+  - Specifies the time multiplier (e.g., `100` = `100%`).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -2044,18 +2897,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int SPINESKINLIST int spineID, strArray outputArray`**
 
-获取指定Spine动画的动画列表或皮肤列表。
+Gets the animation or skin list of the specified Spine animation.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **strArray outputArray**
-  * 指定用于获取列表的任意字符串数组。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **strArray outputArray**
+  - Specifies the string array to store the list.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回获取到的动画或皮肤个数。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of animations or skins retrieved. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
@@ -2063,60 +2916,60 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 **`int CBGSETSPINE int spineID, int x, int y, int zdepth`**
 
-使用方式与 [**`CBGSETG`**](https://osdn.net/projects/emuera/wiki/excom#h5-CBGSETG.20int.20ID.2C.20int.20x.2C.20int.20y.2C.20int.20zdepth) 指令类似，将指定Spine动画显示到客户端背景上。
+Similar to [**`CBGSETG`**](https://osdn.net/projects/emuera/wiki/excom#h5-CBGSETG.20int.20ID.2C.20int.20x.2C.20int.20y.2C.20int.20zdepth), this displays the specified Spine animation on the client background.
 
-:::tip[参数]
-* **int spineID**
-  * 指定SpineID。
-* **int x**
-  * 指定X位置。
-* **int y**
-  * 指定Y位置。
-* **int zdepth**
-  * 指定Z轴深度。
+:::tip[Parameters]
+- **int spineID**
+  - Specifies the SpineID.
+- **int x**
+  - Specifies the X position.
+- **int y**
+  - Specifies the Y position.
+- **int zdepth**
+  - Specifies the Z-axis depth.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功设置，成功时返回 `非0` 。Spine动画未创建时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Spine animation doesn't exist.
 :::
 
 ----
-### 音频相关
+### Audio-Related {#AudioRelated}
 
 ----
 #### AUDIOCREATE
 
 **`int AUDIOCREATE str audioName, str srcAudio(, int volume, any startTime, any duration)`**
 
-根据已有的 `srcAudio` 来创建新的Audio。
+Creates a new Audio based on an existing `srcAudio`.
 
-指定 `startTime` 和 `duration` 时只需参考原Audio所引用的音频文件的总时长。
+When specifying `startTime` and `duration`, refer to the total duration of the audio file referenced by the original Audio.
 
-`startTime` 和 `duration` 可输入 `TimeSpan` 或 `ms(毫秒)` ， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+`startTime` and `duration` can be input as `TimeSpan` or `ms (milliseconds)`. For `TimeSpan` format, refer to the examples in the [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) documentation.
 
-:::tip[参数]
-* **str audioName**
-  * 指定新Audio的名称。
-* **str srcAudio**
-  * 指定引用的原Audio名称。
-* **int volume**
-  * 指定新Audio的播放音量，可省略 `(原Audio的默认音量)` 。
-* **any startTime**
-  * 指定新Audio的起始时间，可省略 `(原Audio的起始时间)` 。
-* **any duration**
-  * 指定新Audio的播放时长，可省略 `(原Audio的播放时长)` 。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the new Audio.
+- **str srcAudio**
+  - Specifies the name of the source Audio.
+- **int volume**
+  - Specifies the playback volume of the new Audio (optional, defaults to the original Audio's volume).
+- **any startTime**
+  - Specifies the start time of the new Audio (optional, defaults to the original Audio's start time).
+- **any duration**
+  - Specifies the playback duration of the new Audio (optional, defaults to the original Audio's duration).
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功创建Audio，成功时返回 `非0` 。Audio名称已存在、原Audio不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns `non-zero` if successful. Returns `0` if the Audio name already exists or the source Audio doesn't exist.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-AUDIOCREATE "New", "Old", 80			;创建新Audio“New”，音量为80
-AUDIOCREATE "New", "Old", , "00:01:10", "10000"	;创建新Audio“New”，起始时间为1分10秒，播放时长为10000毫秒
+AUDIOCREATE "New", "Old", 80            ;Creates new Audio "New" with volume 80
+AUDIOCREATE "New", "Old", , "00:01:10", "10000" ;Creates new Audio "New" starting at 1:10 with duration 10000ms
 ```
 :::
 
@@ -2125,34 +2978,34 @@ AUDIOCREATE "New", "Old", , "00:01:10", "10000"	;创建新Audio“New”，起�
 
 **`int AUDIOCREATEFROMFILE str audioName, str filePath(, int volume, any startTime, any duration)`**
 
-根据指定的 `filePath` 音频文件来创建新的Audio。
+Creates a new Audio from the specified `filePath` audio file.
 
-指定 `startTime` 和 `duration` 时只需参考音频文件的总时长。
+When specifying `startTime` and `duration`, refer only to the total duration of the audio file.
 
-`startTime` 和 `duration` 参数可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+The `startTime` and `duration` parameters accept either `TimeSpan` or `ms (milliseconds)` values. For the `TimeSpan` format, refer to the examples in the [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) documentation.
 
-:::tip[参数]
-* **str audioName**
-  * 指定新Audio的名称。
-* **str filePath**
-  * 指定引用的音频文件相对路径，该路径必须确保从主目录开始。
-* **int volume**
-  * 指定新Audio的播放音量，可省略 `(100)` 。
-* **any startTime**
-  * 指定新Audio的起始时间，可省略 `(0)` 。
-* **any duration**
-  * 指定新Audio的播放时长，可省略 `(音频文件的总时长)` 。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the new Audio.
+- **str filePath**
+  - Specifies the relative path of the referenced audio file, which must start from the root directory.
+- **int volume**
+  - Specifies the playback volume of the new Audio. Optional `(100)`.
+- **any startTime**
+  - Specifies the start time of the new Audio. Optional `(0)`.
+- **any duration**
+  - Specifies the playback duration of the new Audio. Optional `(total duration of the audio file)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功创建Audio，成功时返回 `非0` 。Audio名称已存在、音频文件不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the Audio was successfully created. Returns `non-zero` on success. Returns `0` if the Audio name already exists or the audio file does not exist.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-AUDIOCREATEFROMFILE "New", "sound/Old.mp3", 80			;创建新Audio“New”，音量为80
-AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New”，起始时间为1分10秒
+AUDIOCREATEFROMFILE "New", "sound/Old.mp3", 80          ; Creates a new Audio "New" with volume 80
+AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10" ; Creates a new Audio "New" with a start time of 1 minute and 10 seconds
 ```
 :::
 
@@ -2161,16 +3014,16 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`int AUDIOCREATED str audioName`**
 
-检查指定的Audio是否已创建。
+Checks whether the specified Audio has been created.
 
-:::tip[参数]
-* **str audioName**
-  * 指定Audio的名称。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the Audio.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示Audio是否已创建，Audio存在时返回 `非0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the Audio exists. Returns `non-zero` if the Audio exists.
 :::
 
 ----
@@ -2178,16 +3031,16 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`int AUDIOVOLUME str audioName`**
 
-获取指定Audio的音量。
+Gets the volume of the specified Audio.
 
-:::tip[参数]
-* **str audioName**
-  * 指定Audio的名称。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the Audio.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回Audio的音量，Audio不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the volume of the Audio. Returns `0` if the Audio does not exist.
 :::
 
 ----
@@ -2195,16 +3048,16 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`int AUDIOSTARTTIME str audioName`**
 
-获取指定Audio的播放起始时间，单位为 `ms(毫秒)` 。
+Gets the playback start time of the specified Audio in `ms (milliseconds)`.
 
-:::tip[参数]
-* **str audioName**
-  * 指定Audio的名称。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the Audio.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回Audio的起始时间，Audio不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the start time of the Audio. Returns `0` if the Audio does not exist.
 :::
 
 ----
@@ -2212,16 +3065,16 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`int AUDIODURATION str audioName`**
 
-获取指定Audio的播放持续时间，单位为 `ms(毫秒)` 。
+Gets the playback duration of the specified Audio in `ms (milliseconds)`.
 
-:::tip[参数]
-* **str audioName**
-  * 指定Audio的名称。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the Audio.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回Audio的持续时间，Audio不存在时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the duration of the Audio. Returns `0` if the Audio does not exist.
 :::
 
 ----
@@ -2229,16 +3082,16 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`int AUDIODISPOSE str audioName`**
 
-移除指定的临时Audio，Audio所占用的内存会在播放结束后释放。只有运行时创建的临时Audio才能被移除。
+Removes the specified temporary Audio. The memory occupied by the Audio will be released after playback ends. Only temporary Audios created at runtime can be removed.
 
-:::tip[参数]
-* **str audioName**
-  * 指定需要移除的Audio的名称。
+:::tip[Parameters]
+- **str audioName**
+  - Specifies the name of the Audio to be removed.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 指示是否成功移除Audio，成功时返回 `非0` 。Audio不存在、指定的Audio不是临时Audio时返回 `0` 。
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the Audio was successfully removed. Returns `non-zero` on success. Returns `0` if the Audio does not exist or the specified Audio is not a temporary Audio.
 :::
 
 ----
@@ -2246,22 +3099,22 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`void AUDIODISPOSEALL`**
 
-移除所有运行时创建的临时Audio，Audio所占用的内存会在播放结束后释放。内置Audio不受影响。
+Removes all temporary Audios created at runtime. The memory occupied by the Audios will be released after playback ends. Built-in Audios are unaffected.
 
 ----
 #### CURRENTBGM
 
 **`str CURRENTBGM`**
 
-获取当前正在播放的背景音乐名称。
+Gets the name of the currently playing background music.
 
-:::tip[参数]
-* 无
+:::tip[Parameters]
+- None
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 当前正在播放的背景音乐名称，未播放任何音乐时返回 `空字符串` 。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the name of the currently playing background music. Returns an `empty string` if no music is playing.
 :::
 
 ----
@@ -2269,31 +3122,32 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`void PAUSEBGM (int fadeOut = 0)`**
 
-暂停当前正在播放的背景音乐。
+Pauses the currently playing background music.
 
-:::tip[参数]
-* **int fadeOut = 0**
-  * 指定淡出效果的持续时间，单位为 `ms(毫秒)` ，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000` 。
+:::tip[Parameters]
+- **int fadeOut = 0**
+  - Specifies the duration of the fade-out effect in `ms (milliseconds)`. No effect if the value is `omitted` or `less than or equal to 0`. The maximum value is `10000`.
 :::
 
 ----
-### 模组相关
+### Module Related {#ModuleRelated}
 
 ----
 #### MODULELIST
 
-**`int MODULELIST strArray1D array`**
+**`int MODULELIST strArray array`**
 
-获取已加载的模组ID列表。
+Gets the list of loaded module IDs.
 
-:::tip[参数]
-* **strArray1D array**
-  * 指定存入模组ID列表的一维数组。
+:::tip[Parameters]
+- **strArray array**
+  - Specifies any string-type array to receive the module ID list.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回获取到的模组ID数量。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of module IDs retrieved.  
+    The number may be limited by the length of the last dimension of the receiving array.
 :::
 
 ----
@@ -2301,49 +3155,65 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 
 **`str MODULEPATH str modID`**
 
-获取指定的已加载模组的文件夹相对路径。
+Gets the relative folder path of the specified loaded module.
 
-:::tip[参数]
-* **str modID**
-  * 指定需要获取文件夹路径的模组ID。
+:::tip[Parameters]
+- **str modID**
+  - Specifies the module ID for which to retrieve the folder path.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回获取到的文件夹相对路径，模组ID不存在或未加载时返回 `空字符串` 。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the relative folder path. Returns an `empty string` if the module ID does not exist or is not loaded.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-PRINTSL MODULEPATH("MyMod")			; 打印“mod/MyMod v1.0/”
+PRINTSL MODULEPATH("MyMod")         ; Prints "mod/MyMod v1.0/"
 ```
 :::
 
 ----
 #### GETRESOURCEEXT
 
-**`int GETRESOURCEEXT strArray1D array(, int option = 1P0 | 1P1)`**
+**`int GETRESOURCEEXT strArray array(, int option = 1P0 | 1P1)`**
 
-获取所有受支持的资源文件扩展名，扩展名不带 `.` 号，且全部为小写。
+Gets all image and audio resource file extensions supported by the launcher. Extensions include the `.` symbol and are all lowercase.
 
-:::tip[参数]
-* **strArray1D array**
-  * 指定存入文件扩展名的一维数组。
-* **int option = 1P0 | 1P1**
-  * 指定需要的资源类型， `1P0` = 图像资源， `1P1` = 音频资源，可省略 `(1P0 | 1P1)` 。
+:::tip[Parameters]
+- **strArray array**
+  - Specifies any string-type array to receive the file extensions.
+- **int option = 1P0 | 1P1**
+  - Specifies the type of resource needed. `1P0` = image resources, `1P1` = audio resources. Optional `(1P0 | 1P1)`.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回获取到的扩展名数量。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of extensions retrieved.  
+    The number may be limited by the length of the last dimension of the receiving array.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
-GETRESOURCEEXT LOCALS
-PRINTSL LOCALS:0			; bmp
-PRINTSL LOCALS:1			; jpg
-PRINTSL LOCALS:2			; jpeg
+GETRESOURCEEXT LOCALS, 1P0
+PRINTS "Image Ext:" 
+FOR LOCAL, 0, RESULT
+	PRINTS " "
+	PRINTS LOCALS:LOCAL
+NEXT
+PRINTL
+
+GETRESOURCEEXT LOCALS, 1P1
+PRINTS "Audio Ext:" 
+FOR LOCAL, 0, RESULT
+	PRINTS " "
+	PRINTS LOCALS:LOCAL
+NEXT
+PRINTL
+
+; Output:
+; Image Ext: .bmp .jpg .jpeg .png .webp .tiff .exif .gif
+; Audio Ext: .mp3 .mpeg3 .wav .wave .flac .fla .aiff .aif .aifc .aac .adt .adts .m2ts .mp2 .3g2 .3gp2 .3gp .3gpp .m4a .m4v .mp4v .mp4 .mov .asf .wm .wmv .wma .mp1 .avi .ac3 .ec3
 ```
 :::
 
@@ -2352,19 +3222,19 @@ PRINTSL LOCALS:2			; jpeg
 
 **`str TEXT anyParams keyName`**
 
-根据指定的键名获取多语言文本，具体用法请参阅 [**`多语言功能`**](/#多语言功能) 部分。
+Gets multilingual text based on the specified key name. For detailed usage, refer to the [**`Multilingual Functionality`**](/#Multilingual) section.
 
-:::tip[参数]
-* **anyParams keyName**
-  * 指定多语言文本的键名，输入的键名不需要区分大小写。
+:::tip[Parameters]
+- **anyParams keyName**
+  - Specifies the key name of the multilingual text. The key name is case-insensitive.
 :::
 
-:::tip[返回值]
-* **RESULTS:0**
-  * 返回指定的多语言文本，键名不存在、路径错误时返回 `空字符串`。
+:::tip[Return Value]
+- **RESULTS:0**
+  - Returns the specified multilingual text. Returns an `empty string` if the key name does not exist or the path is incorrect.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 LOCALS '= TEXT("START_GAME")
 PRINTSL TEXT("ITEM")
@@ -2377,21 +3247,22 @@ PRINTSL TEXT("ITEM", "APPLE", "DESC")
 
 **`int TEXTLIST strArray array, anyParams keyName`**
 
-根据指定的键名获取多语言文本列表，具体用法请参阅 [**`多语言功能`**](/#多语言功能) 部分。
+Gets a list of multilingual texts based on the specified key name. For detailed usage, refer to the [**`Multilingual Functionality`**](/#Multilingual) section.
 
-:::tip[参数]
-* **strArray array**
-  * 指定用于接收文本列表的数组。
-* **anyParams keyName**
-  * 指定多语言文本的键名，输入的键名不需要区分大小写。
+:::tip[Parameters]
+- **strArray array**
+  - Specifies any string-type array to receive the text list.
+- **anyParams keyName**
+  - Specifies the key name of the multilingual text. The key name is case-insensitive.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回获取到的文本列表元素数，键名不存在、路径错误时返回 `0`。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of text list elements successfully retrieved. Returns `0` if the key name does not exist or the path is incorrect.  
+    The number may be limited by the length of the last dimension of the receiving array.
 :::
 
-:::note[使用例]
+:::note[Example]
 ```
 TEXTLIST(LOCALS, "ITEM", "BANANA", "DESC")
 FOR LOCAL, 0, RESULT
@@ -2403,16 +3274,39 @@ NEXT
 ----
 #### LANGUAGELIST
 
-**`int LANGUAGELIST strArray1D array`**
+**`int LANGUAGELIST strArray array`**
 
-获取已加载的多语言ID列表，获取的ID会自动将 `减号(-)` 替换为 `下划线(_)`。
+Gets the list of loaded multilingual IDs. The retrieved IDs automatically replace `hyphens (-)` with `underscores (_)`.
 
-:::tip[参数]
-* **strArray1D array**
-  * 指定存入多语言ID列表的一维数组。
+:::tip[Parameters]
+- **strArray array**
+  - Specifies any string-type array to receive the multilingual ID list.
 :::
 
-:::tip[返回值]
-* **RESULT:0**
-  * 返回获取到的多语言ID数量。
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of multilingual IDs retrieved.  
+    The number may be limited by the length of the last dimension of the receiving array.
+:::
+
+----
+### Map Collection Related {#MapCollectionRelated}
+
+----
+#### MAP_COPY
+
+**`int MAP_COPY str srcMap, str destMap`**
+
+Copies all elements from the specified source Map to the destination Map.
+
+:::tip[Parameters]
+- **str srcMap**
+  - Specifies the source Map.
+- **str destMap**
+  - Specifies the destination Map.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of elements in the destination Map. Returns `(-1)` if the source Map or destination Map is not found.
 :::

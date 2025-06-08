@@ -121,11 +121,11 @@ PRINTSL REPLACEBYARRAY("A A-A", "A", LOCALS)		; 打印“111 222-333”
 
 **`str STRAPPEND (str delimiter = ",", anyParams value)`**
 
-实现 [**`string.join`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.join?view=netframework-4.8#system-string-join(system-string-system-string())) 拼合文本。
+实现 [**`string.join`**](https://learn.microsoft.com/dotnet/api/system.string.join?view=netframework-4.8#system-string-join(system-string-system-string())) 拼合文本。
 
 :::tip[参数]
 - **str delimiter = ","**
-  - 指定用于拼合文本的分隔符， 可省略 `(",")` 。
+  - 指定用于拼合文本的分隔符，可省略 `(",")` 。
 - **anyParams value**
   - 指定0个或多个参数值。
 :::
@@ -215,7 +215,7 @@ PRINTVL STRFINDLASTUW("😀A啊B😀A", "B")	;打印“3”
 
 **`str STRFORMAT str formatText(, anyParams value)`**
 
-实现 [**`string.format`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.format?view=netframework-4.8#Starting) 格式化文本处理。
+实现 [**`string.format`**](https://learn.microsoft.com/dotnet/api/system.string.format?view=netframework-4.8#Starting) 格式化文本处理。
 
 :::tip[参数]
 - **str formatText**
@@ -269,7 +269,7 @@ PRINTVL STRLENSUW("A👪A")		;打印“3”
 
 **`str STRREMOVEUW str text(, int start = 0, int count = totalLength)`**
 
-实现 [**`string.remove`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.remove?view=netframework-4.8) 移除指定范围内的文本。
+实现 [**`string.remove`**](https://learn.microsoft.com/dotnet/api/system.string.remove?view=netframework-4.8) 移除指定范围内的文本。
 
 **`STRREMOVE`** 指令在处理Emoji字符时会通过计算显示宽度得出字符长度。  
 如果文本的选定位置处在长字符的中间，则后退到该字符的起始位置。也就是说，卡在起始位置的字符会被计入，卡在末尾位置的字符会被无视。
@@ -312,7 +312,7 @@ PRINTSL STRREMOVEUW("１２３４👨‍👩‍👧‍👦５６", 2, 3)		;打�
 - **strArray array**
   - 指定用于保存分割文本的数组。
 - **str delimiter = ","**
-  - 指定用于分割文本的分隔符， 可省略 `(",")` 。
+  - 指定用于分割文本的分隔符，可省略 `(",")` 。
 :::
 
 :::tip[返回值]
@@ -334,7 +334,7 @@ PRINTSL LOCALS:1					;打印“22”。
 
 **`str STRTRIM str text(, str trimChars, int trimDirection = 0)`**
 
-实现 [**`string.trim`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.string.trim?view=netframework-4.8) 移除文本前后的指定字符。
+实现 [**`string.trim`**](https://learn.microsoft.com/dotnet/api/system.string.trim?view=netframework-4.8) 移除文本前后的指定字符。
 
 :::tip[参数]
 - **str text**
@@ -373,7 +373,7 @@ PRINTSL STRTRIM(" 111 AAA  22  ", " 12", 1)		;打印“AAA  22  ”。
 - **int start = 0**
   - 指定截取的起始位置，可省略 `(0)` 。
 - **int length = totalLength**
-  - 指定截取长度， 输入值为 `负数` 时将截取文本总长度。
+  - 指定截取长度，输入值为 `负数` 时将截取文本总长度。
 :::
 
 :::tip[返回值]
@@ -437,7 +437,7 @@ LOCAL = TRYTOINT("IO") ? RESULT:1 # 10
 - **int dimension = lastDim**
   - 指定数组的索引键所在的维数，省略时使用数组最后一维。当该参数指定为 `0` 时，检索数组内的元素来作为索引值。
 - **str delimiter = ","**
-  - 指定用于分割键名的分隔符， 可省略 `(",")` 。
+  - 指定用于分割键名的分隔符，可省略 `(",")` 。
 :::
 
 :::tip[返回值]
@@ -515,7 +515,7 @@ LOCAL |= 1 << ARRAYFIND(EXAMPLE_ARRAY, "VALUE_2")
 
 ARRAYRESIZE LOCAL, 2		; TEST函数中的LOCAL数组成功被重设。
 ARRAYRESIZE DYNAMIC_ARRAY, 2, 2	; DYNAMIC_ARRAY数组成功被重设。
-CALL TEST_1(DYNAMIC_ARRAY， STATIC_ARRAY)
+CALL TEST_1(DYNAMIC_ARRAY, STATIC_ARRAY)
 
 @TEST_1(REF_ARRAY1, REF_ARRAY2)
 #DIM REF REF_ARRAY1, 0, 0
@@ -1386,7 +1386,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 
 检查用户输入的 `keyData` 键码值是否与指定的 `keyName` 按键名和 `modifier` 修改键匹配。`keyData` 键码值可通过 [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) 指令获取。
 
-具体的 `keyName` 按键名对应列表请参阅 [**`Keys 枚举`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.windows.forms.keys?view=netframework-4.8) 文档。
+具体的 `keyName` 按键名对应列表请参阅 [**`Keys 枚举`**](https://learn.microsoft.com/dotnet/api/system.windows.forms.keys?view=netframework-4.8) 文档。
 
 :::tip[参数]
 - **int keyData**
@@ -1395,9 +1395,9 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
   - 指定需要匹配的按键名，按键名无视大小写，可省略。
 - **int modifier**
   - 指定需要匹配的修改键，可省略。
-    -  `1P0` = Shift
-    -  `1P1` = Ctrl
-    -  `1P2` = Alt
+    - `1P0` = Shift
+    - `1P1` = Ctrl
+    - `1P2` = Alt
 :::
 
 :::tip[返回值]
@@ -1801,7 +1801,11 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 - **int GID**
   - 指定图像ID。
 - **int quality = 3**
-  - 指定质量等级，输入范围为 `0-3` ， `0` = 无过滤， `1` = 低质量， `2` = 中质量， `3` = 高质量。
+  - 指定质量等级，输入范围为 `0-3`：
+    - `0` = 无过滤
+    - `1` = 低质量
+    - `2` = 中质量
+    - `3` = 高质量
 :::
 
 :::tip[返回值]
@@ -1976,6 +1980,8 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 :::tip[参数]
 - **str spriteAnime**
   - 指定SpriteAnime名称。
+- **int offsetTime**
+  - 指定偏移值.
 :::
 
 :::tip[返回值]
@@ -2940,7 +2946,7 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 
 指定 `startTime` 和 `duration` 时只需参考原Audio所引用的音频文件的总时长。
 
-`startTime` 和 `duration` 可输入 `TimeSpan` 或 `ms(毫秒)` ， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+`startTime` 和 `duration` 可输入 `TimeSpan` 或 `ms(毫秒)` ， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
 
 :::tip[参数]
 - **str audioName**
@@ -2976,7 +2982,7 @@ AUDIOCREATE "New", "Old", , "00:01:10", "10000"	;创建新Audio“New”，起�
 
 指定 `startTime` 和 `duration` 时只需参考音频文件的总时长。
 
-`startTime` 和 `duration` 参数可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+`startTime` 和 `duration` 参数可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
 
 :::tip[参数]
 - **str audioName**
@@ -3172,7 +3178,7 @@ PRINTSL MODULEPATH("MyMod")			; 打印“mod/MyMod v1.0/”
 
 **`int GETRESOURCEEXT strArray array(, int option = 1P0 | 1P1)`**
 
-获取所有启动器支持的资源文件扩展名，扩展名不带 `.` 号，且全部为小写。
+获取所有启动器支持的图像、音频资源文件扩展名，扩展名包含 `.` 号，且全部为小写。
 
 :::tip[参数]
 - **strArray array**
@@ -3206,8 +3212,8 @@ NEXT
 PRINTL
 
 ; 输出结果
-; Image Ext: bmp jpg jpeg png webp tiff exif gif
-; Audio Ext: mp3 mpeg3 wav wave flac fla aiff aif aifc aac adt adts m2ts mp2 3g2 3gp2 3gp 3gpp m4a m4v mp4v mp4 mov asf wm wmv wma mp1 avi ac3 ec3
+; Image Ext: .bmp .jpg .jpeg .png .webp .tiff .exif .gif
+; Audio Ext: .mp3 .mpeg3 .wav .wave .flac .fla .aiff .aif .aifc .aac .adt .adts .m2ts .mp2 .3g2 .3gp2 .3gp .3gpp .m4a .m4v .mp4v .mp4 .mov .asf .wm .wmv .wma .mp1 .avi .ac3 .ec3
 ```
 :::
 

@@ -14,11 +14,11 @@ slug: /
 
 启动器的默认标题改为 `EmueraBA`，并更改了启动器的默认图标。
 
-图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`图形绘制接口`** 设置项已被移除。
+图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`描画インターフェース`** (图形绘制接口) 设置项已被移除。
 
-实现了自动识别字符范围功能，已能正确识别中、日、韩、英、Emoji字符并计算长度，**`内部使用的东亚语言`** 设置项已被移除。
+实现了自动识别字符范围功能，已能正确识别中、日、韩、英、Emoji字符并计算长度，**`内部で使用する東アジア言語`** (内部使用的东亚语言) 设置项已被移除。
 
-在显示设置界面中新增 **`制表符宽度`** 设置项，该设置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
+在显示设置界面中新增 **`タブ文字幅`** (制表符宽度) 设置项，该设置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
 制表符会根据之前的文本的字符长度来自动调整自身的字符长度，例如制表符之前有文本 `111`，则当前制表符会占据5个字符长度。
 
 新增用户定义变量关键字 **`RESIZE`** ，该关键字用于标记需要重设数组大小的变量。关于该关键字的更多使用事项请参阅 [**`ARRAYRESIZE`**](new_com#arrayresize)。
@@ -86,7 +86,7 @@ Description,我的mod的简介
 添加多语言文本的方法如下。我们将以添加 `简体中文` 语言作为示例：
 
 - 在游戏主目录下新建 `text` 文件夹，该文件夹即为**多语言主目录**。
-- 在 `text` 文件夹下新建一个**区域语言文件夹**，文件夹名称需参考 [**`区域性语言`**](https://learn.microsoft.com/zh-cn/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c) 文档中的 `语言标签(Language tag)`。
+- 在 `text` 文件夹下新建一个**区域语言文件夹**，文件夹名称需参考 [**`区域性语言`**](https://learn.microsoft.com/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c) 文档中的 `语言标签(Language tag)`。
   - 通过查询上述文档可得知 `Chinese (Simplified)` 的区域名称为 `zh-CN`，该名称将作为文件夹名称。
   - 文件夹名称不分大小写，且不分 `下划线(_)` 与 `减号(-)`，但建议统一改为大写和 `下划线(_)`，例如 `ZH_CN`。
 - 在 `ZH_CN` 文件夹下新建任意 `json` 格式的文件，并在文件中填入如下示例内容：
@@ -153,7 +153,7 @@ PRINTSL LOCALS:1			; 打印“你的感觉真的很奇妙”
 ![](audio_setting.png)
 </center>
 
-可以在 `sound` 文件夹下创建csv文件，并定义**Audio资源**以得到更加自定义的音频效果。
+可以如图像资源那样，在 `resources` 资源文件夹下放置音频文件、创建csv文件并定义**Audio资源**以得到更加自定义的音频效果。
 
 ```csv title="Audio资源的填写格式与示例内容："
 ; Audio名称,音频文件名,音量(100),起始时间(00:00:00),播放时长(音频文件的总时长)
@@ -163,7 +163,9 @@ MyMusic2,MyMusic2.m4a,80,00:01:30
 MyMusic3,MyMusic3.wav,70,00:01:30,15000
 ```
 
-`起始时间` 和 `播放时长` 可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/zh-cn/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+csv文件中的 `起始时间` 和 `播放时长` 属性可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+
+请参阅 [**`音频相关`**](new_com#AudioRelated) 指令以了解更多关于音频的功能。
 
 :::
 
@@ -203,6 +205,8 @@ SPINESETANIM 0, 1, "00", 1
 CBGSETSPINE 0, 0, 0, 1
 ```
 
+请参阅 [**`SPINE相关`**](new_com#SpineRelated) 指令以了解更多关于Spine动画的功能。
+
 :::
 
 ----
@@ -237,9 +241,9 @@ CBGSETSPINE 0, 0, 0, 1
     例如 `#DICTS_DICT_IS MY_DICTDICT` 将会声明一个主键为`字符串`类型、次键为`整数`类型、值为`字符串`类型、名称为 `MY_DICTDICT` 的字典型字典变量。
 
 声明这些扩展变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`二进制存档写入器版本`** 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
-请参阅 [**`列表相关指令`**](new_com#ListRelated)、[**`哈希列表相关指令`**](new_com#HashListRelated)、[**`字典相关指令`**](new_com#DictRelated)、[**`字典集合相关指令`**](new_com#DictItemRelated) 以了解更多关于扩展变量的功能。
+请参阅 [**`列表相关`**](new_com#ListRelated)、[**`哈希列表相关`**](new_com#HashListRelated)、[**`字典相关`**](new_com#DictRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多关于扩展变量的功能。
 
 ```erb title="扩展变量的使用示例："
 #LIST MY_LIST
@@ -278,7 +282,7 @@ PRINTSL MY_DICTDICT:"NEW":8	; 打印 MY_DICTDICT 中的 "NEW" 字典中的键为
 
 解禁了 `函数型宏定义` 的相关功能，尚未完全测试该功能的可靠性。
 
-角色型二维数组支持省略第1参数（当 **`不自动补完角色变量的参数`** 设置项未启用时）。
+角色型二维数组支持省略第1参数（当 **`キャラクタ変数の引数を補完しない`** (不自动补完角色变量的参数) 设置项未启用时）。
 
 `__FILE__` 变量获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/` 。
 
