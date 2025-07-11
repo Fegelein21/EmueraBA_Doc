@@ -174,9 +174,11 @@ csv文件中的 `起始时间` 和 `播放时长` 属性可接收 `TimeSpan` 或
 
 :::info[Spine动画功能]
 
-添加了对 [**`Spine 运行时`**](https://zh.esotericsoftware.com/spine-runtimes) 的支持，目前可读取Spine动画文件并通过 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp) 来渲染绘制画面。
+添加了对 [**`Spine 运行时`**](https://zh.esotericsoftware.com/spine-runtimes) 的支持，可读取Spine动画文件并通过 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp) 来渲染绘制画面。
 
-目前仅支持读取 `3.8.xx` 版本的Spine资源。
+- 目前支持以下版本的Spine运行时：
+  -  **3.8.xx**
+  -  **4.2.xx**
 
 添加Spine资源的方法与添加图像资源类似，请将Spine资源文件放置在 `resources` 文件夹下并创建csv文件，在csv文件中填写如下内容：
 

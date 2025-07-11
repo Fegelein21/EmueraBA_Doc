@@ -6,6 +6,33 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2025-07-11
+
+支持 **4.2.xx** 版本的Spine运行时。
+
+新增 [**`DICTITEMGETKEYS`**](new_com#dictitemgetkeys) 指令，用于获取指定的字典集合中的所有主键名。
+
+[**`STRSPLIT`**](new_com#strsplit) 指令新增第4参数 `removeEmpty` ，用于指定是否移除分割后的空元素。
+
+[**`LISTREMOVEAT`**](new_com#listremoveat) 指令新增第4参数 `removeCount` ，指定移除的元素数，默认值为 `1` 。
+
+- 为以下指令添加了可传入数组、列表、哈希列表的参数格式：
+  - [**`FINDEMOJI`**](new_com#findemoji)
+  - [**`STRSPLIT`**](new_com#strsplit)
+  - [**`LISTCOPY`**](new_com#listcopy)
+  - [**`HASHLISTCOPY`**](new_com#hashlistcopy)
+  - [**`DICTGETKEYS`**](new_com#dictgetkeys)
+  - [**`DICTGETVALUES`**](new_com#dictgetvalues)
+  - [**`MODULELIST`**](new_com#modulelist)
+  - [**`GETRESOURCEEXT`**](new_com#getresourceext)
+  - [**`TEXTLIST`**](new_com#textlist)
+  - [**`LANGUAGELIST`**](new_com#languagelist)
+
+- 为以下指令添加了可传入数组、列表的参数格式：
+  - [**`ARRAYTIDY`**](new_com#arraytidy)  
+    对于列表，整理完毕后的空元素不会被移除。
+
+----
 ### 2025-06-08
 
 为所有文档添加了AI翻译的英文、日文和韩文版本。
