@@ -81,7 +81,7 @@ const config = {
           alt: 'Logo',
           src: 'img/emueraba_icon.ico',
         },
-		hideOnScroll: false,
+      hideOnScroll: false,
         items: [
           // {
             // type: 'docSidebar',

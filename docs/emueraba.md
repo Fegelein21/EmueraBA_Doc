@@ -7,7 +7,7 @@ slug: /
 # 介绍 {#Introduction}
 
 <center>
-![](main_window.png)
+![](/img/main_window.png)
 </center>
 
 **EmueraBA** 启动器是由 [**`EmueraEE+EM`**](https://gitlab.com/EvilMask/emuera.em) 启动器修改而来，目前保持使用 `.NET Framework 4.8` 平台构建。
@@ -31,7 +31,7 @@ slug: /
 **新增了模组读取机制，并在启动器菜单栏中新增了一个 `模组列表` 会话窗口，可在此查看、开关模组以及调整模组加载顺序。**
 
 <center>
-![](module_setting.png)
+![](/img/module_setting.png)
 </center>
 
 添加模组的方法如下：
@@ -150,7 +150,7 @@ PRINTSL LOCALS:1			; 打印“你的感觉真的很奇妙”
 **音频组件更换为 [**`CSCore`**](https://github.com/filoe/cscore) ，并在启动器菜单栏中新增了一个 `音频` 会话窗口，可在此调节各项音量。**
 
 <center>
-![](audio_setting.png)
+![](/img/audio_setting.png)
 </center>
 
 可以如图像资源那样，在 `resources` 资源文件夹下放置音频文件、创建csv文件并定义**Audio资源**以得到更加自定义的音频效果。

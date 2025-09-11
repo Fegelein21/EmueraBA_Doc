@@ -6,6 +6,30 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2025-09-11
+
+[**`ARRAYTIDY`**](new_com#arraytidy) 指令在整理完列表后将会移除空元素。
+
+[**`DICTCOPY`**](new_com#dictcopy) 指令在填充字典后将返回目标变量中的元素总数。
+
+- 以下指令在填充数组后将返回成功复制的元素数，在填充列表、哈希列表后将返回目标变量中的元素总数：
+  - [**`LISTCOPY`**](new_com#listcopy)
+  - [**`HASHLISTCOPY`**](new_com#hashlistcopy)
+  - [**`DICTGETKEYS`**](new_com#dictgetkeys)
+  - [**`DICTGETVALUES`**](new_com#dictgetvalues)
+  - [**`DICTITEMGETKEYS`**](new_com#dictitemgetkeys)
+
+新增 [**`ANYSAME`**](new_com#anysame) 指令，用于查找给定的参数中有无相同的值。
+
+- 为以下指令添加了可传入数组、列表、哈希列表的参数格式：
+  - [**`STRJOIN`**](modify_com#strjoin)
+  - [**`SPINEANIMLIST`**](new_com#spineanimlist-spineskinlist)
+  - [**`SPINESKINLIST`**](new_com#spineanimlist-spineskinlist)
+
+- 为以下指令添加了可传入数组、列表的参数格式：
+  - [**`ARRAYMSORT`**](modify_com#arraymsort)
+
+----
 ### 2025-07-11
 
 支持 **4.2.xx** 版本的Spine运行时。
@@ -14,7 +38,7 @@ sidebar_label: 更新日志
 
 [**`STRSPLIT`**](new_com#strsplit) 指令新增第4参数 `removeEmpty` ，用于指定是否移除分割后的空元素。
 
-[**`LISTREMOVEAT`**](new_com#listremoveat) 指令新增第4参数 `removeCount` ，指定移除的元素数，默认值为 `1` 。
+[**`LISTREMOVEAT`**](new_com#listremoveat) 指令新增第3参数 `removeCount` ，用于指定移除的元素数，默认值为 `1` 。
 
 - 为以下指令添加了可传入数组、列表、哈希列表的参数格式：
   - [**`FINDEMOJI`**](new_com#findemoji)

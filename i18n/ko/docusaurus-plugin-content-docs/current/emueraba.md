@@ -7,7 +7,7 @@ slug: /
 # 소개 {#Introduction}
 
 <center>
-![](main_window.png)
+![](/img/main_window.png)
 </center>
 
 **EmueraBA** 런처는 [**`EmueraEE+EM`**](https://gitlab.com/EvilMask/emuera.em) 런처를 기반으로 수정되었으며, 현재 `.NET Framework 4.8` 플랫폼을 사용하여 빌드됩니다.
@@ -31,7 +31,7 @@ slug: /
 **모드 로딩 메커니즘이 추가되었으며, 런처 메뉴 바에 `모드 목록` 대화창이 추가되어 모드 확인, 활성화/비활성화 및 로딩 순서 조정이 가능합니다.**
 
 <center>
-![](module_setting.png)
+![](/img/module_setting.png)
 </center>
 
 모드 추가 방법은 다음과 같습니다:
@@ -150,7 +150,7 @@ PRINTSL LOCALS:1                   ; "너의 느낌은 정말 신기해" 출력
 **오디오 컴포넌트를 [**`CSCore`**](https://github.com/filoe/cscore)로 교체하고, 런처 메뉴 바에 `오디오` 대화창을 추가하여 볼륨 조절이 가능합니다.**
 
 <center>
-![](audio_setting.png)
+![](/img/audio_setting.png)
 </center>
 
 이미지 리소스와 마찬가지로, `resources` 리소스 폴더에 오디오 파일을 배치하고 CSV 파일을 생성한 후 **Audio 리소스**를 정의하면 더욱 사용자 정의된 오디오 효과를 얻을 수 있습니다.

@@ -7,7 +7,7 @@ slug: /
 # Introduction {#Introduction}
 
 <center>
-![](main_window.png)
+![](/img/main_window.png)
 </center>
 
 **EmueraBA** Launcher is modified from the [**`EmueraEE+EM`**](https://gitlab.com/EvilMask/emuera.em) launcher and is currently built using the `.NET Framework 4.8` platform.
@@ -31,7 +31,7 @@ Added the user-defined variable keyword **`RESIZE`**, which is used to mark vari
 **A new mod loading mechanism has been added, and a `Mod List` dialog window has been included in the launcher menu bar. Here, you can view, enable/disable mods, and adjust their loading order.**
 
 <center>
-![](module_setting.png)
+![](/img/module_setting.png)
 </center>
 
 To add a mod, follow these steps:
@@ -150,7 +150,7 @@ PRINTSL LOCALS:1			; Print "Your feeling is really magical"
 **The audio component has been replaced with [**`CSCore`**](https://github.com/filoe/cscore), and a new `Audio` dialog window has been added to the launcher menu bar, where you can adjust various volume settings.**
 
 <center>
-![](audio_setting.png)
+![](/img/audio_setting.png)
 </center>
 
 You can place audio files in the `resources` folder, create CSV files, and define **Audio Resources** to achieve more customized audio effects, just like with image resources.  

@@ -58,7 +58,8 @@ SETBGCOLORBYNAME %LOCALS%
 
 该指令的第2参数 `delimiter` 可省略，默认值为 `(",")` 。
 
-第3参数 `array` 可传入任意字符串数组，对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
+第3参数 `array` 可传入任意字符串数组。  
+对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 
 ----
 #### STRCOUNT
@@ -77,15 +78,14 @@ SETBGCOLORBYNAME %LOCALS%
 ----
 #### STRJOIN
 
-**`str STRJOIN anyArray array(, str delimiter = ",", int start = 0, int count = lastDimLength)`**
+**`str STRJOIN any Array_List_HashList(, str delimiter = ",", int start = 0, int count = lastDimLength)`**
 
-该指令的第1参数 `array` 允许传入任意数组。
-
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
+该指令的第1参数 `Array_List_HashList` 可传入任意型可引用数组、列表、哈希列表。
 
 :::tip[参数]
-- **anyArray array**
-  - 指定需要合并字符串的任意数组。
+- **any Array_List_HashList**
+  - 指定需要合并字符串的任意型可引用数组、列表、哈希列表。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **str delimiter = ","**
   - 指定合并字符串时使用的分隔符。
 - **int start = 0**
@@ -123,7 +123,7 @@ SETBGCOLORBYNAME %LOCALS%
 ----
 #### ARRAYREMOVE
 
-**`ARRAYREMOVE anyArray1D array, int start, int count, same emptyVal`**
+**`void ARRAYREMOVE anyArray1D array, int start, int count, same emptyVal`**
 
 新增第4参数 `emptyVal` ，用于指定移动元素后的空白填充值，默认的填充值为 `0` 或 `空字符串` 。
 
@@ -132,16 +132,38 @@ SETBGCOLORBYNAME %LOCALS%
 ----
 #### ARRAYSHIFT
 
-**`ARRAYSHIFT anyArray1D array, int shiftCount, same emptyVal(, int start, int count)`**
+**`void ARRAYSHIFT anyArray1D array, int shiftCount, same emptyVal(, int start, int count)`**
 
 该指令的第5参数 `count` 指定为 `负数` 时视为数组的总长度。
 
 ----
 #### ARRAYSORT
 
-**`ARRAYSORT anyArray1D array(, FORWARD or BACK, int start, int count)`**
+**`void ARRAYSORT anyArray1D array(, FORWARD or BACK, int start, int count)`**
 
 该指令的第4参数 `count` 指定为 `负数` 时视为数组的总长度。
+
+----
+#### ARRAYMSORT
+
+**`int ARRAYMSORT any Array1D_List(, sameParams Array_List)`**
+
+该指令的第1参数 `Array1D_List` 可传入任意型可引用1维数组、列表。
+
+后续的参数 `Array_List` 可传入数组、列表。
+
+:::tip[参数]
+- **any Array1D_List**
+  - 指定用于作为排序依据的任意型可引用1维数组、列表。  
+    此参数本身的值也会被排序。
+- **sameParams Array_List**
+  - 指定一个或多个需要排序的可引用数组、列表，值类型要与首个参数的值类型一致。
+:::
+
+:::tip[返回值]
+- **RESULT:0**
+  - 返回排序结果，排序成功或无需排序时返回 `非0` ，否则返回 `0` 。
+:::
 
 ----
 #### ERDNAME
@@ -157,11 +179,10 @@ SETBGCOLORBYNAME %LOCALS%
 
 该指令的第1参数 `array` 允许传入任意数组。修改了第5参数 `option` 的用法，可通过指定该参数调整处理选项。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **anyArray array**
   - 指定需要检索的任意数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **same target**
   - 指定需要检索的内容。
 - **int start = 0**
@@ -194,11 +215,10 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 该指令的第1参数 `array` 允许传入任意整数数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **intArray array**
   - 指定任意整数数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **int min**
   - 指定最小范围值。
 - **int max**
@@ -221,11 +241,10 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 该指令的第1参数 `array` 允许传入任意角色型整数数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **intCharaArray array**
   - 指定任意角色型整数数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **int min**
   - 指定最小范围值。
 - **int max**
@@ -250,11 +269,10 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 该指令的第1参数 `array` 允许传入任意整数数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **intArray array**
   - 指定任意整数数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **int start = 0**
   - 指定开始索引。
 - **int end = lastDimLength**
@@ -275,11 +293,10 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 该指令的第1参数 `array` 允许传入任意整数数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **intCharaArray array**
   - 指定任意角色型整数数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **int start = 0**
   - 指定开始角色索引。
 - **int end = charaCount**
@@ -298,11 +315,10 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 该指令的第1参数 `array` 允许传入任意数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **anyArray array**
   - 指定需要检索的任意数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **same target**
   - 指定需要检索的内容。
 - **int start = 0**
@@ -340,11 +356,10 @@ PRINTVL MATCH(CARRAY_2D:TARGET:3:0, 22, 5)	;统计角色TARGET的 CARRAY_2D:3:5 
 
 该指令的第1参数 `array` 允许传入任意角色型数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **anyCharaArray array**
   - 指定需要检索的角色型数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **same target**
   - 指定需要检索的内容。
 - **int start = 0**
@@ -380,11 +395,10 @@ PRINTVL CMATCH(CARRAY_2D:0:0:5, "Bb", 5, , 1P1 | 1P2)	;统计角色索引 5至�
 
 该指令的第1参数 `array` 允许传入任意整数数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **intArray array**
   - 指定需要总和的整数数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **int start = 0**
   - 指定总和的开始索引。
 - **int end = lastDimLength**
@@ -413,11 +427,10 @@ PRINTVL SUMARRAY(CARRAY_2D:TARGET:3:0, 5)	;总和角色TARGET的 CARRAY_2D:3:5 -
 
 该指令的第1参数 `array` 允许传入任意角色型整数数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **intCharaArray array**
   - 指定需要总和的角色型整数数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **int start = 0**
   - 指定总和的开始角色索引。
 - **int end = charaCount**
@@ -445,11 +458,10 @@ PRINTVL SUMCARRAY(CARRAY_2D:0:0:5, 5)		;总和角色索引 5-最后一位 的 CA
 
 新增第5参数 `option` ，可通过指定该参数调整处理选项。
 
-对于多维数组，默认情况下将处理所有维数的元素，可在 `option` 参数中传入 `1P4` 改为仅处理最后一维。
-
 :::tip[参数]
 - **anyArray array**
   - 指定需要填充的任意数组。
+    - 对于多维数组：默认处理所有维数的元素，可在 `option` 参数中传入 `1P4` 改为仅处理最后一维。
 - **same value**
   - 指定需要填充的值。
 - **int start = 0**

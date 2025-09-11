@@ -7,7 +7,7 @@ slug: /
 # 紹介 {#Introduction}
 
 <center>
-![](main_window.png)
+![](/img/main_window.png)
 </center>
 
 **EmueraBA** ランチャーは、[**`EmueraEE+EM`**](https://gitlab.com/EvilMask/emuera.em) ランチャーを基に修正されたもので、現在は `.NET Framework 4.8` プラットフォームで構築されています。
@@ -31,7 +31,7 @@ slug: /
 **新しいモッド読み込みメカニズムが追加され、ランチャーのメニューバーに `モッドリスト` ダイアログウィンドウが追加されました。ここで、モッドの表示、有効/無効の切り替え、および読み込み順序の調整ができます。**
 
 <center>
-![](module_setting.png)
+![](/img/module_setting.png)
 </center>
 
 モッドを追加するには、以下の手順に従ってください：
@@ -150,7 +150,7 @@ PRINTSL LOCALS:1			; 「あなたの感じ方は本当に不思議ですね」�
 **音声コンポーネントは [**`CSCore`**](https://github.com/filoe/cscore) に置き換えられ、ランチャーのメニューバーに新しい `音声` ダイアログウィンドウが追加されました。ここで、さまざまな音量設定を調整できます。**
 
 <center>
-![](audio_setting.png)
+![](/img/audio_setting.png)
 </center>
 
 画像リソースと同様に、`resources` リソースフォルダにオーディオファイルを配置し、CSVファイルを作成して **Audioリソース** を定義することで、よりカスタマイズされた音声効果を得ることができます。  

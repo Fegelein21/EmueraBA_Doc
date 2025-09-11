@@ -46,6 +46,7 @@ PRINTSL CHARATUW("A👨‍👩‍👧‍👦A", 1)			;打印“👨‍👩‍�
   - 指定文本。
 - **str Array_List_HashList**
   - 指定用于接收Emoji字符结果的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 :::
 
 :::tip[返回值]
@@ -311,6 +312,7 @@ PRINTSL STRREMOVEUW("１２３４👨‍👩‍👧‍👦５６", 2, 3)		;打�
   - 指定需要分割的文本。
 - **str Array_List_HashList**
   - 指定用于接收分割文本的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 - **str delimiter = ","**
   - 指定用于分割文本的分隔符，可省略 `(",")` 。
 - **int removeEmpty = 0**
@@ -536,19 +538,17 @@ ARRAYRESIZE REF_ARRAY2, 2, 2, 2	; 该行会报错，因为其引用的STATIC_ARR
 
 该指令可整理数组中的元素之间的空值，以得到一个没有空隙、元素连贯的数组。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
-对于列表，整理完毕后的空元素不会被移除。
-
 :::tip[参数]
 - **any Array_List**
   - 指定需要整理的的任意可引用数组、列表。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
+    - 对于列表：整理完毕后的空元素将会被移除。
 - **int start = 0**
   - 指定整理的开始索引。
 - **int end = lastDimLength**
   - 指定整理的结束索引+1，省略时使用数组最后一维的长度。
 - **same emptyVal**
-  - 指定处理时会被视作空值的数值或字符串，值类型要与首个参数的值类型相同，可省略( `0` 或 `空字符串` )。
+  - 指定处理时会被视作空值的数值或字符串，值类型要与首个参数的值类型一致，可省略( `0` 或 `空字符串` )。
 :::
 
 :::tip[返回值]
@@ -567,13 +567,12 @@ ARRAYRESIZE REF_ARRAY2, 2, 2, 2	; 该行会报错，因为其引用的STATIC_ARR
 
 该指令默认 `不使用正则匹配` 、`不使用部分匹配` 且 `区分大小写` ，可通过指定 `option` 参数调整处理选项。
 
-对于多维数组，该指令仅处理最后一维的元素，且需要自行指定之前的维索引值。
-
 :::tip[参数]
 - **anyArray array**
   - 指定需要检索的任意数组。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 - **same target**
-  - 指定需要检索的内容，值类型要与首个参数的值类型相同。
+  - 指定需要检索的内容，值类型要与首个参数的值类型一致。
 - **int start = 0**
   - 指定检索的开始索引。
 - **int end = lastDimLength**
@@ -601,6 +600,25 @@ PRINTVL ARRAYFINDLAST(ARRAY, "AA", 0, 8, 1P2)		;从后往前检索 ARRAY:0 至 A
 PRINTVL ARRAYFIND(ARRAY, "\\d+", 0, 8, 1P0 | 1P3)	;检索 ARRAY:0 至 ARRAY:7 中部分匹配到"\\d+"的元素
 PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D:3:5 至 CARRAY_2D:3:9 中等于22的元素
 ```
+:::
+
+----
+#### ANYSAME
+
+**`int ANYSAME any key(, sameParams value)`**
+
+使用方式与 [**`GROUPMATCH`**](https://evilmask.gitlab.io/emuera.em.doc/Reference/GROUPCHECK.html) 指令类似，根据第1参数 `key` 的值，查找后续的参数中有无相同的值。
+
+:::tip[参数]
+- **any key**
+  - 指定需要查找的值。
+- **sameParams value**
+  - 指定1个或多个参数值。
+:::
+
+:::tip[返回值]
+- **RESULT:0**
+  - 返回查找结果，找到时返回 `非0`，未找到时返回 `0`。
 :::
 
 ----
@@ -690,7 +708,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyList dictList**
   - 指定任意列表型字典。
 - **same value**
-  - 指定添加的元素，值类型要与首个参数的值类型相同。
+  - 指定添加的元素，值类型要与首个参数的值类型一致。
 - **int index = listCount**
   - 指定添加的位置，可省略 `(列表的末尾位置)` 。
 :::
@@ -715,7 +733,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyList dictList**
   - 指定任意列表型字典。
 - **same value**
-  - 指定查找的元素，值类型要与首个参数的值类型相同。
+  - 指定查找的元素，值类型要与首个参数的值类型一致。
 - **int start = 0**
   - 指定查找的起始位置，可省略 `(0)` 。
 - **int count = listCount**
@@ -742,7 +760,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyList dictList**
   - 指定任意列表型字典。
 - **same value**
-  - 指定移除的元素，值类型要与首个参数的值类型相同。
+  - 指定移除的元素，值类型要与首个参数的值类型一致。
 :::
 
 :::tip[返回值]
@@ -790,13 +808,15 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyList srcDictList**
   - 指定任意源列表型字典。
 - **same Array_List_HashList**
-  - 指定用于接收所有元素的可引用数组、列表、哈希列表，值类型要与首个参数的值类型相同。
+  - 指定用于接收所有元素的可引用数组、列表、哈希列表，值类型要与首个参数的值类型一致。
+    - 对于列表：源内容将会填充到列表的末尾。
+    - 对于哈希列表：源内容将会与哈希列表中原有的内容合并。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回成功复制的元素数。  
-    获取的元素数可能会受到数组长度、哈希列表特性的影响。
+  - 对于数组：返回成功复制的元素数。获取的元素数受限于数组的长度。
+  - 对于列表、哈希列表：返回目标变量中的元素总数。
 :::
 
 ----
@@ -861,7 +881,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyHashList dictList**
   - 指定任意哈希列表型字典。
 - **same value**
-  - 指定需要添加的值，值类型要与首个参数的值类型相同。
+  - 指定需要添加的值，值类型要与首个参数的值类型一致。
 :::
 
 :::tip[返回值]
@@ -884,7 +904,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyHashList dictList**
   - 指定任意哈希列表型字典。
 - **same value**
-  - 指定需要检索的值，值类型要与首个参数的值类型相同。
+  - 指定需要检索的值，值类型要与首个参数的值类型一致。
 :::
 
 :::tip[返回值]
@@ -907,7 +927,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyHashList dictList**
   - 指定任意哈希列表型字典。
 - **same value**
-  - 指定需要移除的值，值类型要与首个参数的值类型相同。
+  - 指定需要移除的值，值类型要与首个参数的值类型一致。
 :::
 
 :::tip[返回值]
@@ -930,13 +950,15 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyHashList srcDictList**
   - 指定任意源哈希列表型字典。
 - **same Array_List_HashList**
-  - 指定用于接收所有元素的可引用数组、列表、哈希列表，值类型要与首个参数的值类型相同。
+  - 指定用于接收所有元素的可引用数组、列表、哈希列表，值类型要与首个参数的值类型一致。
+    - 对于列表：源内容将会填充到列表的末尾。
+    - 对于哈希列表：源内容将会与哈希列表中原有的内容合并。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回成功复制的元素数。  
-    获取的元素数可能会受到数组长度、哈希列表特性的影响。
+  - 对于数组：返回成功复制的元素数。获取的元素数受限于数组的长度。
+  - 对于列表、哈希列表：返回目标变量中的元素总数。
 :::
 
 ----
@@ -1001,9 +1023,9 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsKey key**
-  - 指定键名，键名的值类型要与首个参数的键类型相同。
+  - 指定键名，键名的值类型要与首个参数的键类型一致。
 - **same value**
-  - 指定值，值类型要与首个参数的值类型相同。
+  - 指定值，值类型要与首个参数的值类型一致。
 :::
 
 :::tip[返回值]
@@ -1026,7 +1048,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsKey key**
-  - 指定键名，键名的值类型要与首个参数的键类型相同。
+  - 指定键名，键名的值类型要与首个参数的键类型一致。
 :::
 
 :::tip[返回值]
@@ -1049,7 +1071,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsKey key**
-  - 指定键名，键名的值类型要与首个参数的键类型相同。
+  - 指定键名，键名的值类型要与首个参数的键类型一致。
 :::
 
 :::tip[返回值]
@@ -1072,7 +1094,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **same outValue**
-  - 指定用于接收键值的变量，变量的值类型要与首个参数的值类型相同。
+  - 指定用于接收键值的变量，变量的值类型要与首个参数的值类型一致。
 :::
 
 :::tip[返回值]
@@ -1095,13 +1117,15 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict srcDictDict**
   - 指定任意源字典型字典。
 - **sameAsKey Array_List_HashList**
-  - 指定用于接收键元素的可引用数组、列表、哈希列表，值类型要与首个参数的键类型相同。
+  - 指定用于接收键元素的可引用数组、列表、哈希列表，值类型要与首个参数的键类型一致。
+    - 对于列表：源内容将会填充到列表的末尾。
+    - 对于哈希列表：源内容将会与哈希列表中原有的内容合并。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回成功复制的元素数。  
-    获取的元素数可能会受到数组长度、哈希列表特性的影响。
+  - 对于数组：返回成功复制的元素数。获取的元素数受限于数组的长度。
+  - 对于列表、哈希列表：返回目标变量中的元素总数。
 :::
 
 ----
@@ -1119,13 +1143,15 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict srcDictDict**
   - 指定任意源字典型字典。
 - **same Array_List_HashList**
-  - 指定用于接收值元素的可引用数组、列表、哈希列表，值类型要与首个参数的值类型相同。
+  - 指定用于接收值元素的可引用数组、列表、哈希列表，值类型要与首个参数的值类型一致。
+    - 对于列表：源内容将会填充到列表的末尾。
+    - 对于哈希列表：源内容将会与哈希列表中原有的内容合并。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回成功复制的元素数。  
-    获取的元素数可能会受到数组长度、哈希列表特性的影响。
+  - 对于数组：返回成功复制的元素数。获取的元素数受限于数组的长度。
+  - 对于列表、哈希列表：返回目标变量中的元素总数。
 :::
 
 ----
@@ -1147,14 +1173,14 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict srcDictDict**
   - 指定任意源字典型字典。
 - **sameAsKeysameAsKeyDict destDict**
-  - 指定目标字典，键类型、值类型都要与首个参数相同。
+  - 指定目标字典，键类型、值类型都要与首个参数一致。
 - **anyDict_sameAsKeysameDict destDictDict**
-  - 指定目标字典型字典，次键类型、值类型都要与首个参数相同。
+  - 指定目标字典型字典，次键类型、值类型都要与首个参数一致。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 对于目标数组将返回成功复制的元素数，对于目标列表和目标列表型字典将返回复制后的元素总数。
+  - 返回目标变量中的元素总数。
 :::
 
 ----
@@ -1179,7 +1205,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsDictKey dictKey**
-  - 指定要创建的主键名，键名的值类型要与首个参数的主键类型相同。
+  - 指定要创建的主键名，键名的值类型要与首个参数的主键类型一致。
 :::
 
 :::tip[返回值]
@@ -1206,7 +1232,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsDictKey dictKey**
-  - 指定要查找的主键名，键名的值类型要与首个参数的主键类型相同。
+  - 指定要查找的主键名，键名的值类型要与首个参数的主键类型一致。
 :::
 
 :::tip[返回值]
@@ -1233,7 +1259,7 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsDictKey dictKey**
-  - 指定要移除的主键名，键名的值类型要与首个参数的主键类型相同。
+  - 指定要移除的主键名，键名的值类型要与首个参数的主键类型一致。
 :::
 
 :::tip[返回值]
@@ -1310,13 +1336,15 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **anyDict_anyanyDict dictDict**
   - 指定任意字典型字典。
 - **sameAsDictKey Array_List_HashList**
-  - 指定用于接收主键名的任意可引用数组、列表、哈希列表，值类型要与首个参数的主键类型相同。
+  - 指定用于接收主键名的任意可引用数组、列表、哈希列表，值类型要与首个参数的主键类型一致。
+    - 对于列表：源内容将会填充到列表的末尾。
+    - 对于哈希列表：源内容将会与哈希列表中原有的内容合并。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回成功复制的元素数。  
-    获取的元素数可能会受到数组长度、哈希列表特性的影响。
+  - 对于数组：返回成功复制的元素数。获取的元素数受限于数组的长度。
+  - 对于列表、哈希列表：返回目标变量中的元素总数。
 :::
 
 ----
@@ -2836,17 +2864,18 @@ GSETCOLORMATRIX 0, COLOR_MATRIX:0:0
 ----
 #### SPINEANIMLIST, SPINESKINLIST
 
-**`int SPINEANIMLIST int spineID, strArray outputArray`**
+**`int SPINEANIMLIST int spineID, str Array_List_HashList`**
 
-**`int SPINESKINLIST int spineID, strArray outputArray`**
+**`int SPINESKINLIST int spineID, str Array_List_HashList`**
 
 获取指定Spine动画的动画列表或皮肤列表。
 
 :::tip[参数]
 - **int spineID**
   - 指定SpineID。
-- **strArray outputArray**
-  - 指定用于获取列表的任意字符串数组。
+- **str Array_List_HashList**
+  - 指定用于接收动画列表或皮肤列表的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 :::
 
 :::tip[返回值]
@@ -3085,6 +3114,7 @@ AUDIOCREATEFROMFILE "New", "sound/Old.mp3", , "00:01:10"	;创建新Audio“New�
 :::tip[参数]
 - **str Array_List_HashList**
   - 指定用于接收模组ID列表的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 :::
 
 :::tip[返回值]
@@ -3126,6 +3156,7 @@ PRINTSL MODULEPATH("MyMod")			; 打印“mod/MyMod v1.0/”
 :::tip[参数]
 - **str Array_List_HashList**
   - 指定用于接收文件扩展名的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 - **int option = 1P0 | 1P1**
   - 指定需要的资源类型， `1P0` = 图像资源， `1P1` = 音频资源，可省略 `(1P0 | 1P1)` 。
 :::
@@ -3193,6 +3224,7 @@ PRINTSL TEXT("ITEM", "APPLE", "DESC")
 :::tip[参数]
 - **str Array_List_HashList**
   - 指定用于接收文本列表的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 - **anyParams keyName**
   - 指定多语言文本的键名，输入的键名不需要区分大小写。
 :::
@@ -3222,6 +3254,7 @@ NEXT
 :::tip[参数]
 - **str Array_List_HashList**
   - 指定用于接收多语言ID列表的字符串型可引用数组、列表、哈希列表。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
 :::
 
 :::tip[返回值]
