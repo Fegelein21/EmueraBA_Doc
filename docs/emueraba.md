@@ -81,7 +81,7 @@ Description,我的mod的简介
 
 :::info[多语言功能]
 
-**多语言功能可以方便开发者整理游戏中的文本以进行本地化翻译，之后在游戏运行时启动器会自动整合可用和优先的语言内容，以快速呈现多语言文本。**
+**多语言功能可以方便创作者整理游戏中的文本以进行本地化翻译，之后在游戏运行时启动器会自动整合可用和优先的语言内容，以快速呈现多语言文本。**
 
 添加多语言文本的方法如下。我们将以添加 `简体中文` 语言作为示例：
 
@@ -105,7 +105,7 @@ Description,我的mod的简介
       "NAME": "苹果",
       "DESC": "一种水果",
     },
-    //注意：请避免键名中包含换行符(\n)，例如 BA\nNANA 是不合法的键名，这是因为启动器在整合语言内容时利用了该字符。
+    //注意：请避免键名中包含换行符(\n)，例如 BA\nNANA 是不合规的键名，这是因为启动器在整合语言内容时利用了该字符。
     "BANANA":
     {
       "NAME": "香蕉",
@@ -123,13 +123,13 @@ Description,我的mod的简介
 
 - 打开启动器并进入 `模组列表`，可以看到窗口左下角的 `多语言列表` 里多了 `中文` 的选项，请将该选项双击启用，并点击 `保存` 按钮。
   - 若您已添加了多个不同的语言，您可使用鼠标拖动已启用的语言以调整语言的呈现顺序，列表顶部的优先级最高。
-  - 此外，在 `模组列表` 中，如果模组之间出现键名路径重复的情况，则前排模组的文本内容会被后排模组取代。
+  - 此外，在 `模组列表` 中，如果模组之间出现键名路径重复的情况，则优先采用后排模组的文本内容。
   - 每次改动 `多语言列表` 后只有重启程序才能重置语言文本缓存，以及重置所有被重构为常量字符串的代码。
 
 最后，在代码中使用 [**`TEXT`**](new_com#text) 与 [**`TEXTLIST`**](new_com#textlist) 指令来获取多语言文本，调用时只需按照json文件中自行设定的键名路径来输入键名即可：
 
 ```
-LOCALS '= TEXT("start_game")		; 获取文本“开始游戏”，输入的键名不需要区分大小写
+LOCALS '= TEXT("start_game")		; 获取文本“开始游戏”，输入的键名无需区分大小写
 PRINTSL TEXT("ITEM")			; 打印“物品”
 PRINTSL TEXT("ITEM", "APPLE", "DESC")	; 打印“一种水果”
 
@@ -212,71 +212,149 @@ CBGSETSPINE 0, 0, 0, 1
 :::
 
 ----
-### 扩展变量类型 {#ExtendedVariableType}
+### 新增扩展变量类型 {#ExtendedVariableType}
 
-:::info[扩展变量类型]
+#### 列表 {#ExTypeList}
 
-新增了以下变量类型：
+列表的声明格式为 **`#LIST(S) <变量名>`**
 
-- 列表，即 `List<value>` 的实现。
-  - 变量的声明格式为: **`#LIST(S) <变量名>`**  
-    例如 `#LIST MY_LIST` 将会声明一个值为`整数`类型、名称为 `MY_LIST` 的列表变量。
-
-- 哈希列表，即 `HashSet<value>` 的实现。
-  - 变量的声明格式为: **`#HASHLIST(S) <变量名>`**  
-    例如 `#HASHLISTS MY_HASHLIST` 将会声明一个值为`字符串`类型、名称为 `MY_HASHLIST` 的哈希列表变量。
-
-- 字典，即 `Dictionary<key, value>` 的实现。
-  - 变量的声明格式为: **`#DICT_(I|S)(I|S) <变量名>`**  
-    例如 `#DICT_IS MY_DICT` 将会声明一个键为`整数`类型、值为`字符串`类型、名称为 `MY_DICT` 的字典变量。
-
-- 列表型字典，即 `Dictionary<dictKey, List<value>>` 的实现。
-  - 变量的声明格式为: **`#DICT(S)_LIST(S) <变量名>`**  
-    例如 `#DICTS_LIST MY_DICTLIST` 将会声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTLIST` 的列表型字典变量。
-
-- 哈希列表型字典，即 `Dictionary<dictKey, HashSet<value>>` 的实现。
-  - 变量的声明格式为: **`#DICT(S)_HASHLIST(S) <变量名>`**  
-    例如 `#DICTS_HASHLIST MY_DICTHASHLIST` 将会声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTHASHLIST` 的哈希列表型字典变量。
-
-- 字典型字典，即 `Dictionary<dictKey, Dictionary<key, value>>` 的实现。
-  - 变量的声明格式为: **`#DICT(S)_DICT_(I|S)(I|S) <变量名>`**  
-    例如 `#DICTS_DICT_IS MY_DICTDICT` 将会声明一个主键为`字符串`类型、次键为`整数`类型、值为`字符串`类型、名称为 `MY_DICTDICT` 的字典型字典变量。
-
-声明这些扩展变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
-请参阅 [**`列表相关`**](new_com#ListRelated)、[**`哈希列表相关`**](new_com#HashListRelated)、[**`字典相关`**](new_com#DictRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多关于扩展变量的功能。
+请参阅 [**`列表相关`**](new_com#ListRelated) 指令以了解更多功能。
 
-```erb title="扩展变量的使用示例："
-#LIST MY_LIST
-#HASHLISTS MY_HASHLIST
-#DICT_IS MY_DICT
-#DICTS_LIST MY_DICTLIST
-#DICTS_HASHLIST MY_DICTHASHLIST
-#DICTS_DICT_IS MY_DICTDICT
+:::note[使用例]
+```erb
+#LIST MY_LIST			; 声明一个值为`整数`类型、名称为 `MY_LIST` 的列表变量
 
 LISTADD MY_LIST, 10		; 向 MY_LIST 中添加一个值为 10 的元素
 PRINTVL MY_LIST:0		; 打印 MY_LIST 的 0 号元素，打印结果为 "10"
+```
+:::
 
-HASHLISTADD MY_HASHLIST, "TEXT"			; 向 MY_HASHLIST 中添加一个值为 "TEXT" 的元素
-PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT")	; 打印 MY_HASHLIST 对值 "TEXT" 的查找结果，打印结果为 "1"
+----
+#### 哈希列表 {#ExTypeHashList}
+
+哈希列表的声明格式为 **`#HASHLIST(S) <变量名>`**
+
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+
+请参阅 [**`哈希列表相关`**](new_com#HashListRelated) 指令以了解更多功能。
+
+:::note[使用例]
+```erb
+#HASHLISTS MY_HASHLIST			; 声明一个值为`字符串`类型、名称为 `MY_HASHLIST` 的哈希列表变量
+
+HASHLISTADD MY_HASHLIST, "TEXT"		; 向 MY_HASHLIST 中添加一个值为 "TEXT" 的元素
+PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT"); 打印 MY_HASHLIST 对值 "TEXT" 的查找结果，打印结果为 "1"
+```
+:::
+
+----
+#### 字典 {#ExTypeDict}
+
+字典的声明格式为 **`#DICT_<I|S><I|S> <变量名>`**  
+如果声明的键类型为 `整数` ，则支持使用ERD键词功能。
+
+声明该变量时支持与 `CONST` 、`GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+
+请参阅 [**`字典相关`**](new_com#DictRelated) 指令以了解更多功能。
+
+:::note[使用例]
+```erb
+#DICT_IS MY_DICT		; 声明一个键为`整数`类型、值为`字符串`类型、名称为 `MY_DICT` 的字典变量
 
 MY_DICT:6 '= "TEXT"		; 向 MY_DICT 中写入一个键为 6、值为 "TEXT" 的元素
 PRINTSL MY_DICT:6		; 打印 MY_DICT 中的键为 6 的值，打印结果为 "TEXT"
+```
+:::
+
+----
+#### 数组型字典 {#ExTypeDictDim}
+
+数组型字典的声明格式为 **`#DICT(S)_DIM(S) <变量名>(, 数组长度 = 1)`**  
+如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。  
+变量的第二维数组下标默认支持使用ERD键词功能。
+
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+
+请参阅 [**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
+
+:::note[使用例]
+```erb
+#DICTS_DIM MY_DICTDIM, 10		; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTDIM` 的数组型字典变量，该变量所创建的每个数组的长度为 `10`
+
+DICTITEMCREATE MY_DICTDIM, "NEW"	; 在 MY_DICTDIM 中创建一个名称为 "NEW" 的数组
+MY_DICTDIM:"NEW":0 = 20			; 将 MY_DICTDIM 中的 "NEW" 数组的 0 号元素赋值为 20
+PRINTVL MY_DICTDIM:"NEW":0		; 打印 MY_DICTDIM 中的 "NEW" 数组的 0 号元素，打印结果为 "20"
+```
+:::
+
+----
+#### 列表型字典 {#ExTypeDictList}
+
+列表型字典的声明格式为 **`#DICT(S)_LIST(S) <变量名>`**  
+如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。
+
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+
+请参阅 [**`列表相关`**](new_com#ListRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
+
+:::note[使用例]
+```erb
+#DICTS_LIST MY_DICTLIST			; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTLIST` 的列表型字典变量
 
 DICTITEMCREATE MY_DICTLIST, "NEW"	; 在 MY_DICTLIST 中创建一个名称为 "NEW" 的列表
-LISTADD MY_DICTLIST:"NEW", 20	; 向 MY_DICTLIST 中的 "NEW" 列表添加一个值为 20 的元素
-PRINTVL MY_DICTLIST:"NEW":0	; 打印 MY_DICTLIST 中的 "NEW" 列表的 0 号元素，打印结果为 "20"
+LISTADD MY_DICTLIST:"NEW", 20		; 向 MY_DICTLIST 中的 "NEW" 列表添加一个值为 20 的元素
+PRINTVL MY_DICTLIST:"NEW":0		; 打印 MY_DICTLIST 中的 "NEW" 列表的 0 号元素，打印结果为 "20"
+```
+:::
+
+----
+#### 哈希列表型字典 {#ExTypeDictHashList}
+
+哈希列表型字典的声明格式为 **`#DICT(S)_HASHLIST(S) <变量名>`**  
+如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。
+
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+
+请参阅 [**`哈希列表相关`**](new_com#HashListRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
+
+:::note[使用例]
+```erb
+#DICTS_HASHLIST MY_DICTHASHLIST		; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTHASHLIST` 的哈希列表型字典变量
 
 DICTITEMCREATE MY_DICTHASHLIST, "NEW"	; 在 MY_DICTHASHLIST 中创建一个名称为 "NEW" 的哈希列表
 HASHLISTADD MY_DICTHASHLIST:"NEW", 20	; 向 MY_DICTHASHLIST 中的 "NEW" 哈希列表添加一个值为 20 的元素
 PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20)	; 打印 MY_DICTHASHLIST 中的 "NEW" 哈希列表对值 20 的查找结果，打印结果为 "1"
+```
+:::
+
+----
+#### 字典型字典 {#ExTypeDictDict}
+
+字典型字典的声明格式为 **`#DICT(S)_DICT_<I|S><I|S> <变量名>`**  
+如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。  
+如果声明的次键类型为 `整数` ，则支持使用ERD键词功能。
+
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+
+请参阅 [**`字典相关`**](new_com#DictRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
+
+:::note[使用例]
+```erb
+#DICTS_DICT_IS MY_DICTDICT		; 声明一个主键为`字符串`类型、次键为`整数`类型、值为`字符串`类型、名称为 `MY_DICTDICT` 的字典型字典变量
 
 DICTITEMCREATE MY_DICTDICT, "NEW"	; 在 MY_DICTDICT 中创建一个名称为 "NEW" 的字典
-MY_DICTDICT:"NEW":8 '= "TEXT"	; 向 MY_DICTDICT 中的 "NEW" 字典写入一个键为 8、值为 "TEXT" 的元素
-PRINTSL MY_DICTDICT:"NEW":8	; 打印 MY_DICTDICT 中的 "NEW" 字典中的键为 8 的元素，打印结果为 "TEXT"
+MY_DICTDICT:"NEW":8 '= "TEXT"		; 向 MY_DICTDICT 中的 "NEW" 字典写入一个键为 8、值为 "TEXT" 的元素
+PRINTSL MY_DICTDICT:"NEW":8		; 打印 MY_DICTDICT 中的 "NEW" 字典中的键为 8 的元素，打印结果为 "TEXT"
 ```
-
 :::
 
 ----
@@ -285,6 +363,8 @@ PRINTSL MY_DICTDICT:"NEW":8	; 打印 MY_DICTDICT 中的 "NEW" 字典中的键为
 解禁了 `函数型宏定义` 的相关功能，尚未完全测试该功能的可靠性。
 
 角色型二维数组支持省略第1参数（当 **`キャラクタ変数の引数を補完しない`** (不自动补完角色变量的参数) 设置项未启用时）。
+
+[**`FOR-NEXT`**](modify_com#for-next) 与 [**`REPEAT-REND`**](modify_com#repeat-rend) 控制语句的临时缓存会随函数一同进出堆栈。
 
 `__FILE__` 变量获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/` 。
 
@@ -301,7 +381,7 @@ PRINTSL MY_DICTDICT:"NEW":8	; 打印 MY_DICTDICT 中的 "NEW" 字典中的键为
 [**`SUBSTRING`**](modify_com#substring) 指令处理边缘字符的逻辑已变更。如果文本的选定位置处在长字符的中间，则后退到该字符的起始位置。  
 也就是说，卡在起始位置的字符会被计入，卡在末尾位置的字符会被无视。
 
-[**`ERDNAME`**](modify_com#erdname) 省略第3参数时将会查找数组最后一维的下标键名。
+[**`ERDNAME`**](modify_com#erdname) 省略第3参数时将会查找数组最后一维的下标键词。
 
 [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) 指令会额外变更 `RESULTS:0` 和 `RESULT:3` 的值。
 

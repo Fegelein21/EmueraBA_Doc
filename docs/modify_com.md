@@ -58,7 +58,7 @@ SETBGCOLORBYNAME %LOCALS%
 
 该指令的第2参数 `delimiter` 可省略，默认值为 `(",")` 。
 
-第3参数 `array` 可传入任意字符串数组。  
+第3参数 `array` 可传入多维数组。  
 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
 
 ----
@@ -117,8 +117,24 @@ SETBGCOLORBYNAME %LOCALS%
 该指令在处理Emoji字符时会通过计算显示宽度得出字符长度。  
 如果文本的选定位置处在长字符的中间，则后退到该字符的起始位置。也就是说，卡在起始位置的字符会被计入，卡在末尾位置的字符会被无视。
 
+:::note[使用例]
+```
+PRINTSL SUBSTRING("１２３", 1, 4)		;打印“１２”。
+PRINTSL SUBSTRING("１😀３", 1, 4)		;打印“１😀”。
+```
+:::
+
 ----
 ### 变量、数组相关 {#VarAndArrayRelated}
+
+----
+#### ARRAYCOPY
+
+**`void ARRAYCOPY str srcArrayName, str destVarName(, int isLastDimOnly = 0)`**
+
+新增第3参数 `isLastDimOnly` ，用于指定是否仅复制源数组的最后一维的元素，可省略 (`0`) 。
+
+第2参数 `destVarName` 支持传入列表和哈希列表的变量名，当 `isLastDimOnly` 的参数值为 `0` 时，源数组中的所有元素将会添加到目标列表中。
 
 ----
 #### ARRAYREMOVE
@@ -148,13 +164,13 @@ SETBGCOLORBYNAME %LOCALS%
 
 **`int ARRAYMSORT any Array1D_List(, sameParams Array_List)`**
 
-该指令的第1参数 `Array1D_List` 可传入任意型可引用1维数组、列表。
+该指令的第1参数 `Array1D_List` 可传入任意型可引用一维数组、列表。
 
 后续的参数 `Array_List` 可传入数组、列表。
 
 :::tip[参数]
 - **any Array1D_List**
-  - 指定用于作为排序依据的任意型可引用1维数组、列表。  
+  - 指定用于作为排序依据的任意型可引用一维数组、列表。  
     此参数本身的值也会被排序。
 - **sameParams Array_List**
   - 指定一个或多个需要排序的可引用数组、列表，值类型要与首个参数的值类型一致。
@@ -168,7 +184,7 @@ SETBGCOLORBYNAME %LOCALS%
 ----
 #### ERDNAME
 
-该指令省略第3参数时将会查找数组最后一维的下标键名。
+该指令省略第3参数时将会查找数组最后一维的下标键词。
 
 ----
 #### FINDELEMENT, FINDLASTELEMENT
@@ -177,7 +193,7 @@ SETBGCOLORBYNAME %LOCALS%
 
 **`int FINDLASTELEMENT anyArray array, same target(, int start = 0, int end = lastDimLength, int option = 0)`**
 
-该指令的第1参数 `array` 允许传入任意数组。修改了第5参数 `option` 的用法，可通过指定该参数调整处理选项。
+该指令的第1参数 `array` 可传入多维数组。修改了第5参数 `option` 的用法，可通过指定该参数调整处理选项。
 
 :::tip[参数]
 - **anyArray array**
@@ -213,7 +229,7 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 **`int INRANGEARRAY intArray array, int min, int max(, int start = 0, int end = lastDimLength)`**
 
-该指令的第1参数 `array` 允许传入任意整数数组。
+该指令的第1参数 `array` 可传入多维整数数组。
 
 :::tip[参数]
 - **intArray array**
@@ -239,7 +255,7 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 **`int INRANGECARRAY intCharaArray array, int min, int max(, int start = 0, int end = charaCount)`**
 
-该指令的第1参数 `array` 允许传入任意角色型整数数组。
+该指令的第1参数 `array` 可传入二维角色型整数数组。
 
 :::tip[参数]
 - **intCharaArray array**
@@ -267,7 +283,7 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 **`int MAXARRAY intArray array(, int start = 0, int end = lastDimLength)`**
 
-该指令的第1参数 `array` 允许传入任意整数数组。
+该指令的第1参数 `array` 可传入多维整数数组。
 
 :::tip[参数]
 - **intArray array**
@@ -291,7 +307,7 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 **`int MAXCARRAY intCharaArray array(, int start = 0, int end = charaCount)`**
 
-该指令的第1参数 `array` 允许传入任意整数数组。
+该指令的第1参数 `array` 可传入二维整数数组。
 
 :::tip[参数]
 - **intCharaArray array**
@@ -313,7 +329,7 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 **`int MATCH anyArray array, same target(, int start = 0, int end = lastDimLength, int option = 0)`**
 
-该指令的第1参数 `array` 允许传入任意数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
+该指令的第1参数 `array` 可传入多维数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
 
 :::tip[参数]
 - **anyArray array**
@@ -354,7 +370,7 @@ PRINTVL MATCH(CARRAY_2D:TARGET:3:0, 22, 5)	;统计角色TARGET的 CARRAY_2D:3:5 
 
 **`int CMATCH anyCharaArray array, same target(, int start = 0, int end = charaCount, int option = 0)`**
 
-该指令的第1参数 `array` 允许传入任意角色型数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
+该指令的第1参数 `array` 可传入二维角色型数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
 
 :::tip[参数]
 - **anyCharaArray array**
@@ -393,7 +409,7 @@ PRINTVL CMATCH(CARRAY_2D:0:0:5, "Bb", 5, , 1P1 | 1P2)	;统计角色索引 5至�
 
 **`int SUMARRAY intArray array(, int start = 0, int end = lastDimLength)`**
 
-该指令的第1参数 `array` 允许传入任意整数数组。
+该指令的第1参数 `array` 可传入多维整数数组。
 
 :::tip[参数]
 - **intArray array**
@@ -425,7 +441,7 @@ PRINTVL SUMARRAY(CARRAY_2D:TARGET:3:0, 5)	;总和角色TARGET的 CARRAY_2D:3:5 -
 
 **`int SUMCARRAY intCharaArray array(, int start = 0, int end = charaCount)`**
 
-该指令的第1参数 `array` 允许传入任意角色型整数数组。
+该指令的第1参数 `array` 可传入二维角色型整数数组。
 
 :::tip[参数]
 - **intCharaArray array**
@@ -488,7 +504,7 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 **`void CVARSET anyCharaArray array(, any key, same value, int start, int end)`**
 
-该指令的第1参数 `array` 允许传入任意角色型数组。第2参数 `key` 可输入字符串键值。
+该指令的第1参数 `array` 可传入二维角色型数组。第2参数 `key` 可输入字符串键值。
 
 ----
 #### VARSETEX
@@ -581,7 +597,7 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 **`int GDRAWG int destID, int srcID, int destX, int destY, int destWidth, int destHeight, int srcX, int srcY`**
 
-新增以上4种参数格式，且 `colorMatrix` 参数可传入任意整数数组。  
+新增以上4种参数格式，且 `colorMatrix` 参数可传入一维整数数组。  
 传入 `colorMatrix` 参数时，该颜色矩阵仅在本次绘制时生效，绘制完成后会被自动清除。
 
 所有参数格式的 `destWidth` 和 `destHeight` 参数可传入 `负数` 以绘制翻转的图像。
@@ -595,7 +611,7 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 **`int GDRAWSPRITE int destID, str imgName, int destX, int destY, int destWidth, int destHeight, int srcX, int srcY, int srcWidth, int srcHeight(, intArray colorMatrix)`**
 
-新增以上2种参数格式，且 `colorMatrix` 参数可传入任意整数数组。  
+新增以上2种参数格式，且 `colorMatrix` 参数可传入一维整数数组。  
 传入 `colorMatrix` 参数时，该颜色矩阵仅在本次绘制时生效，绘制完成后会被自动清除。
 
 所有参数格式的 `destWidth` 和 `destHeight` 参数可传入 `负数` 以绘制翻转的图像。
@@ -828,3 +844,20 @@ STOPBGM	1500			;停止背景音乐并带有1500ms的淡出效果
   - `ウィンドウ高さ` (窗口高度)
   - `フレーム毎秒` (每秒帧数)
   - `タブ文字幅` (制表符宽度)
+
+----
+### 控制语句 {#ControlStatement}
+
+----
+#### FOR-NEXT
+
+**`FOR-NEXT int counter, int start, int end(, int step)`**
+
+该控制语句的起始值、结束值、步进值等临时参数会随函数一同进出堆栈。
+
+----
+#### REPEAT-REND
+
+**`REPEAT-REND int loopCount`**
+
+该控制语句的起始值、结束值、步进值等临时参数会随函数一同进出堆栈。

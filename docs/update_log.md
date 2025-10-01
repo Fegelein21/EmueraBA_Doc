@@ -6,6 +6,25 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2025-10-01
+
+[**`FOR-NEXT`**](modify_com#for-next) 与 [**`REPEAT-REND`**](modify_com#repeat-rend) 控制语句的起始值、结束值、步进值等临时参数会随函数一同进出堆栈。
+
+新增 [**`FOREACH-NEXTF`**](new_com#foreach-nextf) 控制语句，用于遍历指定的集合中的所有元素。
+
+新增扩展变量类型 [**`数组型字典`**](/#ExTypeDictDim)。
+
+新增变量关键字 [**`HARDCHECK`**](new_com#hardcheck)，用于控制字典变量是否对用户输入的主键和次键进行严格检查。
+
+新增 [**`HASH`**](new_com#hash) 指令，用于为指定的参数值生成哈希码。
+
+扩展变量类型 [**`字典`**](/#ExTypeDict) 支持声明 `CONST` 关键字。
+
+- [**`ARRAYCOPY`**](modify_com#arraycopy) 指令改动：
+  - 新增第3参数 `isLastDimOnly` ，用于指定是否仅复制源数组的最后一维的元素，可省略 (`0`) 。
+  - 第2参数 `destVarName` 支持传入列表和哈希列表的变量名，当 `isLastDimOnly` 的参数值为 `0` 时，源数组中的所有元素将会添加到目标列表中。
+
+----
 ### 2025-09-11
 
 [**`ARRAYTIDY`**](new_com#arraytidy) 指令在整理完列表后将会移除空元素。
@@ -68,13 +87,15 @@ sidebar_label: 更新日志
 ----
 ### 2025-05-07
 
-新增用户定义变量关键字 **`RESIZE`** ，该关键字用于标记需要重设数组大小的变量。关于该关键字的更多使用事项请参阅 [**`ARRAYRESIZE`**](new_com#arrayresize)。
+新增用户定义变量关键字 [**`RESIZE`**](new_com#resize)，该关键字用于标记需要重设大小的数组变量。
+
+新增 [**`ARRAYRESIZE`**](new_com#arrayresize) 指令，用于重设指定的用户定义数组的大小。
 
 新增 [**`扩展变量类型`**](/#ExtendedVariableType)，支持列表、哈希列表、字典等变量类型。
 
 角色型二维数组支持省略第1参数（当 **`キャラクタ変数の引数を補完しない`** (不自动补完角色变量的参数) 设置项未启用时）。
 
-[**`ERDNAME`**](modify_com#erdname) 指令省略第3参数时将会查找数组最后一维的下标键名。
+[**`ERDNAME`**](modify_com#erdname) 指令省略第3参数时将会查找数组最后一维的下标键词。
 
 新增 [**`列表相关`**](new_com#ListRelated)、[**`哈希列表相关`**](new_com#HashListRelated)、[**`字典相关`**](new_com#DictRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令。
 
