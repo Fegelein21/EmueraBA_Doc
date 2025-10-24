@@ -225,6 +225,37 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 :::
 
 ----
+#### INRANGE
+
+**`int INRANGE any value, same minValue, same maxValue`**
+
+该指令的第1参数 `value` 可传入字符串，用于判断字符串的顺位是否在指定范围内。
+
+:::tip[参数]
+- **any value**
+  - 指定需要判断的值。
+- **same minValue**
+  - 指定最小范围值，变量的值类型要与首个参数的值类型一致。
+- **same maxValue**
+  - 指定最大范围值，变量的值类型要与首个参数的值类型一致。
+:::
+
+:::tip[返回值]
+- **RESULT:0**
+  - 返回判断结果，值在指定范围内时返回 `非0` ，否则返回 `0` 。
+:::
+
+:::note[使用例]
+```
+PRINTVL INRANGE(11, 10, 20)		; 打印“1”
+PRINTVL INRANGE(21, 10, 20)		; 打印“0”
+PRINTVL INRANGE("b", "a", "c")		; 打印“1”
+PRINTVL INRANGE("banana", "b", "c")	; 打印“1”
+PRINTVL INRANGE("can", "a", "c")	; 打印“0”
+```
+:::
+
+----
 #### INRANGEARRAY
 
 **`int INRANGEARRAY intArray array, int min, int max(, int start = 0, int end = lastDimLength)`**

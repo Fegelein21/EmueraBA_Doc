@@ -6,6 +6,14 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2025-10-24
+
+支持读取和播放 `GIF` 、`WEBP` 动态图像，只需像静态图像那样在resources资源文件中定义，然后在ERB脚本中以同样的方式打印显示即可。  
+可以使用 [**`SETANIMETIMER`**](modify_com#setanimetimer) 指令来刷新画面以获得流畅的播放效果。
+
+[**`INRANGE`**](modify_com#inrange) 指令的第1参数 `value` 可传入字符串，用于判断字符串的顺位是否在指定范围内。
+
+----
 ### 2025-10-01
 
 [**`FOR-NEXT`**](modify_com#for-next) 与 [**`REPEAT-REND`**](modify_com#repeat-rend) 控制语句的起始值、结束值、步进值等临时参数会随函数一同进出堆栈。

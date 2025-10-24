@@ -16,6 +16,9 @@ slug: /
 
 图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`描画インターフェース`** (图形绘制接口) 设置项已被移除。
 
+支持读取和播放 `GIF` 、`WEBP` 动态图像，只需像静态图像那样在resources资源文件中定义，然后在ERB脚本中以同样的方式打印显示即可。  
+可以使用 [**`SETANIMETIMER`**](modify_com#setanimetimer) 指令来刷新画面以获得流畅的播放效果。
+
 实现了自动识别字符范围功能，已能正确识别中、日、韩、英、Emoji字符并计算长度，**`内部で使用する東アジア言語`** (内部使用的东亚语言) 设置项已被移除。
 
 在显示设置界面中新增 **`タブ文字幅`** (制表符宽度) 设置项，该设置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
@@ -257,7 +260,7 @@ PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT"); 打印 MY_HASHLIST 对值 "TEXT" 的�
 字典的声明格式为 **`#DICT_<I|S><I|S> <变量名>`**  
 如果声明的键类型为 `整数` ，则支持使用ERD键词功能。
 
-声明该变量时支持与 `CONST` 、`GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+声明该变量时支持与 `CONST` 、`GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
 请参阅 [**`字典相关`**](new_com#DictRelated) 指令以了解更多功能。
@@ -278,7 +281,7 @@ PRINTSL MY_DICT:6		; 打印 MY_DICT 中的键为 6 的值，打印结果为 "TEX
 如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。  
 变量的第二维数组下标默认支持使用ERD键词功能。
 
-声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
 请参阅 [**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
@@ -299,7 +302,7 @@ PRINTVL MY_DICTDIM:"NEW":0		; 打印 MY_DICTDIM 中的 "NEW" 数组的 0 号元�
 列表型字典的声明格式为 **`#DICT(S)_LIST(S) <变量名>`**  
 如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。
 
-声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
 请参阅 [**`列表相关`**](new_com#ListRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
@@ -320,7 +323,7 @@ PRINTVL MY_DICTLIST:"NEW":0		; 打印 MY_DICTLIST 中的 "NEW" 列表的 0 号�
 哈希列表型字典的声明格式为 **`#DICT(S)_HASHLIST(S) <变量名>`**  
 如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。
 
-声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
 请参阅 [**`哈希列表相关`**](new_com#HashListRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
@@ -342,7 +345,7 @@ PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20)	; 打印 MY_DICTHASHLIST 中的 "
 如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。  
 如果声明的次键类型为 `整数` ，则支持使用ERD键词功能。
 
-声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
+声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
 
 请参阅 [**`字典相关`**](new_com#DictRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
