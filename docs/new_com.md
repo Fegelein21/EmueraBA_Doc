@@ -3196,11 +3196,11 @@ PRINTS "Audio Ext:"
 FOR LOCAL, 0, RESULT
 	PRINTS " " + LOCALS:LOCAL
 NEXT
-PRINTL
+PRINTW
 
 ; 输出结果
 ; Image Ext: .bmp .jpg .jpeg .png .webp .tiff .exif .gif
-; Audio Ext: .mp3 .mpeg3 .wav .wave .flac .fla .aiff .aif .aifc .aac .adt .adts .m2ts .mp2 .3g2 .3gp2 .3gp .3gpp .m4a .m4v .mp4v .mp4 .mov .asf .wm .wmv .wma .mp1 .avi .ac3 .ec3
+; Audio Ext: .mp3 .mpeg3 .wav .wave .flac .fla .aiff .aif .aifc .aac .adt .adts .m2ts .mp2 .3g2 .3gp2 .3gp .3gpp .m4a .m4v .mp4v .mp4 .mov .asf .wm .wmv .wma .mp1 .avi .ac3 .ec3 .ogg
 ```
 :::
 

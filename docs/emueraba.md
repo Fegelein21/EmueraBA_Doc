@@ -4,7 +4,9 @@ sidebar_label: 介绍
 slug: /
 ---
 
-# 介绍 {#Introduction}
+# EmueraBA
+
+### 介绍 {#Introduction}
 
 <center>
 ![](/img/main_window.png)
@@ -14,17 +16,20 @@ slug: /
 
 启动器的默认标题改为 `EmueraBA`，并更改了启动器的默认图标。
 
-图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`描画インターフェース`** (图形绘制接口) 设置项已被移除。
+图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`描画インターフェース`** (图形绘制接口) 设置项已被移除。  
+请参阅 [**`GETRESOURCEEXT`**](new_com#getresourceext) 中的 `使用例` 部分以了解支持的图像格式。
 
 支持读取和播放 `GIF` 、`WEBP` 动态图像，只需像静态图像那样在resources资源文件中定义，然后在ERB脚本中以同样的方式打印显示即可。  
 可以使用 [**`SETANIMETIMER`**](modify_com#setanimetimer) 指令来刷新画面以获得流畅的播放效果。
 
 实现了自动识别字符范围功能，已能正确识别中、日、韩、英、Emoji字符并计算长度，**`内部で使用する東アジア言語`** (内部使用的东亚语言) 设置项已被移除。
 
-在显示设置界面中新增 **`タブ文字幅`** (制表符宽度) 设置项，该设置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
+在 `显示设置` 界面中新增 **`タブ文字幅`** (制表符宽度) 设置项，该设置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
 制表符会根据之前的文本的字符长度来自动调整自身的字符长度，例如制表符之前有文本 `111`，则当前制表符会占据5个字符长度。
 
 新增用户定义变量关键字 **`RESIZE`** ，该关键字用于标记需要重设数组大小的变量。关于该关键字的更多使用事项请参阅 [**`ARRAYRESIZE`**](new_com#arrayresize)。
+
+支持截图功能，可通过菜单栏中的 `帮助 → 截图按钮` 来将当前的画面保存为文件，或通过新增的 [**`GSNAPSHOT`**](new_com#gsnapshot) 指令来获取当前画面的图像数据。
 
 ----
 ### 模组功能 {#ModuleFunc}
@@ -65,7 +70,7 @@ Description,我的mod的简介
 
 - 创建 `ERB` 文件夹以添加 `ERB、ERH、ERD` 文件。
 - 创建 `resources` 文件夹以添加 `csv、png、jpg、webp` 等图像资源。
-- 创建 `sound` 文件夹以添加 `csv、m4a、aac、wav、mp3` 等音频资源。
+- 创建 `sound` 文件夹以添加 `csv、ogg、m4a、wav、mp3` 等音频资源。
 - 创建 `text` 文件夹以添加 `json` 格式的多语言资源。
 - 创建 `font` 文件夹以添加 `ttf、otf` 格式的字体资源。
 
@@ -160,15 +165,16 @@ PRINTSL LOCALS:1			; 打印“你的感觉真的很奇妙”
 
 ```csv title="Audio资源的填写格式与示例内容："
 ; Audio名称,音频文件名,音量(100),起始时间(00:00:00),播放时长(音频文件的总时长)
-MyMusic,MyMusic.mp3
-MyMusic1,MyMusic1.mp3,100
-MyMusic2,MyMusic2.m4a,80,00:01:30
-MyMusic3,MyMusic3.wav,70,00:01:30,15000
+MyMusic,MyMusic.ogg
+MyMusic1,MyMusic1.m4a,100
+MyMusic2,MyMusic2.wav,80,00:01:30
+MyMusic3,MyMusic3.mp3,70,00:01:30,15000
 ```
 
 csv文件中的 `起始时间` 和 `播放时长` 属性可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
 
-请参阅 [**`音频相关`**](new_com#AudioRelated) 指令以了解更多关于音频的功能。
+请参阅 [**`音频相关`**](new_com#AudioRelated) 指令以了解更多关于音频的功能。  
+请参阅 [**`GETRESOURCEEXT`**](new_com#getresourceext) 中的 `使用例` 部分以了解支持的音频格式。
 
 :::
 

@@ -6,6 +6,21 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2026-1-11
+
+支持读取 `Ogg Vorbis` 格式、扩展名为 `.ogg` 的音频文件。
+
+支持截图功能，可通过菜单栏中的 `帮助 → 截图按钮` 来将当前的画面保存为文件，或通过新增的 [**`GSNAPSHOT`**](new_com#gsnapshot) 指令来获取当前画面的图像数据。
+
+[**`ARRAYSORT`**](modify_com#arraysort) 指令的第1参数 `Array1D_List` 支持传入列表。
+
+[**`PLAYSOUND`**](modify_com#playsound) 指令新增以下参数：  
+新增第3参数 `groupID` ，用于指定本次的播放音效组，可配合 [**`STOPSOUND`**](modify_com#stopsound) 指令来停止相同音效组的所有音效，可省略 `(0)` 。  
+新增第4参数 `delay` ，用于指定本次的播放延时，单位为毫秒，可省略 `(0)` 。
+
+[**`STOPSOUND`**](modify_com#stopsound) 指令新增 `groupID` 参数，用于指定想要停止播放的音效组，省略该参数时即为停止播放所有音效。
+
+----
 ### 2025-10-24
 
 支持读取和播放 `GIF` 、`WEBP` 动态图像，只需像静态图像那样在resources资源文件中定义，然后在ERB脚本中以同样的方式打印显示即可。  

@@ -155,9 +155,11 @@ PRINTSL SUBSTRING("１😀３", 1, 4)		;打印“１😀”。
 ----
 #### ARRAYSORT
 
-**`void ARRAYSORT anyArray1D array(, FORWARD or BACK, int start, int count)`**
+**`void ARRAYSORT any Array1D_List(, FORWARD or BACK, int start, int count)`**
 
-该指令的第4参数 `count` 指定为 `负数` 时视为数组的总长度。
+该指令的第1参数 `Array1D_List` 支持传入列表。
+
+第4参数 `count` 指定为 `负数` 时视为数组或列表的总长度。
 
 ----
 #### ARRAYMSORT
@@ -768,9 +770,11 @@ PLAYBGM 1500				;恢复播放当前背景音乐，开始时带有1500ms的淡入
 ----
 #### PLAYSOUND
 
-**`int PLAYSOUND str name(, int volume)`**
+**`int PLAYSOUND str name(, int volume, int groupID = 0, int delay = 0)`**
 
-新增第2参数 `volume` ，用于指定本次的播放音量。
+新增第2参数 `volume` ，用于指定本次的播放音量。  
+新增第3参数 `groupID` ，用于指定本次的播放音效组，可配合 [**`STOPSOUND`**](modify_com#stopsound) 指令来停止相同音效组的所有音效。  
+新增第4参数 `delay` ，用于指定本次的播放延时，单位为毫秒。
 
 第1参数 `name` 仅支持输入Audio名称。若要通过音频文件路径来播放，请先使用 [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) 指令来创建Audio。  
 关于如何添加内置Audio资源，请参阅 [**`音频功能`**](/#AudioFunc) 部分。
@@ -780,6 +784,10 @@ PLAYBGM 1500				;恢复播放当前背景音乐，开始时带有1500ms的淡入
   - 指定播放的Audio名称。
 - **int volume**
   - 指定本次的播放音量，可省略 `(使用音频的预设音量)` 。
+- **int groupID = 0**
+  - 指定本次的播放音效组，可省略 `(0)` 。
+- **int delay = 0**
+  - 指定本次的播放延时，单位为毫秒，可省略 `(0)` 。
 :::
 
 :::tip[返回值]
@@ -789,8 +797,8 @@ PLAYBGM 1500				;恢复播放当前背景音乐，开始时带有1500ms的淡入
 
 :::note[使用例]
 ```
-PLAYSOUND "MySOUND"			;播放音效“MySOUND”
-PLAYSOUND "MySOUND", 80			;播放音效“MySOUND”，本次播放音量为80
+PLAYSOUND "MySOUND"		; 播放音效“MySOUND”
+PLAYSOUND "MySOUND", 80		; 播放音效“MySOUND”，本次播放音量为80
 ```
 :::
 
@@ -823,6 +831,26 @@ PLAYSOUND "MySOUND", 80			;播放音效“MySOUND”，本次播放音量为80
 :::note[使用例]
 ```
 STOPBGM	1500			;停止背景音乐并带有1500ms的淡出效果
+```
+:::
+
+----
+#### STOPSOUND
+
+**`void STOPSOUND (int groupID = 0)`**
+
+新增 `groupID` 参数，用于指定想要停止播放的音效组，省略该参数时即为停止播放所有音效。
+
+:::tip[参数]
+- **int groupID = 0**
+  - 指定想要停止播放的音效组，省略该参数时即为停止播放所有音效。
+:::
+
+:::note[使用例]
+```
+PLAYSOUND "MySOUND1", , 1	; 播放音效“MySOUND1”，音效组设为1
+PLAYSOUND "MySOUND2", , 2	; 播放音效“MySOUND2”，音效组设为2
+STOPSOUND 2			; 停止播放所有音效组为2的音效
 ```
 :::
 
