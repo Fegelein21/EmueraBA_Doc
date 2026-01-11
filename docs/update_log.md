@@ -6,7 +6,7 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
-### 2026-1-11
+### 2026-01-11
 
 支持读取 `Ogg Vorbis` 格式、扩展名为 `.ogg` 的音频文件。
 
@@ -15,8 +15,8 @@ sidebar_label: 更新日志
 [**`ARRAYSORT`**](modify_com#arraysort) 指令的第1参数 `Array1D_List` 支持传入列表。
 
 [**`PLAYSOUND`**](modify_com#playsound) 指令新增以下参数：  
-新增第3参数 `groupID` ，用于指定本次的播放音效组，可配合 [**`STOPSOUND`**](modify_com#stopsound) 指令来停止相同音效组的所有音效，可省略 `(0)` 。  
-新增第4参数 `delay` ，用于指定本次的播放延时，单位为毫秒，可省略 `(0)` 。
+新增第3参数 `groupID`，用于指定本次的播放音效组，可配合 [**`STOPSOUND`**](modify_com#stopsound) 指令来停止相同音效组的所有音效，可省略 `(0)`。  
+新增第4参数 `delay`，用于指定本次的播放延时，单位为毫秒，可省略 `(0)`。
 
 [**`STOPSOUND`**](modify_com#stopsound) 指令新增 `groupID` 参数，用于指定想要停止播放的音效组，省略该参数时即为停止播放所有音效。
 
@@ -44,7 +44,7 @@ sidebar_label: 更新日志
 扩展变量类型 [**`字典`**](/#ExTypeDict) 支持声明 `CONST` 关键字。
 
 - [**`ARRAYCOPY`**](modify_com#arraycopy) 指令改动：
-  - 新增第3参数 `isLastDimOnly` ，用于指定是否仅复制源数组的最后一维的元素，可省略 (`0`) 。
+  - 新增第3参数 `isLastDimOnly`，用于指定是否仅复制源数组的最后一维的元素，可省略 (`0`) 。
   - 第2参数 `destVarName` 支持传入列表和哈希列表的变量名，当 `isLastDimOnly` 的参数值为 `0` 时，源数组中的所有元素将会添加到目标列表中。
 
 ----
@@ -78,9 +78,9 @@ sidebar_label: 更新日志
 
 新增 [**`DICTITEMGETKEYS`**](new_com#dictitemgetkeys) 指令，用于获取指定的字典集合中的所有主键名。
 
-[**`STRSPLIT`**](new_com#strsplit) 指令新增第4参数 `removeEmpty` ，用于指定是否移除分割后的空元素。
+[**`STRSPLIT`**](new_com#strsplit) 指令新增第4参数 `removeEmpty`，用于指定是否移除分割后的空元素。
 
-[**`LISTREMOVEAT`**](new_com#listremoveat) 指令新增第3参数 `removeCount` ，用于指定移除的元素数，默认值为 `1` 。
+[**`LISTREMOVEAT`**](new_com#listremoveat) 指令新增第3参数 `removeCount`，用于指定移除的元素数，默认值为 `1`。
 
 - 为以下指令添加了可传入数组、列表、哈希列表的参数格式：
   - [**`FINDEMOJI`**](new_com#findemoji)

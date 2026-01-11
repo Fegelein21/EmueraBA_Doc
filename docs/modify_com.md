@@ -56,7 +56,7 @@ SETBGCOLORBYNAME %LOCALS%
 
 **`void SPLIT str text(, str delimiter = ","), strArray array(, int result)`**
 
-该指令的第2参数 `delimiter` 可省略，默认值为 `(",")` 。
+该指令的第2参数 `delimiter` 可省略，默认值为 `(",")`。
 
 第3参数 `array` 可传入多维数组。  
 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
@@ -66,7 +66,7 @@ SETBGCOLORBYNAME %LOCALS%
 
 **`int STRCOUNT str input, str match(, int option = 0)`**
 
-- 新增第3参数 `option` ，可通过指定该参数调整处理选项。
+- 新增第3参数 `option`，可通过指定该参数调整处理选项。
   -  `1P0` = 使用纯文本匹配模式，处理速度更快但不支持正则语法
   -  `1P1` = 忽略大小写
 
@@ -132,7 +132,7 @@ PRINTSL SUBSTRING("１😀３", 1, 4)		;打印“１😀”。
 
 **`void ARRAYCOPY str srcArrayName, str destVarName(, int isLastDimOnly = 0)`**
 
-新增第3参数 `isLastDimOnly` ，用于指定是否仅复制源数组的最后一维的元素，可省略 (`0`) 。
+新增第3参数 `isLastDimOnly`，用于指定是否仅复制源数组的最后一维的元素，可省略 (`0`) 。
 
 第2参数 `destVarName` 支持传入列表和哈希列表的变量名，当 `isLastDimOnly` 的参数值为 `0` 时，源数组中的所有元素将会添加到目标列表中。
 
@@ -141,7 +141,7 @@ PRINTSL SUBSTRING("１😀３", 1, 4)		;打印“１😀”。
 
 **`void ARRAYREMOVE anyArray1D array, int start, int count, same emptyVal`**
 
-新增第4参数 `emptyVal` ，用于指定移动元素后的空白填充值，默认的填充值为 `0` 或 `空字符串` 。
+新增第4参数 `emptyVal`，用于指定移动元素后的空白填充值，默认的填充值为 `0` 或 `空字符串`。
 
 该指令的第3参数 `count` 指定为 `负数` 时视为数组的总长度。
 
@@ -180,7 +180,7 @@ PRINTSL SUBSTRING("１😀３", 1, 4)		;打印“１😀”。
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回排序结果，排序成功或无需排序时返回 `非0` ，否则返回 `0` 。
+  - 返回排序结果，排序成功或无需排序时返回 `非0`，否则返回 `0`。
 :::
 
 ----
@@ -217,7 +217,7 @@ PRINTSL SUBSTRING("１😀３", 1, 4)		;打印“１😀”。
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回符合检索要求的首个索引值，未找到时返回 `-1` 。
+  - 返回符合检索要求的首个索引值，未找到时返回 `-1`。
 :::
 
 :::note[使用例]
@@ -244,7 +244,7 @@ LOCAL = FINDELEMENT(LOCALS, "WORD", , , 1P0 | 1P1)
 
 :::tip[返回值]
 - **RESULT:0**
-  - 返回判断结果，值在指定范围内时返回 `非0` ，否则返回 `0` 。
+  - 返回判断结果，值在指定范围内时返回 `非0`，否则返回 `0`。
 :::
 
 :::note[使用例]
@@ -362,7 +362,7 @@ PRINTVL INRANGE("can", "a", "c")	; 打印“0”
 
 **`int MATCH anyArray array, same target(, int start = 0, int end = lastDimLength, int option = 0)`**
 
-该指令的第1参数 `array` 可传入多维数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
+该指令的第1参数 `array` 可传入多维数组。新增第5参数 `option`，可通过指定该参数调整处理选项。
 
 :::tip[参数]
 - **anyArray array**
@@ -403,7 +403,7 @@ PRINTVL MATCH(CARRAY_2D:TARGET:3:0, 22, 5)	;统计角色TARGET的 CARRAY_2D:3:5 
 
 **`int CMATCH anyCharaArray array, same target(, int start = 0, int end = charaCount, int option = 0)`**
 
-该指令的第1参数 `array` 可传入二维角色型数组。新增第5参数 `option` ，可通过指定该参数调整处理选项。
+该指令的第1参数 `array` 可传入二维角色型数组。新增第5参数 `option`，可通过指定该参数调整处理选项。
 
 :::tip[参数]
 - **anyCharaArray array**
@@ -505,7 +505,7 @@ PRINTVL SUMCARRAY(CARRAY_2D:0:0:5, 5)		;总和角色索引 5-最后一位 的 CA
 
 **`void VARSET anyArray array(, same value, int start = 0, int end = lastDimLength, int option = 0)`**
 
-新增第5参数 `option` ，可通过指定该参数调整处理选项。
+新增第5参数 `option`，可通过指定该参数调整处理选项。
 
 :::tip[参数]
 - **anyArray array**
@@ -563,14 +563,14 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 点击数字按钮时，该指令会额外将接收到的数字输出到 `RESULTS:0` 中。
 
-接收键盘输入时(即RESULT:0 == 3)， `RESULT:3` 将会接收修改键的键码值。
+接收键盘输入时(即RESULT:0 == 3)，`RESULT:3` 将会接收修改键的键码值。
 
 ----
 #### TWAIT
 
 **`void TWAIT int time(, int flag = 0)`**
 
-该指令的第2参数 `flag` 可省略 `(0)` 。
+该指令的第2参数 `flag` 可省略 `(0)`。
 
 ----
 ### 图像相关 {#ImageRelated}
@@ -587,7 +587,7 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 **`int GCREATEFROMFILE int GID, str filepath`**
 
-该指令的第2参数 `filepath` 必须确保是从主目录开始的相对路径，例如 `resources/image.png` 或者 `erb/image.png` 。
+该指令的第2参数 `filepath` 必须确保是从主目录开始的相对路径，例如 `resources/image.png` 或者 `erb/image.png`。
 
 该指令的第3参数 `isRelative` 已被移除。
 
@@ -598,7 +598,7 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 **`int GDASHSTYLE int GID, int DashStyle, int DashCap`**
 
-- 由于图形库的更换， `DashCap` 的输入值与效果改变如下：
+- 由于图形库的更换，`DashCap` 的输入值与效果改变如下：
   -  `0` = 没有线帽
   -  `1` = 半圆线帽
   -  `2` = 半方线帽
@@ -617,7 +617,7 @@ VARSET CARRAY:TARGET:0, 1, 5, 10	; 把角色TARGET的 CARRAY:5 至 CARRAY:9 以�
 
 **`int GDRAWGWITHMASK int destID, int srcID, int maskID, int destX, int destY`**
 
-改进了该指令的颜色算法， `maskID` 图像的 alpha值 和 blue值 会同时影响绘制结果。
+改进了该指令的颜色算法，`maskID` 图像的 alpha值 和 blue值 会同时影响绘制结果。
 
 ----
 #### GDRAWG
@@ -675,7 +675,7 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 
 **`void SETANIMETIMER int interval(, int duration)`**
 
-新增第2参数 `duration` ，用于指定刷新动画的持续时间，单位为毫秒。持续时间过后会自动停止刷新动画。
+新增第2参数 `duration`，用于指定刷新动画的持续时间，单位为毫秒。持续时间过后会自动停止刷新动画。
 
 该指令在 [**`TINPUT`**](https://evilmask.gitlab.io/emuera.em.doc/Reference/TINPUT.html) 或者 [**`INPUTMOUSEKEY`**](#inputmousekey) 之类的计时等待的情况下仍会继续刷新动画。
 
@@ -693,7 +693,7 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 
 **`int SPRITEANIMECREATE str sprite, int width, int height(, int isLoopFrame = 1)`**
 
-新增第4参数 `isLoopFrame` ，用于指定该SpriteAnime是否循环播放，省略或输入值为 `非0` 时为循环播放。
+新增第4参数 `isLoopFrame`，用于指定该SpriteAnime是否循环播放，省略或输入值为 `非0` 时为循环播放。
 
 该指令在创建Sprite前会释放已创建的非内置Sprite，即无需在创建前调用 [**`SPRITEDISPOSE`**](#spritedispose) 指令。如果已存在同名的内置Sprite则会创建失败。
 
@@ -713,14 +713,14 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 
 **`int SPRITEDISPOSE str sprite(, int disposeImg)`**
 
-新增第2参数 `disposeImg` ，用于指定是否释放该Sprite所引用的图像。
+新增第2参数 `disposeImg`，用于指定是否释放该Sprite所引用的图像。
 
 ----
 #### SPRITEDISPOSEALL
 
 **`void SPRITEDISPOSEALL (int disposeImage = 0)`**
 
-- 修改了第1参数 `disposeImage` 的功能，该指令不再具备移除内置Sprite的功能，可省略 `(0)` 。
+- 修改了第1参数 `disposeImage` 的功能，该指令不再具备移除内置Sprite的功能，可省略 `(0)`。
   -  `0` = 移除所有运行时创建的临时Sprite。
   -  `非0` = 移除所有临时Sprite，并释放所有内置Sprite所引用的图像。其引用的图像会在调用时重新加载。
 
@@ -732,7 +732,7 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 
 **`int PLAYBGM str name(, int volume, int fadeIn = 0, int delay = 0)`**
 
-新增第2至第4参数 `volume` , `fadeIn` , `delay` 。
+新增第2至第4参数 `volume` , `fadeIn` , `delay`。
 
 第1参数 `name` 仅支持输入Audio名称。若要通过音频文件路径来播放，请先使用 [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) 指令来创建Audio。  
 关于如何添加内置Audio资源，请参阅 [**`音频功能`**](/#AudioFunc) 部分。
@@ -745,16 +745,16 @@ GLOAD 0, "resources/New Folder/image"	;会读取resources/New Folder/image.png�
 - **str name**
   - 指定播放的Audio名称。
 - **int volume**
-  - 指定本次的播放音量，可省略 `(使用Audio的预设音量)` 。
+  - 指定本次的播放音量，可省略 `(使用Audio的预设音量)`。
 - **int fadeIn = 0**
-  - 指定淡入效果的持续时间，单位为 `ms(毫秒)` ，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000` 。
+  - 指定淡入效果的持续时间，单位为 `ms(毫秒)`，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000`。
 - **int delay = 0**
-  - 指定延时播放的持续时间，单位为 `ms(毫秒)` ，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000` 。
+  - 指定延时播放的持续时间，单位为 `ms(毫秒)`，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000`。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 指示是否成功播放，成功时返回 `非0` 。Audio不存在、Audio加载出错时返回 `0` 。
+  - 指示是否成功播放，成功时返回 `非0`。Audio不存在、Audio加载出错时返回 `0`。
 :::
 
 :::note[使用例]
@@ -772,9 +772,9 @@ PLAYBGM 1500				;恢复播放当前背景音乐，开始时带有1500ms的淡入
 
 **`int PLAYSOUND str name(, int volume, int groupID = 0, int delay = 0)`**
 
-新增第2参数 `volume` ，用于指定本次的播放音量。  
-新增第3参数 `groupID` ，用于指定本次的播放音效组，可配合 [**`STOPSOUND`**](modify_com#stopsound) 指令来停止相同音效组的所有音效。  
-新增第4参数 `delay` ，用于指定本次的播放延时，单位为毫秒。
+新增第2参数 `volume`，用于指定本次的播放音量。  
+新增第3参数 `groupID`，用于指定本次的播放音效组，可配合 [**`STOPSOUND`**](modify_com#stopsound) 指令来停止相同音效组的所有音效。  
+新增第4参数 `delay`，用于指定本次的播放延时，单位为毫秒。
 
 第1参数 `name` 仅支持输入Audio名称。若要通过音频文件路径来播放，请先使用 [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) 指令来创建Audio。  
 关于如何添加内置Audio资源，请参阅 [**`音频功能`**](/#AudioFunc) 部分。
@@ -783,16 +783,16 @@ PLAYBGM 1500				;恢复播放当前背景音乐，开始时带有1500ms的淡入
 - **str name**
   - 指定播放的Audio名称。
 - **int volume**
-  - 指定本次的播放音量，可省略 `(使用音频的预设音量)` 。
+  - 指定本次的播放音量，可省略 `(使用音频的预设音量)`。
 - **int groupID = 0**
-  - 指定本次的播放音效组，可省略 `(0)` 。
+  - 指定本次的播放音效组，可省略 `(0)`。
 - **int delay = 0**
-  - 指定本次的播放延时，单位为毫秒，可省略 `(0)` 。
+  - 指定本次的播放延时，单位为毫秒，可省略 `(0)`。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 指示是否成功播放，成功时返回 `非0` 。Audio不存在、Audio加载出错时返回 `0` 。
+  - 指示是否成功播放，成功时返回 `非0`。Audio不存在、Audio加载出错时返回 `0`。
 :::
 
 :::note[使用例]
@@ -807,7 +807,7 @@ PLAYSOUND "MySOUND", 80		; 播放音效“MySOUND”，本次播放音量为80
 
 **`void SETBGMVOLUME int volume(, int fadeDuration = 0)`**
 
-新增第2参数 `fadeDuration` ，用于指定音量变化时的渐变效果，单位为 `ms(毫秒)` ，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000` 。
+新增第2参数 `fadeDuration`，用于指定音量变化时的渐变效果，单位为 `ms(毫秒)`，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000`。
 
 该指令只会变更当前正在播放的背景音乐的音量，不再影响全局音量。
 
@@ -825,7 +825,7 @@ PLAYSOUND "MySOUND", 80		; 播放音效“MySOUND”，本次播放音量为80
 
 :::tip[参数]
 - **int fadeOut = 0**
-  - 指定淡出效果的持续时间，单位为 `ms(毫秒)` ，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000` 。
+  - 指定淡出效果的持续时间，单位为 `ms(毫秒)`，输入值 `省略` 或 `小于等于0` 时无效果，最大值为 `10000`。
 :::
 
 :::note[使用例]
@@ -862,7 +862,7 @@ STOPSOUND 2			; 停止播放所有音效组为2的音效
 
 **`int ENUMFILES string dir(, string pattern, int option)`**
 
-该指令获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/` 。
+该指令获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/`。
 
 ----
 #### EXISTFILE
@@ -875,12 +875,12 @@ STOPSOUND 2			; 停止播放所有音效组为2的音效
 - **str filePath**
   - 指定文件路径。
 - **int getInfo = 0**
-  - 指定是否获取文件信息，输入 `非0` 时会将文件信息输出到 `RESULT:1 - RESULT:4` ，可省略 `(0)` 。
+  - 指定是否获取文件信息，输入 `非0` 时会将文件信息输出到 `RESULT:1 - RESULT:4`，可省略 `(0)`。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
-  - 指示文件是否存在，文件存在时返回 `非0` 。
+  - 指示文件是否存在，文件存在时返回 `非0`。
 - **RESULT:1**
   - 指示文件的体积大小，单位为byte。
 - **RESULT:2**

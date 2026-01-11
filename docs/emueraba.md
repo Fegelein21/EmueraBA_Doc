@@ -171,7 +171,7 @@ MyMusic2,MyMusic2.wav,80,00:01:30
 MyMusic3,MyMusic3.mp3,70,00:01:30,15000
 ```
 
-csv文件中的 `起始时间` 和 `播放时长` 属性可接收 `TimeSpan` 或 `ms(毫秒)` 值， `TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
+csv文件中的 `起始时间` 和 `播放时长` 属性可接收 `TimeSpan` 或 `ms(毫秒)` 值，`TimeSpan` 的书写格式请参阅 [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) 文档中的示例部分。
 
 请参阅 [**`音频相关`**](new_com#AudioRelated) 指令以了解更多关于音频的功能。  
 请参阅 [**`GETRESOURCEEXT`**](new_com#getresourceext) 中的 `使用例` 部分以了解支持的音频格式。
@@ -264,7 +264,7 @@ PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT"); 打印 MY_HASHLIST 对值 "TEXT" 的�
 #### 字典 {#ExTypeDict}
 
 字典的声明格式为 **`#DICT_<I|S><I|S> <变量名>`**  
-如果声明的键类型为 `整数` ，则支持使用ERD键词功能。
+如果声明的键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `CONST` 、`GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
@@ -284,7 +284,7 @@ PRINTSL MY_DICT:6		; 打印 MY_DICT 中的键为 6 的值，打印结果为 "TEX
 #### 数组型字典 {#ExTypeDictDim}
 
 数组型字典的声明格式为 **`#DICT(S)_DIM(S) <变量名>(, 数组长度 = 1)`**  
-如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。  
+如果声明的主键类型为 `整数`，则支持使用ERD键词功能。  
 变量的第二维数组下标默认支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
@@ -306,7 +306,7 @@ PRINTVL MY_DICTDIM:"NEW":0		; 打印 MY_DICTDIM 中的 "NEW" 数组的 0 号元�
 #### 列表型字典 {#ExTypeDictList}
 
 列表型字典的声明格式为 **`#DICT(S)_LIST(S) <变量名>`**  
-如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。
+如果声明的主键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
@@ -327,7 +327,7 @@ PRINTVL MY_DICTLIST:"NEW":0		; 打印 MY_DICTLIST 中的 "NEW" 列表的 0 号�
 #### 哈希列表型字典 {#ExTypeDictHashList}
 
 哈希列表型字典的声明格式为 **`#DICT(S)_HASHLIST(S) <变量名>`**  
-如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。
+如果声明的主键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
@@ -348,8 +348,8 @@ PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20)	; 打印 MY_DICTHASHLIST 中的 "
 #### 字典型字典 {#ExTypeDictDict}
 
 字典型字典的声明格式为 **`#DICT(S)_DICT_<I|S><I|S> <变量名>`**  
-如果声明的主键类型为 `整数` ，则支持使用ERD键词功能。  
-如果声明的次键类型为 `整数` ，则支持使用ERD键词功能。
+如果声明的主键类型为 `整数`，则支持使用ERD键词功能。  
+如果声明的次键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
 与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
@@ -375,7 +375,7 @@ PRINTSL MY_DICTDICT:"NEW":8		; 打印 MY_DICTDICT 中的 "NEW" 字典中的键�
 
 [**`FOR-NEXT`**](modify_com#for-next) 与 [**`REPEAT-REND`**](modify_com#repeat-rend) 控制语句的临时缓存会随函数一同进出堆栈。
 
-`__FILE__` 变量获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/` 。
+`__FILE__` 变量获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/`。
 
 [**`REPLACE`**](modify_com#replace) 指令的其中一种参数格式已被分离为独立指令 [**`REPLACEBYARRAY`**](new_com#replacebyarray)。
 
@@ -400,7 +400,7 @@ PRINTSL MY_DICTDICT:"NEW":8		; 打印 MY_DICTDICT 中的 "NEW" 字典中的键�
 
 [**`GDASHSTYLE`**](modify_com#gdashstyle) 指令的线帽效果已变更。
 
-[**`GDRAWTEXT`**](modify_com#gdrawtext) 指令仅返回 `RESULT:0` ，其他返回值已失效。
+[**`GDRAWTEXT`**](modify_com#gdrawtext) 指令仅返回 `RESULT:0`，其他返回值已失效。
 
 [**`GDRAWGWITHMASK`**](modify_com#gdrawgwithmask) 的绘制结果受 alpha值 和 blue值 影响。
 
@@ -419,7 +419,7 @@ PRINTSL MY_DICTDICT:"NEW":8		; 打印 MY_DICTDICT 中的 "NEW" 字典中的键�
 
 [**`SETSOUNDVOLUME`**](modify_com#setsoundvolume) 指令已被弃用，不再有任何效果。
 
-[**`ENUMFILES`**](modify_com#enumfiles) 指令获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/` 。
+[**`ENUMFILES`**](modify_com#enumfiles) 指令获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/`。
 
 HTML代码的相关改动：
 - `div` 标签的 `bcolor` 属性更名为 `bdcolor` (borderColor)，以避免与 `bcolor` (backgroundColor)混淆。
