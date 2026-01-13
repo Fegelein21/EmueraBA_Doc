@@ -1654,6 +1654,23 @@ ENDIF
 :::
 
 ----
+#### GSNAPSHOT
+
+**`int GSNAPSHOT int GID`**
+
+该指令用于在运行时截取画面，将当前窗口内的画面数据复制到指定的图像ID中。
+
+:::tip[参数]
+- **int GID**
+  - 指定图像ID。
+:::
+
+:::tip[返回值]
+- **RESULT:0**
+  - 始终返回 `非0`。
+:::
+
+----
 #### GRESETMATRIX
 
 **`int GRESETMATRIX int GID`**
