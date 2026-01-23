@@ -396,25 +396,27 @@ PRINTSL SUBSTRINGUW("A👪BAB👪A", 5)		;打印“👪A”
 ----
 #### TRYTOINT
 
-**`int TRYTOINT str text`**
+**`int TRYTOINT str text(, int outValue)`**
 
-使用方式与 [**`TOINT`**](https://osdn.net/projects/emuera/wiki/excom#h5-TOINT.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E) 指令类似，可避免 ISNUMERIC + TOINT 的功能重复问题。
+使用方式与 [**`TOINT`**](https://osdn.net/projects/emuera/wiki/excom#h5-TOINT.20.3C.E6.96.87.E5.AD.97.E5.88.97.E5.BC.8F.3E) 指令类似，用于将指定的字符串转换为整数，可避免接连使用 `ISNUMERIC` 与 `TOINT` 指令导致的功能重复问题。
 
 :::tip[参数]
 - **str text**
   - 指定需要转换成整数的字符串。
+- **int outValue**
+  - 指定用于接收转换结果的整数型变量，省略时将使用 `RESULT:1` 来接收转换结果，转换失败时返回的转换结果为 `0`。
 :::
 
 :::tip[返回值]
 - **RESULT:0**
   - 指示是否转换成功，成功时返回 `非0`。
-- **RESULT:1**
-  - 返回转换结果，转换失败时返回 `0`。
 :::
 
 :::note[使用例]
 ```
-LOCAL = TRYTOINT("IO") ? RESULT:1 # 10
+PRINTVL TRYTOINT("IO") ? RESULT:1 # 11		; 打印“11”
+SIF TRYTOINT("20", LOCAL)
+PRINTVL LOCAL					; 打印“20”
 ```
 :::
 
@@ -3325,11 +3327,11 @@ NEXT
 
 **`FOREACH-NEXTF same valueVar, any Collection(, VALUE)`**
 
-**`FOREACH-NEXTF sameAsKey keyVar, any Dict_DictDict, KEY`**
+**`FOREACH-NEXTF sameAsKey keyVar, any Dict, KEY`**
 
 **`FOREACH-NEXTF sameAsDictKey dictKeyVar, any DictCollection, DICTKEY`**
 
-**`FOREACH-NEXTF sameAsKey keyVar, same valueVar, any Dict_DictDict`**
+**`FOREACH-NEXTF sameAsKey keyVar, same valueVar, any Dict`**
 
 使用方式与 [**`FOR-NEXT`**](https://osdn.net/projects/emuera/wiki/excom#h5-FOR.20.3C.E6.95.B0.E5.80.A4.E5.9E.8B.E5.A4.89.E6.95.B0.3E.2C.20.3C.E6.95.B0.E5.BC.8F.3E.2C.20.3C.E6.95.B0.E5.BC.8F.3E.7B.2C.20.3C.E6.95.B0.E5.BC.8F.3E.7D) 控制语句类似，用于遍历指定的集合中的所有元素。
 
@@ -3344,7 +3346,7 @@ NEXT
   - 指定接收值的变量，变量的值类型要与集合的值类型一致。
 - **any Collection**
   - 指定需要遍历的任意数组、列表、哈希列表、字典等集合。
-- **any Dict_DictDict**
+- **any Dict**
   - 指定需要遍历的任意字典。
 - **any DictCollection**
   - 指定需要遍历的任意字典集合。

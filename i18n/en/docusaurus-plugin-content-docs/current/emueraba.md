@@ -4,49 +4,57 @@ sidebar_label: Introduction
 slug: /
 ---
 
-# Introduction {#Introduction}
+# EmueraBA
+
+### Introduction {#Introduction}
 
 <center>
 ![](/img/main_window.png)
 </center>
 
-**EmueraBA** Launcher is modified from the [**`EmueraEE+EM`**](https://gitlab.com/EvilMask/emuera.em) launcher and is currently built using the `.NET Framework 4.8` platform.
+**EmueraBA** is a launcher derived from modifications of the [**`EmueraEE+EM`**](https://gitlab.com/EvilMask/emuera.em) launcher. It is currently built using the **`.NET Framework 4.8`** platform.
 
-The default title of the launcher has been changed to `EmueraBA`, and the default icon of the launcher has been updated.
+The launcher's default title has been changed to `EmueraBA`, and its default icon has been updated.
 
-The graphics library has been replaced with [**`SkiaSharp`**](https://github.com/mono/SkiaSharp). All functions related to screen display and image rendering have been migrated to SkiaSharp, and the **`描画インターフェース`** (Drawing Interface) setting has been removed.
+The graphics library has been replaced with [**`SkiaSharp`**](https://github.com/mono/SkiaSharp). All functionalities related to screen display and image drawing have been migrated to SkiaSharp, and the **`描画インターフェース`** (Graphics Drawing Interface) setting item has been removed.  
+Please refer to the `使用例` (Usage Example) section in [**`GETRESOURCEEXT`**](new_com#getresourceext) for information on supported image formats.
 
-Automatic character range recognition has been implemented, allowing correct identification and length calculation for Chinese, Japanese, Korean, English, and Emoji characters. The **`内部で使用する東アジア言語`** (Internal language used) setting has been removed.
+Supports reading and playing dynamic images like `GIF` and `WEBP`. Simply define them in the resources file like static images and then print/display them in ERB scripts in the same way.  
+You can use the [**`SETANIMETIMER`**](modify_com#setanimetimer) instruction to refresh the screen for smooth playback.
 
-A new **`タブ文字幅`** (Tab Width) setting has been added to the display settings interface. This setting adjusts the character length of `tab characters (\t)` in text, with a default value of `8`.  
-The tab character automatically adjusts its length based on the preceding text. For example, if the text before the tab is `111`, the tab will occupy 5 character spaces.
+Implemented automatic character range recognition. It can now correctly identify and calculate the length of Chinese, Japanese, Korean, English, and Emoji characters. The **`内部で使用する東アジア言語`** (Internally Used East Asian Languages) setting item has been removed.
 
-Added the user-defined variable keyword **`RESIZE`**, which is used to mark variables that require array resizing. For more details on using this keyword, please refer to [**`ARRAYRESIZE`**](new_com#arrayresize).  
+Added a **`タブ文字幅`** (Tab Character Width) setting item in the `Display Settings` interface. This setting adjusts the character length of `tab characters (\t)` in text, with a default value of `8`.  
+Tab characters automatically adjust their own character length based on the length of preceding text. For example, if the text before a tab is `111`, the current tab will occupy 5 character spaces.
 
-----
-### Mod Features {#ModuleFunc}
+Added the user-defined variable keyword **`RESIZE`**, which is used to mark variables that require array resizing. For more details on using this keyword, please refer to [**`ARRAYRESIZE`**](new_com#arrayresize).
 
-:::info[Mod Features]
+Supports screenshot functionality. You can save the current screen as a file via `Help → Screenshot Button` in the menu bar, or obtain the current screen's image data via the newly added [**`GSNAPSHOT`**](new_com#gsnapshot) instruction.
 
-**A new mod loading mechanism has been added, and a `Mod List` dialog window has been included in the launcher menu bar. Here, you can view, enable/disable mods, and adjust their loading order.**
+---
+### Module Functionality {#ModuleFunc}
+
+:::info[Module Functionality]
+
+**Added a module loading mechanism and a new `Module List` dialog window in the launcher's menu bar, where you can view, enable/disable modules, and adjust their loading order.**
 
 <center>
 ![](/img/module_setting.png)
 </center>
 
-To add a mod, follow these steps:
+The method for adding modules is as follows:
 
-- Create a new `mod` folder in the game's main directory. This folder will serve as the **main mod directory**.
-- Inside the `mod` folder, create a new **mod folder** with any name, such as `MyMod`.
-- Inside the `MyMod` folder, create a **mod identifier file** named `_mod.csv` and fill in the content according to the attributes in the table below:
+- Create a new `mod` folder in the game's main directory. This folder serves as the **Module Main Directory**.
+- Create a **Module Folder** inside the `mod` folder. The folder name can be arbitrary, e.g., `MyMod`.
+- Create a **Module Identifier File** named `_mod.csv` inside the `MyMod` folder, and fill in its content according to the attributes in the table below:
 
-|Attribute         |Description|
-|:---:             |---|
-|ID                |The unique identifier for the mod. If the ID is empty or conflicts with another mod, the mod will not be recognized. **Ensure the ID follows function naming conventions and avoid modifying it after creation**.|
-|Name              |The display name of the mod.|
-|Authors           |The author(s) of the mod.|
-|Cover             |The display cover of the mod. To load an image from within the mod, use `{0}` as the mod's path, e.g., `{0}resources/cover.png`.|
-|Description       |The display description of the mod. Line breaks are allowed. **Ensure the Description attribute is written after other attributes**.|
+| Attribute    | Description                                                                                                                                                                                                                               |
+| :----------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ID           | The unique identifier for this module. If this ID is empty or duplicates another module's ID, the module will not be recognized. **Ensure the ID name follows function naming conventions, and it is not recommended to modify it after creation.** |
+| Name         | The display name of this module.                                                                                                                                                                                                          |
+| Authors      | The author(s) of this module.                                                                                                                                                                                                             |
+| Cover        | The display cover image for this module. To load an image from within the module, you can use `{0}` as the module's path, e.g., `{0}resources/cover.png`.                                                                                |
+| Description  | The display description for this module. Multi-line descriptions are supported. **Ensure the Description attribute is written after all other attributes.**                                                                               |
 
 ```csv title="File Path and Example Content: mod/MyMod/_mod.csv"
 ID,MyMod
@@ -54,48 +62,48 @@ Name,My Mod v1.0
 Authors,Tom & Jerry
 Cover,{0}resources/cover.png
 Description,Description of my mod
-Description line 1
-Description line 2
+Description line 1 of my mod
+Description line 2 of my mod
 ```
 
-Next, you can add the following resource files to the mod folder:
+Next, you can add the following resource files within the module folder:
 
 - Create an `ERB` folder to add `ERB, ERH, ERD` files.
-- Create a `resources` folder to add image resources such as `csv, png, jpg, webp`.
-- Create a `sound` folder to add audio resources such as `csv, m4a, aac, wav, mp3`.
-- Create a `text` folder to add multilingual resources in `json` format.
-- Create a `font` folder to add font resources in `ttf, otf` formats.
+- Create a `resources` folder to add image resources like `csv, png, jpg, webp`.
+- Create a `sound` folder to add audio resources like `csv, ogg, m4a, wav, mp3`.
+- Create a `text` folder to add multi-language resources in `json` format.
+- Create a `font` folder to add font resources in `ttf, otf` format.
 
-Resource files within the mod folder are treated the same as those in the game's main directory. File names are unrestricted, but be mindful of resource conflicts between mods:
+Resource files within a module are no different from those in the game's main directory. Filenames are not restricted, but note potential resource duplication between modules:
 
-- If there are duplicate contents in `ERB, ERH, ERD` files, the content from the latter mod will be skipped, and a warning will be issued.
-- If there are duplicate Sprite resource names, duplicates within the same mod will be skipped with a warning, while duplicates across different mods will prioritize the latter mod's content.
-- If there are duplicate Audio resource names, duplicates within the same mod will be skipped with a warning, while duplicates across different mods will prioritize the latter mod's content.
-- If there are duplicate key paths in multilingual resources, the latter text and mod content will take precedence.
-- If there are duplicate font names, the latter mod's content will take precedence.
+- For `ERB, ERH, ERD` files, if any content is duplicated, content from modules loaded later will be skipped and a warning will be issued.
+- For Sprite resources, duplicate names within the same module will be skipped with a warning. Between different modules, content from modules loaded later will be prioritized.
+- For Audio resources, duplicate names within the same module will be skipped with a warning. Between different modules, content from modules loaded later will be prioritized.
+- For multi-language resources, if key path names are duplicated, the text from later entries and modules loaded later will be prioritized.
+- For font resources, if font names are duplicated, content from modules loaded later will be prioritized.
 
 :::
 
-----
-### Multilingual Functionality {#Multilingual}
+---
+### Multi-Language Functionality {#Multilingual}
 
-:::info[Multilingual Functionality]
+:::info[Multi-Language Functionality]
 
-**The multilingual feature allows developers to organize game text for localization. During runtime, the launcher will automatically integrate available and prioritized language content to quickly display multilingual text.**
+**The multi-language functionality facilitates creators in organizing in-game text for localization. During runtime, the launcher automatically integrates available and prioritized language content to quickly present multi-language text.**
 
-To add multilingual text, follow these steps. We will use adding `Simplified Chinese` as an example:
+The method for adding multi-language text is as follows. We'll use adding `Simplified Chinese` as an example:
 
-- Create a new `text` folder in the game's main directory. This folder will serve as the **main multilingual directory**.
-- Inside the `text` folder, create a **regional language folder**. The folder name should follow the [**`Locale Language`**](https://learn.microsoft.com/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c) documentation's `Language tag`.
-  - By referring to the above documentation, the regional name for `Chinese (Simplified)` is `zh-CN`, which will be used as the folder name.
-  - Folder names are case-insensitive and can use either `underscore (_)` or `hyphen (-)`, but it is recommended to use uppercase and `underscore (_)`, e.g., `ZH_CN`.
-- Inside the `ZH_CN` folder, create any `json` file and fill it with the following example content:
+- Create a new `text` folder in the game's main directory. This folder serves as the **Multi-Language Main Directory**.
+- Create a **Locale Language Folder** inside the `text` folder. The folder name should refer to the `Language tag` in the [**`Locale Language`**](https://learn.microsoft.com/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c) documentation.
+  - By consulting the documentation, we find the locale name for `Chinese (Simplified)` is `zh-CN`. This name will be used as the folder name.
+  - Folder names are case-insensitive, and `underscore(_)` and `hyphen(-)` are treated the same. However, it is recommended to use uppercase and `underscore(_)` consistently, e.g., `ZH_CN`.
+- Create any `json` format file inside the `ZH_CN` folder, and fill it with example content like below:
 
 ```json title="File Path and Example Content: text/ZH_CN/text.json"
 {
   // This is a comment.
 
-  "Key": "Content",
+  "KeyName": "Content",
   "START_GAME": "Start Game",
   "ITEM": "Item",
   "ITEM":
@@ -105,93 +113,96 @@ To add multilingual text, follow these steps. We will use adding `Simplified Chi
       "NAME": "Apple",
       "DESC": "A type of fruit",
     },
-    // Note: Avoid including line breaks (\n) in key names, e.g., BA\nNANA is an invalid key name. This is because the launcher uses this character to integrate language content.
+    // Note: Avoid line breaks (\n) in key names, e.g., BA\nNANA is invalid because the launcher uses this character when integrating language content.
     "BANANA":
     {
       "NAME": "Banana",
       "DESC":
       [
         "Big banana, a big banana",
-        "Your feeling is really magical",
+        "Your feeling is truly wonderful",
       ],
     },
   },
 }
 ```
 
-Now, we have successfully added `Simplified Chinese` multilingual text. Next, we need to enable this language in the settings:
+Now we have successfully added multi-language text for `Simplified Chinese`. Next, we need to enable this language in the settings:
 
-- Open the launcher and go to the `Mod List`. You will see a `Multilingual List` option at the bottom left of the window, with `Chinese` added as an option. Double-click to enable it and click the `Save` button.
-  - If you have added multiple languages, you can drag the enabled languages to adjust their display order, with the topmost language having the highest priority.
-  - Additionally, in the `Mod List`, if there are duplicate key paths between mods, the text content from the latter mod will replace the former.
-  - After modifying the `Multilingual List`, you must restart the program to reset the language text cache and all code refactored into constant strings.
+- Open the launcher and enter the `Module List`. You will see an additional `Chinese` option in the `Multi-Language List` at the bottom left of the window. Double-click to enable this option and click the `Save` button.
+  - If you have added multiple different languages, you can drag and drop the enabled languages to adjust their presentation order. The top of the list has the highest priority.
+  - Also, in the `Module List`, if key path names are duplicated between modules, the text content from modules loaded later will be prioritized.
+  - Each time the `Multi-Language List` is modified, you must restart the program to reset the language text cache and all code that has been reconstructed into constant strings.
 
-Finally, use the [**`TEXT`**](new_com#text) and [**`TEXTLIST`**](new_com#textlist) commands in your code to retrieve multilingual text. Simply input the key path as defined in the json file:
+Finally, use the [**`TEXT`**](new_com#text) and [**`TEXTLIST`**](new_com#textlist) instructions in your code to retrieve multi-language text. When calling, simply input the key name according to the key path you defined in the json file:
 
 ```
-LOCALS '= TEXT("start_game")		; Retrieve the text "Start Game". Key names are case-insensitive.
-PRINTSL TEXT("ITEM")			; Print "Item"
-PRINTSL TEXT("ITEM", "APPLE", "DESC")	; Print "A type of fruit"
+LOCALS '= TEXT("start_game")        ; Retrieves text "Start Game". Input key name is case-insensitive.
+PRINTSL TEXT("ITEM")                ; Prints "Item"
+PRINTSL TEXT("ITEM", "APPLE", "DESC") ; Prints "A type of fruit"
 
 TEXTLIST LOCALS, "ITEM", "APPLE", "DESC"
-PRINTSL LOCALS:0			; Print "A type of fruit"
+PRINTSL LOCALS:0                    ; Prints "A type of fruit"
 TEXTLIST LOCALS, "ITEM", "BANANA", "DESC"
-PRINTSL LOCALS:0			; Print "Big banana, a big banana"
-PRINTSL LOCALS:1			; Print "Your feeling is really magical"
+PRINTSL LOCALS:0                    ; Prints "Big banana, a big banana"
+PRINTSL LOCALS:1                    ; Prints "Your feeling is truly wonderful"
 ```
 
 :::
 
-----
+---
 ### Audio Functionality {#AudioFunc}
 
 :::info[Audio Functionality]
 
-**The audio component has been replaced with [**`CSCore`**](https://github.com/filoe/cscore), and a new `Audio` dialog window has been added to the launcher menu bar, where you can adjust various volume settings.**
+**The audio component has been replaced with [**`CSCore`**](https://github.com/filoe/cscore), and a new `Audio` dialog window has been added to the launcher's menu bar, where you can adjust various volume settings.**
 
 <center>
 ![](/img/audio_setting.png)
 </center>
 
-You can place audio files in the `resources` folder, create CSV files, and define **Audio Resources** to achieve more customized audio effects, just like with image resources.  
+Similar to image resources, you can place audio files in the `resources` folder, create csv files, and define **Audio Resources** for more customized audio effects.
 
 ```csv title="Audio Resource Format and Example Content:"
-; Audio Name,Audio File Name,Volume (100),Start Time (00:00:00),Duration (Total Duration of Audio File)
-MyMusic,MyMusic.mp3
-MyMusic1,MyMusic1.mp3,100
-MyMusic2,MyMusic2.m4a,80,00:01:30
-MyMusic3,MyMusic3.wav,70,00:01:30,15000
+; AudioName,AudioFileName,Volume(100),StartTime(00:00:00),Duration(TotalDurationOfAudioFile)
+MyMusic,MyMusic.ogg
+MyMusic1,MyMusic1.m4a,100
+MyMusic2,MyMusic2.wav,80,00:01:30
+MyMusic3,MyMusic3.mp3,70,00:01:30,15000
 ```
 
-The `Start Time` and `Duration` properties in the CSV file can accept either `TimeSpan` or `ms (milliseconds)` values. Refer to the [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) documentation for the `TimeSpan` format.
+In the csv file, the `StartTime` and `Duration` properties can accept `TimeSpan` or `ms (milliseconds)` values. For the `TimeSpan` format, please refer to the example section in the [**`TimeSpan.TryParse`**](https://learn.microsoft.com/dotnet/api/system.timespan.tryparse?view=netframework-4.8) documentation.
 
-Please refer to the [**`Audio-related`**](new_com#AudioRelated) commands to learn more about audio features.
+Please refer to the [**`Audio Related`**](new_com#AudioRelated) instructions for more details on audio functionality.  
+Please refer to the `使用例` (Usage Example) section in [**`GETRESOURCEEXT`**](new_com#getresourceext) for information on supported audio formats.
 
 :::
 
-----
+---
 ### Spine Animation Functionality {#SpineAnimFunc}
 
 :::info[Spine Animation Functionality]
 
-Support for [**`Spine Runtime`**](https://zh.esotericsoftware.com/spine-runtimes) has been added. Spine animation files can now be read and rendered using [**`SkiaSharp`**](https://github.com/mono/SkiaSharp).
+Added support for the [**`Spine Runtime`**](https://zh.esotericsoftware.com/spine-runtumes), allowing the reading of Spine animation files and rendering them via [**`SkiaSharp`**](https://github.com/mono/SkiaSharp).
 
-Currently, only Spine resources from version `3.8.xx` are supported.
+- Currently supports the following Spine runtime versions:
+    -  **3.8.xx**
+    -  **4.2.xx**
 
-To add Spine resources, follow a similar process to adding image resources. Place Spine resource files in the `resources` folder and create a csv file with the following content:
+The method for adding Spine resources is similar to adding image resources. Place Spine resource files in the `resources` folder, create a csv file, and fill it with the following content:
 
 ```csv title="Spine Resource Format and Example Content:"
-; Spine Resource Name,Atlas File,Skel File or Json File
+; SpineResourceName,atlasFile,skelFileOrJsonFile
 aris_spine, aris.atlas, aris.skel
 ```
 
-You can then use the [**`SPINECREATE`**](new_com#spinecreate), [**`CBGSETSPINE`**](new_com#cbgsetspine) commands to load and display Spine animations on the screen.
+You can then use instructions like [**`SPINECREATE`**](new_com#spinecreate) and [**`CBGSETSPINE`**](new_com#cbgsetspine) in your code to load and display Spine animations on the screen.
 
-```erb title="Example Usage of SPINE Commands:"
+```erb title="Example Usage of SPINE-related Instructions:"
 ; Set animation refresh interval in milliseconds
 SETANIMETIMER 1000 / 60
 
-; Create a Spine animation with a specified ID
+; Create a Spine animation with a self-specified ID
 SPINECREATE 0, "aris_spine"
 
 ; Set the Spine animation's scale to 50%
@@ -205,90 +216,188 @@ SPINESETANIM 0, 1, "00", 1
 CBGSETSPINE 0, 0, 0, 1
 ```
 
-Please refer to the [**`SPINE-related`**](new_com#SpineRelated) commands to learn more about Spine animation features.
+Please refer to the [**`SPINE Related`**](new_com#SpineRelated) instructions for more details on Spine animation functionality.
 
 :::
 
-----
-### Extended Variable Types {#ExtendedVariableType}
+---
+### New Extended Variable Types {#ExtendedVariableType}
 
-:::info[Extended Variable Types]
+#### List {#ExTypeList}
 
-The following new variable types have been added:
+The declaration format for a List is **`#LIST(S) <VariableName>`**
 
-- List (implementation of `List<value>`)
-  - Declaration format: **`#LIST(S) <variable_name>`**  
-    Example: `#LIST MY_LIST` declares a list variable named `MY_LIST` with integer values.
+Supports simultaneous definition with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF` keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
 
-- Hash List (implementation of `HashSet<value>`)
-  - Declaration format: **`#HASHLIST(S) <variable_name>`**  
-    Example: `#HASHLISTS MY_HASHLIST` declares a hash list variable named `MY_HASHLIST` with string values.
+Please refer to the [**`List Related`**](new_com#ListRelated) instructions for more functionality.
 
-- Dictionary (implementation of `Dictionary<key, value>`)
-  - Declaration format: **`#DICT_(I|S)(I|S) <variable_name>`**  
-    Example: `#DICT_IS MY_DICT` declares a dictionary variable named `MY_DICT` with integer keys and string values.
+:::note[Usage Example]
+```erb
+#LIST MY_LIST             ; Declare a List variable named `MY_LIST` with `integer` type values
 
-- List Dictionary (implementation of `Dictionary<dictKey, List<value>>`)
-  - Declaration format: **`#DICT(S)_LIST(S) <variable_name>`**  
-    Example: `#DICTS_LIST MY_DICTLIST` declares a list dictionary variable named `MY_DICTLIST` with string keys and integer values.
+LISTADD MY_LIST, 10       ; Add an element with value 10 to MY_LIST
+PRINTVL MY_LIST:0         ; Print the 0th element of MY_LIST, result is "10"
+```
+:::
 
-- Hash List Dictionary (implementation of `Dictionary<dictKey, HashSet<value>>`)
-  - Declaration format: **`#DICT(S)_HASHLIST(S) <variable_name>`**  
-    Example: `#DICTS_HASHLIST MY_DICTHASHLIST` declares a hash list dictionary variable named `MY_DICTHASHLIST` with string keys and integer values.
+---
+#### Hash List {#ExTypeHashList}
 
-- Dictionary of Dictionaries (implementation of `Dictionary<dictKey, Dictionary<key, value>>`)
-  - Declaration format: **`#DICT(S)_DICT_(I|S)(I|S) <variable_name>`**  
-    Example: `#DICTS_DICT_IS MY_DICTDICT` declares a dictionary of dictionaries variable named `MY_DICTDICT` with string primary keys, integer secondary keys, and string values.
+The declaration format for a Hash List is **`#HASHLIST(S) <VariableName>`**
 
-These extended variables can be declared with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, and `REF` keywords.  
-When using with `SAVEDATA` keyword, the **バイナリデータライターのバージョン** (BinaryDataWriter Version) setting must be set to `1809` or higher.
+Supports simultaneous definition with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF` keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
 
-Refer to [**`List-related`**](new_com#ListRelated), [**`Hash List-related`**](new_com#HashListRelated), [**`Dictionary-related`**](new_com#DictRelated), [**`Dictionary Collection-related`**](new_com#DictItemRelated) commands for more functionality of extended variables.
+Please refer to the [**`Hash List Related`**](new_com#HashListRelated) instructions for more functionality.
 
-```erb title="Example Usage of Extended Variables:"
-#LIST MY_LIST
-#HASHLISTS MY_HASHLIST
-#DICT_IS MY_DICT
-#DICTS_LIST MY_DICTLIST
-#DICTS_HASHLIST MY_DICTHASHLIST
-#DICTS_DICT_IS MY_DICTDICT
+:::note[Usage Example]
+```erb
+#HASHLISTS MY_HASHLIST            ; Declare a Hash List variable named `MY_HASHLIST` with `string` type values
 
-LISTADD MY_LIST, 10        ; Add element with value 10 to MY_LIST
-PRINTVL MY_LIST:0          ; Print element at index 0 of MY_LIST (output: "10")
+HASHLISTADD MY_HASHLIST, "TEXT"   ; Add an element with value "TEXT" to MY_HASHLIST
+PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT") ; Print the search result for value "TEXT" in MY_HASHLIST, result is "1"
+```
+:::
 
-HASHLISTADD MY_HASHLIST, "TEXT"         ; Add value "TEXT" to MY_HASHLIST
-PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT") ; Check if "TEXT" exists in MY_HASHLIST (output: "1")
+---
+#### Dictionary {#ExTypeDict}
 
-MY_DICT:6 '= "TEXT"        ; Add key 6 with value "TEXT" to MY_DICT
-PRINTSL MY_DICT:6          ; Print value for key 6 in MY_DICT (output: "TEXT")
+The declaration format for a Dictionary is **`#DICT_<I|S><I|S> <VariableName>`**  
+If the declared key type is `integer`, it supports the ERD keyword feature.
 
-DICTITEMCREATE MY_DICTLIST, "NEW"    ; Create list named "NEW" in MY_DICTLIST
-LISTADD MY_DICTLIST:"NEW", 20        ; Add value 20 to "NEW" list
-PRINTVL MY_DICTLIST:"NEW":0          ; Print index 0 of "NEW" list (output: "20")
+Supports simultaneous definition with `CONST`, `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF`, [**`HARDCHECK`**](new_com#hardcheck) keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
 
-DICTITEMCREATE MY_DICTHASHLIST, "NEW" ; Create hash list named "NEW" in MY_DICTHASHLIST
-HASHLISTADD MY_DICTHASHLIST:"NEW", 20 ; Add value 20 to "NEW" hash list
-PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20) ; Check if 20 exists in "NEW" hash list (output: "1")
+Please refer to the [**`Dictionary Related`**](new_com#DictRelated) instructions for more functionality.
 
-DICTITEMCREATE MY_DICTDICT, "NEW"     ; Create dictionary named "NEW" in MY_DICTDICT
-MY_DICTDICT:"NEW":8 '= "TEXT"         ; Add key 8 with value "TEXT" to "NEW" dictionary
-PRINTSL MY_DICTDICT:"NEW":8           ; Print value for key 8 in "NEW" dictionary (output: "TEXT")
+:::note[Usage Example]
+```erb
+#DICT_IS MY_DICT      ; Declare a Dictionary variable named `MY_DICT` with `integer` type keys and `string` type values
+
+MY_DICT:6 '= "TEXT"   ; Write an element with key 6 and value "TEXT" into MY_DICT
+PRINTSL MY_DICT:6     ; Print the value for key 6 in MY_DICT, result is "TEXT"
+```
+:::
+
+---
+#### Array-Type Dictionary {#ExTypeDictDim}
+
+The declaration format for an Array-Type Dictionary is **`#DICT(S)_DIM(S) <VariableName>(, ArrayLength = 1)`**  
+If the declared primary key type is `integer`, it supports the ERD keyword feature.  
+The second dimension array subscript of the variable supports the ERD keyword feature by default.
+
+Supports simultaneous definition with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF`, [**`HARDCHECK`**](new_com#hardcheck) keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
+
+Please refer to the [**`Dictionary Collection Related`**](new_com#DictItemRelated) instructions for more functionality.
+
+:::note[Usage Example]
+```erb
+#DICTS_DIM MY_DICTDIM, 10        ; Declare an Array-Type Dictionary variable named `MY_DICTDIM` with `string` type primary keys and `integer` type values. Each array created by this variable has a length of `10`.
+
+DICTITEMCREATE MY_DICTDIM, "NEW" ; Create an array named "NEW" in MY_DICTDIM
+MY_DICTDIM:"NEW":0 = 20          ; Assign the value 20 to the 0th element of the "NEW" array in MY_DICTDIM
+PRINTVL MY_DICTDIM:"NEW":0       ; Print the 0th element of the "NEW" array in MY_DICTDIM, result is "20"
+```
+:::
+
+---
+#### List-Type Dictionary {#ExTypeDictList}
+
+The declaration format for a List-Type Dictionary is **`#DICT(S)_LIST(S) <VariableName>`**  
+If the declared primary key type is `integer`, it supports the ERD keyword feature.
+
+Supports simultaneous definition with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF`, [**`HARDCHECK`**](new_com#hardcheck) keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
+
+Please refer to the [**`List Related`**](new_com#ListRelated) and [**`Dictionary Collection Related`**](new_com#DictItemRelated) instructions for more functionality.
+
+:::note[Usage Example]
+```erb
+#DICTS_LIST MY_DICTLIST          ; Declare a List-Type Dictionary variable named `MY_DICTLIST` with `string` type primary keys and `integer` type values
+
+DICTITEMCREATE MY_DICTLIST, "NEW" ; Create a list named "NEW" in MY_DICTLIST
+LISTADD MY_DICTLIST:"NEW", 20    ; Add an element with value 20 to the "NEW" list in MY_DICTLIST
+PRINTVL MY_DICTLIST:"NEW":0      ; Print the 0th element of the "NEW" list in MY_DICTLIST, result is "20"
+```
+:::
+
+---
+#### Hash List-Type Dictionary {#ExTypeDictHashList}
+
+The declaration format for a Hash List-Type Dictionary is **`#DICT(S)_HASHLIST(S) <VariableName>`**  
+If the declared primary key type is `integer`, it supports the ERD keyword feature.
+
+Supports simultaneous definition with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF`, [**`HARDCHECK`**](new_com#hardcheck) keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
+
+Please refer to the [**`Hash List Related`**](new_com#HashListRelated) and [**`Dictionary Collection Related`**](new_com#DictItemRelated) instructions for more functionality.
+
+:::note[Usage Example]
+```erb
+#DICTS_HASHLIST MY_DICTHASHLIST          ; Declare a Hash List-Type Dictionary variable named `MY_DICTHASHLIST` with `string` type primary keys and `integer` type values
+
+DICTITEMCREATE MY_DICTHASHLIST, "NEW"    ; Create a hash list named "NEW" in MY_DICTHASHLIST
+HASHLISTADD MY_DICTHASHLIST:"NEW", 20    ; Add an element with value 20 to the "NEW" hash list in MY_DICTHASHLIST
+PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20) ; Print the search result for value 20 in the "NEW" hash list of MY_DICTHASHLIST, result is "1"
+```
+:::
+
+---
+#### Dictionary-Type Dictionary {#ExTypeDictDict}
+
+The declaration format for a Dictionary-Type Dictionary is **`#DICT(S)_DICT_<I|S><I|S> <VariableName>`**  
+If the declared primary key type is `integer`, it supports the ERD keyword feature.  
+If the declared secondary key type is `integer`, it supports the ERD keyword feature.
+
+Supports simultaneous definition with `GLOBAL`, `SAVEDATA`, `DYNAMIC`, `REF`, [**`HARDCHECK`**](new_com#hardcheck) keywords when declaring this variable.  
+When defined with the `SAVEDATA` keyword, the **`バイナリデータライターのバージョン`** (Binary Archive Writer Version) setting must be changed to `1809` or higher.
+
+Please refer to the [**`Dictionary Related`**](new_com#DictRelated) and [**`Dictionary Collection Related`**](new_com#DictItemRelated) instructions for more functionality.
+
+:::note[Usage Example]
+```erb
+#DICTS_DICT_IS MY_DICTDICT      ; Declare a Dictionary-Type Dictionary variable named `MY_DICTDICT` with `string` type primary keys, `integer` type secondary keys, and `string` type values
+
+DICTITEMCREATE MY_DICTDICT, "NEW" ; Create a dictionary named "NEW" in MY_DICTDICT
+MY_DICTDICT:"NEW":8 '= "TEXT"   ; Write an element with secondary key 8 and value "TEXT" into the "NEW" dictionary within MY_DICTDICT
+PRINTSL MY_DICTDICT:"NEW":8     ; Print the value for secondary key 8 in the "NEW" dictionary of MY_DICTDICT, result is "TEXT"
+```
+:::
+
+---
+### Program and Instruction Compatibility Changes {#CompatibilityChanges}
+
+Unbanned the related functionalities of `Function-Type Macro Definitions`. The reliability of this feature has not been fully tested.
+
+- Improvements to the ERD Keyword feature:
+    - When the keyword index value is omitted, the system automatically assigns an unused index value to that keyword.  
+      **Warning: Variables declared with SAVEDATA are not recommended to omit index values to avoid game save data corruption.**
+    - When an existing keyword name is entered as an index value, it will directly reference that keyword's index value.
+
+```csv title="ERD Keyword Feature Example: ERB/example.erd"
+; Index value for "能量饮料" is assigned as 1
+1,能量饮料
+; Index value for "酒" is automatically assigned as 0 because index 0 is unused
+,酒
+; Index value for "Wine" references "酒", i.e., 0
+酒,Wine
+; Index value for "ジュース" references the subsequent "果汁", i.e., 2
+果汁,ジュース
+; Index value for "果汁" is automatically assigned as 2 because indices 0 and 1 are already occupied
+,果汁
 ```
 
-:::
+Character-type two-dimensional arrays support omitting the first parameter (when the **`キャラクタ変数の引数を補完しない`** (Do Not Auto-Complete Character Variable Parameters) setting is not enabled).
 
-----
-### Compatibility Changes in Programs and Commands {#CompatibilityChanges}
+Temporary caches for the [**`FOR-NEXT`**](modify_com#for-next) and [**`REPEAT-REND`**](modify_com#repeat-rend) control statements follow the function in and out of the stack.
 
-The functionality related to `function-like macro definitions` has been enabled, though its reliability has not been fully tested.
+The backslashes `\\` in the file path obtained by the `__FILE__` variable are replaced with forward slashes `/`.
 
-Two-dimensional character-type arrays support omitting the first parameter (when the **`キャラクタ変数の引数を補完しない`** (Don't autocomplete arguments in character variables) option is not enabled).
+One of the parameter formats of the [**`REPLACE`**](modify_com#replace) instruction has been separated into an independent instruction [**`REPLACEBYARRAY`**](new_com#replacebyarray).
 
-The backslashes `\\` in file paths retrieved by the `__FILE__` variable have been replaced with forward slashes `/`.
-
-One of the parameter formats of the [**`REPLACE`**](modify_com#replace) command has been separated into a standalone command, [**`REPLACEBYARRAY`**](new_com#replacebyarray).
-
-The following commands now support processing Emoji characters🎉. These commands calculate the display width to approximate the character length when handling Emoji characters.  
+The following instructions now support processing Emoji characters 🎉. When handling Emoji characters, these instructions calculate the approximate character length based on display width.  
 For example, `😀` has a character length of 2, and `👨‍👩‍👧‍👦` has a character length of 4.
 
 - [**`STRLEN, STRLENFORM`**](modify_com#strlen-strlenform)
@@ -296,55 +405,55 @@ For example, `😀` has a character length of 2, and `👨‍👩‍👧‍👦`
 - [**`STRLENS`**](modify_com#strlens)
 - [**`SUBSTRING`**](modify_com#substring)
 
-The edge character handling logic of the [**`SUBSTRING`**](modify_com#substring) command has been changed. If the selected position is in the middle of a long character, it will backtrack to the start of that character.  
-In other words, characters at the starting position will be included, while those at the ending position will be ignored.
+The edge character handling logic of the [**`SUBSTRING`**](modify_com#substring) instruction has been changed. If the selected position in the text falls in the middle of a wide character, it retreats to the starting position of that character.  
+That is, characters caught at the start position are included, and characters caught at the end position are ignored.
 
-When the third parameter of [**`ERDNAME`**](modify_com#erdname) is omitted, it will retrieve the key names of the indices in the array's last dimension.
+When the third parameter is omitted in [**`ERDNAME`**](modify_com#erdname), it will look up the keyword for the last dimension subscript of the array.
 
-The [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) command will additionally change the values of `RESULTS:0` and `RESULT:3`.
+The [**`INPUTMOUSEKEY`**](modify_com#inputmousekey) instruction will additionally change the values of `RESULTS:0` and `RESULT:3`.
 
-The [**`GCREATE`**](modify_com#gcreate), [**`GCREATEFROMFILE`**](modify_com#gcreatefromfile), and [**`GLOAD`**](modify_com#gsave-gload) commands will release previously created images before creating new ones, eliminating the need to call [**`GDISPOSE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GDISPOSE.20int.20ID) before creation.
+The [**`GCREATE`**](modify_com#gcreate), [**`GCREATEFROMFILE`**](modify_com#gcreatefromfile), and [**`GLOAD`**](modify_com#gsave-gload) instructions will release already created images before creating a new one, meaning there's no need to call the [**`GDISPOSE`**](https://osdn.net/projects/emuera/wiki/excom#h5-GDISPOSE.20int.20ID) instruction before creation.
 
-The second parameter of the [**`GCREATEFROMFILE`**](modify_com#gcreatefromfile) command must be a relative path starting from the main directory, and the third parameter has been removed.
+The second parameter of [**`GCREATEFROMFILE`**](modify_com#gcreatefromfile) must be a relative path starting from the main directory, and the third parameter has been removed.
 
-The line cap effect of the [**`GDASHSTYLE`**](modify_com#gdashstyle) command has been changed.
+The line cap effect of the [**`GDASHSTYLE`**](modify_com#gdashstyle) instruction has been changed.
 
-The [**`GDRAWTEXT`**](modify_com#gdrawtext) command now only returns `RESULT:0`, and other return values are no longer valid.
+The [**`GDRAWTEXT`**](modify_com#gdrawtext) instruction now only returns `RESULT:0`; other return values are no longer valid.
 
-The rendering result of [**`GDRAWGWITHMASK`**](modify_com#gdrawgwithmask) is affected by the alpha and blue values.
+The drawing result of [**`GDRAWGWITHMASK`**](modify_com#gdrawgwithmask) is affected by alpha value and blue value.
 
-Due to the change in the graphics library, the usage of the color matrix in the [**`GDRAWG`**](modify_com#gdrawg) and [**`GDRAWSPRITE`**](modify_com#gdrawsprite) commands has been modified. Refer to the [**`GSETCOLORMATRIX`**](new_com#gsetcolormatrix) command for details.
+Due to the graphics library change, the usage of the color matrix in the [**`GDRAWG`**](modify_com#gdrawg) and [**`GDRAWSPRITE`**](modify_com#gdrawsprite) instructions has changed. For details, please refer to the explanation in the [**`GSETCOLORMATRIX`**](new_com#gsetcolormatrix) instruction.
 
-The [**`SETANIMETIMER`**](modify_com#setanimetimer) command will continue to refresh animations during timed waits, such as in [**`TINPUT`**](https://evilmask.gitlab.io/emuera.em.doc/Reference/TINPUT.html) or [**`INPUTMOUSEKEY`**](modify_com#inputmousekey).
+The [**`SETANIMETIMER`**](modify_com#setanimetimer) instruction will continue to refresh animations even during timed waits like [**`TINPUT`**](https://evilmask.gitlab.io/emuera.em.doc/Reference/TINPUT.html) or [**`INPUTMOUSEKEY`**](modify_com#inputmousekey).
 
-The [**`SPRITECREATE`**](modify_com#spritecreate) and [**`SPRITEANIMECREATE`**](modify_com#spriteanimecreate) commands will release previously created non-built-in Sprites before creating new ones, eliminating the need to call [**`SPRITEDISPOSE`**](modify_com#spritedispose) before creation. If a built-in Sprite with the same name exists, creation will fail.
+The [**`SPRITECREATE`**](modify_com#spritecreate) and [**`SPRITEANIMECREATE`**](modify_com#spriteanimecreate) instructions will release already created non-built-in Sprites before creating a new one, meaning there's no need to call [**`SPRITEDISPOSE`**](modify_com#spritedispose) before creation. If a built-in Sprite with the same name already exists, creation will fail.
 
-The [**`SPRITEDISPOSEALL`**](modify_com#spritedisposeall) command no longer removes built-in Sprites but can release all images referenced by built-in Sprites.
+The [**`SPRITEDISPOSEALL`**](modify_com#spritedisposeall) instruction no longer has the ability to remove built-in Sprites, but it can release all images referenced by built-in Sprites.
 
-The first parameter of the [**`PLAYBGM`**](modify_com#playbgm) and [**`PLAYSOUND`**](modify_com#playsound) commands now only accepts Audio names. To play audio via file path, use the [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) command to create an Audio resource first.  
-Refer to the [**`Audio Functionality`**](#AudioFunc) section for details on adding built-in Audio resources.
+The first parameter of the [**`PLAYBGM`**](modify_com#playbgm) and [**`PLAYSOUND`**](modify_com#playsound) instructions now only supports inputting an Audio Name. To play via an audio file path, first use the [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) instruction to create an Audio.  
+For information on how to add built-in Audio resources, please refer to the [**`Audio Functionality`**](#AudioFunc) section.
 
-The [**`SETBGMVOLUME`**](modify_com#setbgmvolume) command now only changes the volume of the currently playing background music and no longer affects the global volume.
+The [**`SETBGMVOLUME`**](modify_com#setbgmvolume) instruction now only changes the volume of the currently playing background music and no longer affects the global volume.
 
-The [**`SETSOUNDVOLUME`**](modify_com#setsoundvolume) command has been deprecated and no longer has any effect.
+The [**`SETSOUNDVOLUME`**](modify_com#setsoundvolume) instruction has been deprecated and no longer has any effect.
 
-The backslashes `\\` in file paths retrieved by the [**`ENUMFILES`**](modify_com#enumfiles) command have been replaced with forward slashes `/`.
+The backslashes `\\` in file paths obtained by the [**`ENUMFILES`**](modify_com#enumfiles) instruction are replaced with forward slashes `/`.
 
-Changes related to HTML code:
+HTML code related changes:
 - The `bcolor` attribute of the `div` tag has been renamed to `bdcolor` (borderColor) to avoid confusion with `bcolor` (backgroundColor).
-- The input format for the `bdcolor` attribute of the `div` tag has been changed to a single color value `'color'`, and it no longer accepts four-corner color values.
-- The input format for the `border` attribute of the `div` tag has been changed to a single value `'thick'`, and it no longer accepts four-corner values.
-- The `margin` attribute of the `div` tag now expands outward instead of squeezing inward.
+- The input value format for the `bdcolor` attribute of the `div` tag has been changed to a single color value `'color'` and no longer accepts four-corner color values.
+- The input value format for the `border` attribute of the `div` tag has been changed to a single numeric value `'thick'` and no longer accepts four-corner numeric values.
+- The effect of the `margin` attribute of the `div` tag has been changed to expand outward, no longer squeezing inward.
 
-When returning to the title screen via the `タイトルに戻る` (Return to Title) button in the menu bar, the following content will be cleared:
+When returning to the title screen via the `タイトルに戻る` (Return to Title) button in the menu bar, the following content will be additionally cleared:
 
-- All CBG images, including CBGBUTTON and CBGBMAP, will be cleared, equivalent to the [**`CBGCLEAR`**](https://osdn.net/projects/emuera/wiki/excom#h5-GCLEAR.20int.20ID.2C.20int.20cARGB) command.
-- All runtime-created Sprites will be cleared, and all images referenced by Sprites will be released, equivalent to the [**`SPRITEDISPOSEALL`**](modify_com#spritedisposeall) command.
-- All runtime-created Spine animations will be cleared, and all images referenced by Spine animations will be released, equivalent to the [**`SPINEDISPOSEALL`**](new_com#spinedisposeall) command.
-- All runtime-created Audio will be cleared, and the audio cache will be released, equivalent to the [**`AUDIODISPOSEALL`**](new_com#audiodisposeall) command.
+- Clear all CBG images, including CBGBUTTON, CBGBMAP, etc. The effect is the same as the [**`CBGCLEAR`**](https://osdn.net/projects/emuera/wiki/excom#h5-GCLEAR.20int.20ID.2C.20int.20cARGB) instruction.
+- Clear all Sprites created during runtime, releasing all images referenced by Sprites. The effect is the same as the [**`SPRITEDISPOSEALL`**](modify_com#spritedisposeall) instruction.
+- Clear all Spine animations created during runtime, releasing all images referenced by Spine animations. The effect is the same as the [**`SPINEDISPOSEALL`**](new_com#spinedisposeall) instruction.
+- Clear all Audios created during runtime and release the audio cache. The effect is the same as the [**`AUDIODISPOSEALL`**](new_com#audiodisposeall) instruction.
 
 The `emuera.log` game log and `console.log` debug log are saved using `UTF-8-BOM` encoding.
 
-The `watchlist.csv` variable watchlist is saved and read using `UTF-8-BOM` encoding.
+The `watchlist.csv` variable watch list is saved and read using `UTF-8-BOM` encoding.
 
-The variable watchlist is no longer automatically saved when closing the debug window.
+The variable watch list is no longer automatically saved when the debug window is closed.
