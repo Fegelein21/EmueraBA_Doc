@@ -531,21 +531,46 @@ ARRAYRESIZE REF_ARRAY2, 2, 2, 2	; 该行会报错，因为其引用的STATIC_ARR
 :::
 
 ----
+#### ARRAYREVERSE
+
+**`void ARRAYREVERSE any Array_List(, int start = 0, int end = lastDimLength)`**
+
+该指令用于将数组或列表的指定范围内的元素进行反序排列。
+
+:::tip[参数]
+- **any Array_List**
+  - 指定需要处理的任意可引用数组、列表。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
+- **int start = 0**
+  - 指定开始索引。
+- **int end = lastDimLength**
+  - 指定结束索引+1，省略时使用数组最后一维的长度、或列表的总长度。
+:::
+
+:::note[使用例]
+```
+LOCAL = 0, 1, 2, 3, 4, 5
+ARRAYREVERSE LOCAL, 2
+PRINTSL STRJOIN(LOCAL)		打印“0,1,5,4,3,2”
+```
+:::
+
+----
 #### ARRAYTIDY
 
 **`int ARRAYTIDY any Array_List(, int start = 0, int end = lastDimLength, same emptyVal)`**
 
-该指令可整理数组中的元素之间的空值，以得到一个没有空隙、元素连贯的数组。
+该指令可整理数组或列表中的元素之间的空值，以得到一个没有空隙、元素连贯的集合。
 
 :::tip[参数]
 - **any Array_List**
-  - 指定需要整理的的任意可引用数组、列表。
+  - 指定需要整理的任意可引用数组、列表。
     - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
     - 对于列表：整理完毕后的空元素将会被移除。
 - **int start = 0**
   - 指定整理的开始索引。
 - **int end = lastDimLength**
-  - 指定整理的结束索引+1，省略时使用数组最后一维的长度。
+  - 指定整理的结束索引+1，省略时使用数组最后一维的长度、或列表的总长度。
 - **same emptyVal**
   - 指定处理时会被视作空值的数值或字符串，值类型要与首个参数的值类型一致，可省略( `0` 或 `空字符串` )。
 :::

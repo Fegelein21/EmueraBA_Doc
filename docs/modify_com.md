@@ -91,7 +91,7 @@ SETBGCOLORBYNAME %LOCALS%
 - **int start = 0**
   - 指定合并的开始索引。
 - **int count = lastDimLength**
-  - 指定合并的元素数，省略时使用数组最后一维的长度。
+  - 指定合并的元素数，省略时使用数组最后一维的长度、或列表的总长度。
 :::
 
 :::tip[返回值]

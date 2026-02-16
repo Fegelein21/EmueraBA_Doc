@@ -377,16 +377,11 @@ Unbanned the related functionalities of `Function-Type Macro Definitions`. The r
     - When an existing keyword name is entered as an index value, it will directly reference that keyword's index value.
 
 ```csv title="ERD Keyword Feature Example: ERB/example.erd"
-; Index value for "能量饮料" is assigned as 1
-1,能量饮料
-; Index value for "酒" is automatically assigned as 0 because index 0 is unused
-,酒
-; Index value for "Wine" references "酒", i.e., 0
-酒,Wine
-; Index value for "ジュース" references the subsequent "果汁", i.e., 2
-果汁,ジュース
-; Index value for "果汁" is automatically assigned as 2 because indices 0 and 1 are already occupied
-,果汁
+1,能量饮料	; Index value for "能量饮料" is assigned as 1
+,酒		; Index value for "酒" is automatically assigned as 0 because index 0 is unused
+酒,Wine		; Index value for "Wine" references "酒", i.e., 0
+果汁,ジュース	; Index value for "ジュース" references the subsequent "果汁", i.e., 2
+,果汁		; Index value for "果汁" is automatically assigned as 2 because indices 0 and 1 are already occupied
 ```
 
 Character-type two-dimensional arrays support omitting the first parameter (when the **`キャラクタ変数の引数を補完しない`** (Do Not Auto-Complete Character Variable Parameters) setting is not enabled).

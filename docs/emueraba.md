@@ -16,15 +16,15 @@ slug: /
 
 启动器的默认标题改为 `EmueraBA`，并更改了启动器的默认图标。
 
-图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`描画インターフェース`** (图形绘制接口) 设置项已被移除。  
+图形库更换为 [**`SkiaSharp`**](https://github.com/mono/SkiaSharp)，画面显示与图像绘制的相关功能已全面改用SkiaSharp，**`描画インターフェース`** (图形绘制接口) 配置项已被移除。  
 请参阅 [**`GETRESOURCEEXT`**](new_com#getresourceext) 中的 `使用例` 部分以了解支持的图像格式。
 
 支持读取和播放 `GIF` 、`WEBP` 动态图像，只需像静态图像那样在resources资源文件中定义，然后在ERB脚本中以同样的方式打印显示即可。  
 可以使用 [**`SETANIMETIMER`**](modify_com#setanimetimer) 指令来刷新画面以获得流畅的播放效果。
 
-实现了自动识别字符范围功能，已能正确识别中、日、韩、英、Emoji字符并计算长度，**`内部で使用する東アジア言語`** (内部使用的东亚语言) 设置项已被移除。
+实现了自动识别字符范围功能，已能正确识别中、日、韩、英、Emoji字符并计算长度，**`内部で使用する東アジア言語`** (内部使用的东亚语言) 配置项已被移除。
 
-在 `显示设置` 界面中新增 **`タブ文字幅`** (制表符宽度) 设置项，该设置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
+在 `显示设置` 界面中新增 **`タブ文字幅`** (制表符宽度) 配置项，该配置项可调整 `制表符(\t)` 在文本中的字符长度，默认值为 `8`。  
 制表符会根据之前的文本的字符长度来自动调整自身的字符长度，例如制表符之前有文本 `111`，则当前制表符会占据5个字符长度。
 
 新增用户定义变量关键字 **`RESIZE`** ，该关键字用于标记需要重设数组大小的变量。关于该关键字的更多使用事项请参阅 [**`ARRAYRESIZE`**](new_com#arrayresize)。
@@ -228,18 +228,16 @@ CBGSETSPINE 0, 0, 0, 1
 列表的声明格式为 **`#LIST(S) <变量名>`**
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`列表相关`**](new_com#ListRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
+```erb title="使用例"
 #LIST MY_LIST			; 声明一个值为`整数`类型、名称为 `MY_LIST` 的列表变量
 
 LISTADD MY_LIST, 10		; 向 MY_LIST 中添加一个值为 10 的元素
 PRINTVL MY_LIST:0		; 打印 MY_LIST 的 0 号元素，打印结果为 "10"
 ```
-:::
 
 ----
 #### 哈希列表 {#ExTypeHashList}
@@ -247,18 +245,16 @@ PRINTVL MY_LIST:0		; 打印 MY_LIST 的 0 号元素，打印结果为 "10"
 哈希列表的声明格式为 **`#HASHLIST(S) <变量名>`**
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`哈希列表相关`**](new_com#HashListRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
+```erb title="使用例"
 #HASHLISTS MY_HASHLIST			; 声明一个值为`字符串`类型、名称为 `MY_HASHLIST` 的哈希列表变量
 
 HASHLISTADD MY_HASHLIST, "TEXT"		; 向 MY_HASHLIST 中添加一个值为 "TEXT" 的元素
 PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT"); 打印 MY_HASHLIST 对值 "TEXT" 的查找结果，打印结果为 "1"
 ```
-:::
 
 ----
 #### 字典 {#ExTypeDict}
@@ -267,18 +263,16 @@ PRINTVL HASHLISTHAS(MY_HASHLIST, "TEXT"); 打印 MY_HASHLIST 对值 "TEXT" 的�
 如果声明的键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `CONST` 、`GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`字典相关`**](new_com#DictRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
+```erb title="使用例"
 #DICT_IS MY_DICT		; 声明一个键为`整数`类型、值为`字符串`类型、名称为 `MY_DICT` 的字典变量
 
 MY_DICT:6 '= "TEXT"		; 向 MY_DICT 中写入一个键为 6、值为 "TEXT" 的元素
 PRINTSL MY_DICT:6		; 打印 MY_DICT 中的键为 6 的值，打印结果为 "TEXT"
 ```
-:::
 
 ----
 #### 数组型字典 {#ExTypeDictDim}
@@ -288,19 +282,17 @@ PRINTSL MY_DICT:6		; 打印 MY_DICT 中的键为 6 的值，打印结果为 "TEX
 变量的第二维数组下标默认支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
+```erb title="使用例"
 #DICTS_DIM MY_DICTDIM, 10		; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTDIM` 的数组型字典变量，该变量所创建的每个数组的长度为 `10`
 
 DICTITEMCREATE MY_DICTDIM, "NEW"	; 在 MY_DICTDIM 中创建一个名称为 "NEW" 的数组
 MY_DICTDIM:"NEW":0 = 20			; 将 MY_DICTDIM 中的 "NEW" 数组的 0 号元素赋值为 20
 PRINTVL MY_DICTDIM:"NEW":0		; 打印 MY_DICTDIM 中的 "NEW" 数组的 0 号元素，打印结果为 "20"
 ```
-:::
 
 ----
 #### 列表型字典 {#ExTypeDictList}
@@ -309,19 +301,17 @@ PRINTVL MY_DICTDIM:"NEW":0		; 打印 MY_DICTDIM 中的 "NEW" 数组的 0 号元�
 如果声明的主键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`列表相关`**](new_com#ListRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
+```erb title="使用例"
 #DICTS_LIST MY_DICTLIST			; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTLIST` 的列表型字典变量
 
 DICTITEMCREATE MY_DICTLIST, "NEW"	; 在 MY_DICTLIST 中创建一个名称为 "NEW" 的列表
 LISTADD MY_DICTLIST:"NEW", 20		; 向 MY_DICTLIST 中的 "NEW" 列表添加一个值为 20 的元素
 PRINTVL MY_DICTLIST:"NEW":0		; 打印 MY_DICTLIST 中的 "NEW" 列表的 0 号元素，打印结果为 "20"
 ```
-:::
 
 ----
 #### 哈希列表型字典 {#ExTypeDictHashList}
@@ -330,19 +320,17 @@ PRINTVL MY_DICTLIST:"NEW":0		; 打印 MY_DICTLIST 中的 "NEW" 列表的 0 号�
 如果声明的主键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`哈希列表相关`**](new_com#HashListRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
-#DICTS_HASHLIST MY_DICTHASHLIST		; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTHASHLIST` 的哈希列表型字典变量
+```erb title="使用例"
+#DICTS_HASHLIST MY_DICTHASHLIST			; 声明一个主键为`字符串`类型、值为`整数`类型、名称为 `MY_DICTHASHLIST` 的哈希列表型字典变量
 
-DICTITEMCREATE MY_DICTHASHLIST, "NEW"	; 在 MY_DICTHASHLIST 中创建一个名称为 "NEW" 的哈希列表
-HASHLISTADD MY_DICTHASHLIST:"NEW", 20	; 向 MY_DICTHASHLIST 中的 "NEW" 哈希列表添加一个值为 20 的元素
+DICTITEMCREATE MY_DICTHASHLIST, "NEW"		; 在 MY_DICTHASHLIST 中创建一个名称为 "NEW" 的哈希列表
+HASHLISTADD MY_DICTHASHLIST:"NEW", 20		; 向 MY_DICTHASHLIST 中的 "NEW" 哈希列表添加一个值为 20 的元素
 PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20)	; 打印 MY_DICTHASHLIST 中的 "NEW" 哈希列表对值 20 的查找结果，打印结果为 "1"
 ```
-:::
 
 ----
 #### 字典型字典 {#ExTypeDictDict}
@@ -352,44 +340,55 @@ PRINTVL HASHLISTHAS(MY_DICTHASHLIST:"NEW", 20)	; 打印 MY_DICTHASHLIST 中的 "
 如果声明的次键类型为 `整数`，则支持使用ERD键词功能。
 
 声明该变量时支持与 `GLOBAL` 、`SAVEDATA` 、`DYNAMIC` 、`REF` 、[**`HARDCHECK`**](new_com#hardcheck) 关键字同时定义。  
-与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 设置项更改为 `1809` 及以上。
+与 `SAVEDATA` 关键字定义时需要将 **`バイナリデータライターのバージョン`** (二进制存档写入器版本) 配置项更改为 `1809` 及以上。
 
 请参阅 [**`字典相关`**](new_com#DictRelated)、[**`字典集合相关`**](new_com#DictItemRelated) 指令以了解更多功能。
 
-:::note[使用例]
-```erb
+```erb title="使用例"
 #DICTS_DICT_IS MY_DICTDICT		; 声明一个主键为`字符串`类型、次键为`整数`类型、值为`字符串`类型、名称为 `MY_DICTDICT` 的字典型字典变量
 
 DICTITEMCREATE MY_DICTDICT, "NEW"	; 在 MY_DICTDICT 中创建一个名称为 "NEW" 的字典
 MY_DICTDICT:"NEW":8 '= "TEXT"		; 向 MY_DICTDICT 中的 "NEW" 字典写入一个键为 8、值为 "TEXT" 的元素
 PRINTSL MY_DICTDICT:"NEW":8		; 打印 MY_DICTDICT 中的 "NEW" 字典中的键为 8 的元素，打印结果为 "TEXT"
 ```
-:::
 
 ----
-### 程序、指令的兼容性变动 {#CompatibilityChanges}
+### 语法、指令与程序的兼容性变动 {#CompatibilityChanges}
 
 解禁了 `函数型宏定义` 的相关功能，尚未完全测试该功能的可靠性。
 
-- ERD键词功能的改进如下：
-  - 省略键词索引值时，系统会为该键词自动分配一个尚未使用的索引值。  
-    **警告：带SAVEDATA声明的变量不建议省略索引值，以避免游戏存档数据错乱。**
-  - 填写已存在的键词名称作为索引值时，将会直接引用该键词的的索引值。
+**ERD键词功能的相关改动：**
+
+- 省略键词索引值时，系统会为该键词自动分配一个尚未使用的索引值。  
+  **警告：带 `SAVEDATA` 声明的变量不建议省略索引值，以避免游戏存档数据错乱。**
+- 填写已存在的键词名称作为索引值时，将会直接引用该键词的索引值。
 
 ```csv title="ERD键词功能示例：ERB/example.erd"
-; "能量饮料"的索引值被分配为1
-1,能量饮料
-; "酒"的索引值被自动分配为0，因为索引值0未被占用
-,酒
-; "Wine"的索引值将引用自"酒"，即为0
-酒,Wine
-; "ジュース"的索引值将引用自后续的"果汁"，即为2
-果汁,ジュース
-; "果汁"的索引值被自动分配为2，因为索引值0和1已被占用
-,果汁
+1,能量饮料	; "能量饮料"的索引值被分配为1
+,酒		; "酒"的索引值被自动分配为0，因为索引值0未被占用
+酒,Wine		; "Wine"的索引值将引用自"酒"，即为0
+果汁,ジュース	; "ジュース"的索引值将引用自后续的"果汁"，即为2
+,果汁		; "果汁"的索引值被自动分配为2，因为索引值0和1已被占用
 ```
 
-角色型二维数组支持省略第1参数（当 **`キャラクタ変数の引数を補完しない`** (不自动补完角色变量的参数) 设置项未启用时）。
+**FORM语法的相关改动：**
+
+- 使用内插变量时，不再需要根据其变量类型区分花括号(`{STR}`)与百分比号(`%STR%`)。
+- 新增对齐关键字 **`CENTER`**，可使文本在指定的字符长度内居中对齐。例如 `{"确认", 6, CENTER}` 将会格式化为 `" 确认 "`。
+- 可以传入数值表达式作为对齐参数，例如 `{"确认", 6, 1 + 1}` 将会格式化为 `" 确认 "`。  
+  具体的数值及含义如下：
+  - 0 = 左对齐，相当于 `LEFT` 关键字。
+  - 1 = 右对齐，相当于 `RIGHT` 关键字。
+  - 2 = 居中对齐，相当于 `CENTER` 关键字。
+
+**HTML语法的相关改动：**
+
+- `div` 标签的 `bcolor` 属性更名为 `bdcolor` (borderColor)，以避免与其他标签中的 `bcolor` (backgroundColor)属性混淆。
+- `div` 标签的 `bdcolor` 属性的输入值格式改为 `'color'` 单颜色值，不再接收四角颜色值。
+- `div` 标签的 `border` 属性的输入值格式改为 `'thick'` 单数值，不再接收四角数值。
+- `div` 标签的 `margin` 属性的效果改为向外扩张，不再向内挤压。
+
+角色型二维数组支持省略第1参数（当 **`キャラクタ変数の引数を補完しない`** (不自动补完角色变量的参数) 配置项未启用时）。
 
 [**`FOR-NEXT`**](modify_com#for-next) 与 [**`REPEAT-REND`**](modify_com#repeat-rend) 控制语句的临时缓存会随函数一同进出堆栈。
 
@@ -438,12 +437,6 @@ PRINTSL MY_DICTDICT:"NEW":8		; 打印 MY_DICTDICT 中的 "NEW" 字典中的键�
 [**`SETSOUNDVOLUME`**](modify_com#setsoundvolume) 指令已被弃用，不再有任何效果。
 
 [**`ENUMFILES`**](modify_com#enumfiles) 指令获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/`。
-
-HTML代码的相关改动：
-- `div` 标签的 `bcolor` 属性更名为 `bdcolor` (borderColor)，以避免与 `bcolor` (backgroundColor)混淆。
-- `div` 标签的 `bdcolor` 属性的输入值格式改为 `'color'` 单颜色值，不再接收四角颜色值。
-- `div` 标签的 `border` 属性的输入值格式改为 `'thick'` 单数值，不再接收四角数值。
-- `div` 标签的 `margin` 属性的效果改为向外扩张，不再向内挤压。
 
 通过菜单栏中的 `タイトルに戻る` 按钮返回标题画面时将会额外清空如下内容：
 
