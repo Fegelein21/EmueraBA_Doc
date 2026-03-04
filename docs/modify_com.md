@@ -29,6 +29,31 @@ SETBGCOLORBYNAME %LOCALS%
 ### 文本处理相关 {#TextProcessRelated}
 
 ----
+#### REGEXPMATCH
+
+**`int REGEXPMATCH str source, str pattern, int groupCount, str Array_List_HashList`**
+
+该参数格式的第4参数可传入字符串型可引用数组、列表、哈希列表。
+
+:::tip[参数]
+- **str source**
+  - 指定需要处理的文本。
+- **str pattern**
+  - 指定正则表达式规则。
+- **int groupCount**
+  - 指定用于接收匹配到的子表达式组数的数值型变量。
+- **str Array_List_HashList**
+  - 指定用于接收所有匹配结果的的字符串型可引用数组、列表、哈希列表。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
+:::
+
+:::tip[返回值]
+- **RESULT:0**
+  - 返回所有匹配结果数量。
+:::
+
+----
 #### REPLACE
 
 **`str REPLACE str source, str match, str newvalue(, int flag = 0)`**
@@ -860,9 +885,30 @@ STOPSOUND 2			; 停止播放所有音效组为2的音效
 ----
 #### ENUMFILES
 
-**`int ENUMFILES string dir(, string pattern, int option)`**
+**`int ENUMFILES string dir(, string pattern = "*", int option = 0, str Array_List_HashList = RESULTS)`**
 
-该指令获取的文件路径的反斜杠 `\\` 替换为正斜杠 `/`。
+该指令的第4参数可传入字符串型可引用数组、列表、哈希列表。
+
+该指令获取的文件路径中的反斜杠 `\\` 替换为正斜杠 `/`。
+
+:::tip[参数]
+- **str dir**
+  - 指定查找文件的目录。
+- **str pattern = "*"**
+  - 指定匹配文件名规则，可省略 `("*"，匹配任意文件名)`。
+- **int option = 0**
+  - 指定是否查找子目录下的文件，输入值为 `0` 时仅查找当前目录下的文件，可省略 `(0)`。
+- **str Array_List_HashList = RESULTS**
+  - 指定用于接收查找到的文件路径的字符串型可引用数组、列表、哈希列表，可省略 `(使用RESULTS数组)`。  
+    注意：查找到的文件路径包含原目录路径。
+    - 对于多维数组：仅处理最后一维的元素，且需要自行指定之前的维索引值。
+    - 对于列表、哈希列表：变量中原有的内容会被清空并填充新内容。
+:::
+
+:::tip[返回值]
+- **RESULT:0**
+  - 返回查找到的文件数量。
+:::
 
 ----
 #### EXISTFILE
