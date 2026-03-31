@@ -531,28 +531,53 @@ ARRAYRESIZE REF_ARRAY2, 2, 2, 2	; This line will cause an error because the refe
 :::
 
 ----
+#### ARRAYREVERSE
+
+**`void ARRAYREVERSE any Array_List(, int start = 0, int end = lastDimLength)`**
+
+This command is used to reverse the order of elements within a specified range of an array or list.
+
+:::tip[Parameters]
+- **any Array_List**
+  - Specifies any referable array or list to be processed.
+    - For multi-dimensional arrays: Only the elements of the last dimension are processed, and previous dimension index values need to be specified manually.
+- **int start = 0**
+  - Specifies the starting index.
+- **int end = lastDimLength**
+  - Specifies the ending index+1. When omitted, the length of the last dimension of the array or the total length of the list is used.
+:::
+
+:::note[Usage Example]
+```
+LOCAL = 0, 1, 2, 3, 4, 5
+ARRAYREVERSE LOCAL, 2
+PRINTSL STRJOIN(LOCAL)		Prints "0,1,5,4,3,2"
+```
+:::
+
+----
 #### ARRAYTIDY
 
 **`int ARRAYTIDY any Array_List(, int start = 0, int end = lastDimLength, same emptyVal)`**
 
-This command organizes empty values within an array to produce a contiguous array without gaps.
+This command can organize empty values between elements in an array or list to obtain a collection without gaps and with contiguous elements.
 
 :::tip[Parameters]
 - **any Array_List**
   - Specifies any referable array or list to be organized.
-    - For multi-dimensional arrays: Only elements of the last dimension are processed, and earlier dimension indices must be specified manually.
-    - For lists: Empty elements after organization will be removed.
+    - For multi-dimensional arrays: Only the elements of the last dimension are processed, and previous dimension index values need to be specified manually.
+    - For lists: Empty elements will be removed after organization is complete.
 - **int start = 0**
-  - Specifies the start index for organization.
+  - Specifies the starting index for organization.
 - **int end = lastDimLength**
-  - Specifies the end index+1 for organization. If omitted, uses the length of the array's last dimension.
+  - Specifies the ending index+1 for organization. When omitted, the length of the last dimension of the array or the total length of the list is used.
 - **same emptyVal**
-  - Specifies the numerical or string value that will be treated as an empty value during processing. The value type must match the first parameter's value type. Can be omitted (`0` or `empty string`).
+  - Specifies the numerical value or string that will be treated as an empty value during processing. The value type must be consistent with the value type of the first parameter. Can be omitted (`0` or `empty string`).
 :::
 
 :::tip[Return Value]
 - **RESULT:0**
-  - Returns the number of elements within the specified range after organization.
+  - Returns the number of elements after organization within the specified range.
 :::
 
 ----
@@ -1541,6 +1566,43 @@ Retrieves a coordinate point on a Bezier curve based on specified control points
 **`void GDISPOSEALL`**
 
 Releases and clears all Graphics images.
+
+----
+#### GDRAWNINEPATCH
+
+**`int GDRAWNINEPATCH int GID, any ninePatchImage, int centerX, int centerY, int centerWidth, int centerHeight`**
+
+**`int GDRAWNINEPATCH int GID, any ninePatchImage, int centerX, int centerY, int centerWidth, int centerHeight, int destX, int destY, int destWidth, int destHeight`**
+
+Used to stretch and draw the specified nine-patch image according to NinePatch rules. The nine-patch image specified by this command does not need to contain edge black bars. Simply pass parameters to determine the central rectangular area of the nine-patch image, and it will automatically distinguish the stretching areas around the nine-patch image.
+
+:::tip[Parameters]
+- **int GID**
+  - Specifies the image ID.
+- **any ninePatchImage**
+  - Specifies the image ID or Sprite name of the nine-patch image. The specified nine-patch image does not need to contain edge black bars.
+- **int centerX**
+  - Specifies the X position of the central rectangle of the nine-patch image.
+- **int centerY**
+  - Specifies the Y position of the central rectangle of the nine-patch image.
+- **int centerWidth**
+  - Specifies the width of the central rectangle of the nine-patch image.
+- **int centerHeight**
+  - Specifies the height of the central rectangle of the nine-patch image.
+- **int destX**
+  - Specifies the target X position. When omitted, the nine-patch image will be stretched to the entire target image.
+- **int destY**
+  - Specifies the target Y position. When omitted, the nine-patch image will be stretched to the entire target image.
+- **int destWidth**
+  - Specifies the target width. When omitted, the nine-patch image will be stretched to the entire target image. Can input `negative numbers` to draw flipped images.
+- **int destHeight**
+  - Specifies the target height. When omitted, the nine-patch image will be stretched to the entire target image. Can input `negative numbers` to draw flipped images.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Indicates whether the graphics were successfully drawn. Returns `non-zero` when successful. Returns `0` when the specified image or nine-patch image has not been created.
+:::
 
 ----
 #### GENABLED
@@ -3110,29 +3172,37 @@ Removes all temporary Audio created at runtime. Memory occupied by Audio will be
 ----
 #### CURRENTBGM
 
-**`str CURRENTBGM`**
+**`int CURRENTBGM str Array_List_HashList(, int groupID)`**
 
-Retrieves the name of the background music currently playing.
+Gets a list of currently playing background music names.
 
 :::tip[Parameters]
-- None
+- **str Array_List_HashList**
+  - Specifies a string-type referable array, list, or hash list to receive the currently playing background music names.
+    - For lists and hash lists: The original content in the variable will be cleared and filled with new content.
+- **int groupID**
+  - Specifies the group number for which you want to get background music names with the same group number. When this parameter is omitted, all background music names are obtained.
 :::
 
 :::tip[Return Value]
-- **RESULTS:0**
-  - The name of the background music currently playing. Returns an `empty string` if no music is playing.
+- **RESULT:0**
+  - Returns the number of currently playing background music names obtained.  
+    The number obtained may be affected by array length and hash list characteristics.
 :::
 
 ----
 #### PAUSEBGM
 
-**`void PAUSEBGM (int fadeOut = 0)`**
+**`void PAUSEBGM (int fadeOut = 0, int groupID)`**
 
-Pauses the background music currently playing.
+Pauses currently playing background music. Can be used with the [**`PLAYBGM`**](modify_com#playbgm) command to resume playback of paused background music.
 
 :::tip[Parameters]
 - **int fadeOut = 0**
-  - Specifies the fade-out effect duration in `ms (milliseconds)`. Input `omitted` or `less than or equal to 0` for no effect. Maximum value is `10000`.
+  - Specifies the duration of fade-out effect, in `ms(milliseconds)`. Input values `omitted` or `less than or equal to 0` have no effect, maximum value is `10000`.  
+    This parameter will affect all background music with the specified group number.
+- **int groupID**
+  - Specifies the group number you want to pause playback for. When this parameter is omitted, all background music will be paused.
 :::
 
 ----

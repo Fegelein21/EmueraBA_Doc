@@ -29,6 +29,31 @@ SETBGCOLORBYNAME %LOCALS%
 ### Text Processing Related {#TextProcessRelated}
 
 ----
+#### REGEXPMATCH
+
+**`int REGEXPMATCH str source, str pattern, int groupCount, str Array_List_HashList`**
+
+The fourth parameter of this parameter format can accept string-type referable arrays, lists, and hash lists.
+
+:::tip[Parameters]
+- **str source**
+  - Specifies the text to be processed.
+- **str pattern**
+  - Specifies the regular expression rule.
+- **int groupCount**
+  - Specifies a numeric variable to receive the number of matched sub-expression groups.
+- **str Array_List_HashList**
+  - Specifies a string-type referable array, list, or hash list to receive all matching results.
+    - For multi-dimensional arrays: Only the elements of the last dimension are processed, and previous dimension index values need to be specified manually.
+    - For lists and hash lists: The original content in the variable will be cleared and filled with new content.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of all matching results.
+:::
+
+----
 #### REPLACE
 
 **`str REPLACE str source, str match, str newvalue(, int flag = 0)`**
@@ -80,23 +105,23 @@ This instruction calculates character length by computing display width when pro
 
 **`str STRJOIN any Array_List_HashList(, str delimiter = ",", int start = 0, int count = lastDimLength)`**
 
-The first parameter `Array_List_HashList` can accept any type of referable array, list, or hash list.
+The first parameter `Array_List_HashList` of this command can accept any-type referable arrays, lists, and hash lists.
 
 :::tip[Parameters]
 - **any Array_List_HashList**
-  - Specifies any type of referable array, list, or hash list whose strings are to be joined.
-    - For multi-dimensional arrays: Only elements of the last dimension are processed, and preceding dimension index values must be specified manually.
+  - Specifies any-type referable array, list, or hash list whose strings need to be merged.
+    - For multi-dimensional arrays: Only the elements of the last dimension are processed, and previous dimension index values need to be specified manually.
 - **str delimiter = ","**
-  - Specifies the delimiter used when joining strings.
+  - Specifies the delimiter used when merging strings.
 - **int start = 0**
-  - Specifies the starting index for joining.
+  - Specifies the starting index for merging.
 - **int count = lastDimLength**
-  - Specifies the number of elements to join. Uses the length of the last dimension of the array when omitted.
+  - Specifies the number of elements to merge. When omitted, the length of the last dimension of the array or the total length of the list is used.
 :::
 
 :::tip[Return Value]
 - **RESULTS:0**
-  - Returns the joined string.
+  - Returns the merged string.
 :::
 
 ----
@@ -730,31 +755,47 @@ Added a second parameter `disposeImg` to specify whether to release the image re
 ----
 #### PLAYBGM
 
-**`int PLAYBGM str name(, int volume, int fadeIn = 0, int delay = 0)`**
+**`int PLAYBGM str name(, int volume, int delay = 0, int fadeIn = 0, int groupID = 0)`**
 
-Added second to fourth parameters `volume`, `fadeIn`, `delay`.
-
-The first parameter `name` only supports inputting Audio names. To play via an audio file path, first use the [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) instruction to create an Audio.  
+The first parameter `name` only supports inputting Audio names. To play via audio file paths, first use the [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) command to create an Audio.  
 For information on how to add built-in Audio resources, please refer to the [**`Audio Functionality`**](/#AudioFunc) section.
 
-**`int PLAYBGM (int fadeIn = 0, int delay = 0)`**
-
-Added the above parameter format. This format is used to resume playback of a paused background music.
+Added the second parameter `volume` to specify the playback volume for this instance.  
+Added the third parameter `delay` to specify the duration of delayed playback.  
+Added the fourth parameter `fadeIn` to specify the duration of fade-in effect.  
+Added the fifth parameter `groupID` to specify the playback group number for this instance, which can be used with the [**`STOPBGM`**](modify_com#stopbgm) command to stop all background music with the same group number.
 
 :::tip[Parameters]
 - **str name**
   - Specifies the Audio name to play.
 - **int volume**
-  - Specifies the playback volume for this instance. Can be omitted `(uses the Audio's preset volume)`.
-- **int fadeIn = 0**
-  - Specifies the fade-in effect duration in `ms (milliseconds)`. No effect if the input value is `omitted` or `less than or equal to 0`. Maximum value is `10000`.
+  - Specifies the playback volume for this instance, can be omitted `(uses the Audio's preset volume)`.
 - **int delay = 0**
-  - Specifies the delay playback duration in `ms (milliseconds)`. No effect if the input value is `omitted` or `less than or equal to 0`. Maximum value is `10000`.
+  - Specifies the duration of delayed playback, in `ms(milliseconds)`. Input values `omitted` or `less than or equal to 0` have no effect, maximum value is `10000`.
+- **int fadeIn = 0**
+  - Specifies the duration of fade-in effect, in `ms(milliseconds)`. Input values `omitted` or `less than or equal to 0` have no effect, maximum value is `10000`.
+- **int groupID = 0**
+  - Specifies the playback group number for this instance, can be omitted `(0)`.
+:::
+
+**`int PLAYBGM (int delay = 0, int fadeIn = 0, int groupID)`**
+
+Added a new parameter format specifically for controlling background music playback status, which can be used with the [**`PAUSEBGM`**](new_com#pausebgm) command to implement pausing and resuming playback of background music.
+
+:::tip[Parameters]
+- **int delay = 0**
+  - Specifies the duration of delayed playback, in `ms(milliseconds)`. Input values `omitted` or `less than or equal to 0` have no effect, maximum value is `10000`.  
+    This parameter will affect all background music with the specified group number.
+- **int fadeIn = 0**
+  - Specifies the duration of fade-in effect, in `ms(milliseconds)`. Input values `omitted` or `less than or equal to 0` have no effect, maximum value is `10000`.  
+    This parameter will affect all background music with the specified group number.
+- **int groupID**
+  - Specifies the group number you want to resume playback for. When this parameter is omitted, all background music will resume playback.
 :::
 
 :::tip[Return Value]
 - **RESULT:0**
-  - Indicates whether playback was successful. Returns `non-zero` on success. Returns `0` if the Audio does not exist or there is an error loading the Audio.
+  - Indicates whether playback was successful. Returns `non-zero` when successful. Returns `0` when Audio does not exist or Audio loading error occurs.
 :::
 
 :::note[Usage Example]
@@ -770,29 +811,29 @@ PLAYBGM 1500                          ; Resumes playback of current background m
 ----
 #### PLAYSOUND
 
-**`int PLAYSOUND str name(, int volume, int groupID = 0, int delay = 0)`**
+**`int PLAYSOUND str name(, int volume, int delay = 0, int groupID = 0)`**
 
-Added a second parameter `volume` to specify the playback volume for this instance.  
-Added a third parameter `groupID` to specify the sound effect group for this playback, which can be used with the [**`STOPSOUND`**](modify_com#stopsound) instruction to stop all sound effects in the same group.  
-Added a fourth parameter `delay` to specify the playback delay for this instance, in milliseconds.
-
-The first parameter `name` only supports inputting Audio names. To play via an audio file path, first use the [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) instruction to create an Audio.  
+The first parameter `name` only supports inputting Audio names. To play via audio file paths, first use the [**`AUDIOCREATEFROMFILE`**](new_com#audiocreatefromfile) command to create an Audio.  
 For information on how to add built-in Audio resources, please refer to the [**`Audio Functionality`**](/#AudioFunc) section.
+
+Added the second parameter `volume` to specify the playback volume for this instance.  
+Added the third parameter `delay` to specify the playback delay for this instance.  
+Added the fourth parameter `groupID` to specify the playback group number for this instance, which can be used with the [**`STOPSOUND`**](modify_com#stopsound) command to stop all sound effects with the same group number.
 
 :::tip[Parameters]
 - **str name**
   - Specifies the Audio name to play.
 - **int volume**
-  - Specifies the playback volume for this instance. Can be omitted `(uses the audio's preset volume)`.
-- **int groupID = 0**
-  - Specifies the sound effect group for this playback. Can be omitted `(0)`.
+  - Specifies the playback volume for this instance, can be omitted `(uses the audio's preset volume)`.
 - **int delay = 0**
-  - Specifies the playback delay for this instance, in milliseconds. Can be omitted `(0)`.
+  - Specifies the playback delay for this instance, in milliseconds, can be omitted `(0)`.
+- **int groupID = 0**
+  - Specifies the playback group number for this instance, can be omitted `(0)`.
 :::
 
 :::tip[Return Value]
 - **RESULT:0**
-  - Indicates whether playback was successful. Returns `non-zero` on success. Returns `0` if the Audio does not exist or there is an error loading the Audio.
+  - Indicates whether playback was successful. Returns `non-zero` when successful. Returns `0` when Audio does not exist or Audio loading error occurs.
 :::
 
 :::note[Usage Example]
@@ -819,38 +860,42 @@ This instruction has been deprecated and no longer has any effect.
 ----
 #### STOPBGM
 
-**`void STOPBGM (int fadeOut = 0)`**
+**`void STOPBGM (int fadeOut = 0, int groupID)`**
 
-Added a `fadeOut` parameter. When a value `greater than 0` is input, the background music will have a fade-out effect when stopping.
+Added the `fadeOut` parameter. When the input value is `greater than 0`, background music can have a fade-out effect when stopped.  
+Added the `groupID` parameter to specify the group number you want to stop playback for. When this parameter is omitted, all background music will be stopped.
 
 :::tip[Parameters]
 - **int fadeOut = 0**
-  - Specifies the fade-out effect duration in `ms (milliseconds)`. No effect if the input value is `omitted` or `less than or equal to 0`. Maximum value is `10000`.
+  - Specifies the duration of fade-out effect, in `ms(milliseconds)`. Input values `omitted` or `less than or equal to 0` have no effect, maximum value is `10000`.  
+    This parameter will affect all background music with the specified group number.
+- **int groupID**
+  - Specifies the group number you want to stop playback for. When this parameter is omitted, all background music will be stopped.
 :::
 
 :::note[Usage Example]
 ```
-STOPBGM 1500            ; Stops background music with a 1500ms fade-out effect.
+STOPBGM	1500			; Stop background music with a 1500ms fade-out effect
 ```
 :::
 
 ----
 #### STOPSOUND
 
-**`void STOPSOUND (int groupID = 0)`**
+**`void STOPSOUND (int groupID)`**
 
-Added a `groupID` parameter to specify the sound effect group to stop. When this parameter is omitted, all sound effects are stopped.
+Added the `groupID` parameter to specify the group number you want to stop playback for. When this parameter is omitted, all sound effects will be stopped.
 
 :::tip[Parameters]
-- **int groupID = 0**
-  - Specifies the sound effect group to stop. When this parameter is omitted, all sound effects are stopped.
+- **int groupID**
+  - Specifies the group number you want to stop playback for. When this parameter is omitted, all sound effects will be stopped.
 :::
 
 :::note[Usage Example]
 ```
-PLAYSOUND "MySOUND1", , 1 ; Plays sound effect "MySOUND1", sound effect group set to 1.
-PLAYSOUND "MySOUND2", , 2 ; Plays sound effect "MySOUND2", sound effect group set to 2.
-STOPSOUND 2                ; Stops all sound effects in group 2.
+PLAYSOUND "MySOUND1", , 1	; Play sound effect "MySOUND1" with group number set to 1
+PLAYSOUND "MySOUND2", , 2	; Play sound effect "MySOUND2" with group number set to 2
+STOPSOUND 2			; Stop all sound effects with group number 2
 ```
 :::
 
@@ -860,9 +905,30 @@ STOPSOUND 2                ; Stops all sound effects in group 2.
 ----
 #### ENUMFILES
 
-**`int ENUMFILES string dir(, string pattern, int option)`**
+**`int ENUMFILES string dir(, string pattern = "*", int option = 0, str Array_List_HashList = RESULTS)`**
 
-The backslashes `\\` in file paths obtained by this instruction are replaced with forward slashes `/`.
+The fourth parameter of this command can accept string-type referable arrays, lists, and hash lists.
+
+The backslashes `\\` in the file paths obtained by this command have been replaced with forward slashes `/`.
+
+:::tip[Parameters]
+- **str dir**
+  - Specifies the directory to search for files.
+- **str pattern = "*"**
+  - Specifies the file name matching rule, can be omitted `("*"，matches any file name)`.
+- **int option = 0**
+  - Specifies whether to search for files in subdirectories. When the input value is `0`, only files in the current directory are searched, can be omitted `(0)`.
+- **str Array_List_HashList = RESULTS**
+  - Specifies a string-type referable array, list, or hash list to receive the found file paths, can be omitted `(use the RESULTS array)`.  
+    Note: The found file paths include the original directory path.
+    - For multi-dimensional arrays: Only the elements of the last dimension are processed, and previous dimension index values need to be specified manually.
+    - For lists and hash lists: The original content in the variable will be cleared and filled with new content.
+:::
+
+:::tip[Return Value]
+- **RESULT:0**
+  - Returns the number of files found.
+:::
 
 ----
 #### EXISTFILE

@@ -6,6 +6,29 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2026-03-31
+
+更新了所有AI翻译的英文、日文和韩文文档。
+
+声明 [**`扩展变量`**](/#ExtendedVariableType) 时支持与 `CHARADATA` 关键字同时定义。
+
+`RANDDATA` 数组的长度不再限制，可在 `csv/VariableSize.CSV` 文件中修改。
+
+在 `音频` 会话窗口中新增 **`最小化窗口时自动静音`** 配置项，该配置项默认已启用。
+
+新增 [**`GDRAWNINEPATCH`**](new_com#gdrawninepatch) 指令，用于绘制点九图。
+
+[**`CURRENTBGM`**](new_com#currentbgm) 指令改为获取正在播放的背景音乐名称列表，该指令的参数格式以及返回值类型已变更。
+
+[**`PLAYBGM`**](modify_com#playbgm) 指令的参数格式已变更。且新增 `groupID` 参数，用于指定背景音乐的播放组号。
+
+[**`PLAYSOUND`**](modify_com#playsound) 指令的参数格式已变更。
+
+[**`PAUSEBGM`**](new_com#pausebgm) 指令新增 `groupID` 参数，用于指定想要暂停播放的背景音乐组号。
+
+[**`STOPBGM`**](modify_com#stopbgm) 指令新增 `groupID` 参数，用于指定想要停止播放的背景音乐组号。
+
+----
 ### 2026-03-04
 
 新增 [**`插件功能`**](/#PluginFunc)，可在不修改启动器本身的情况下，通过读取外部DLL插件的方式添加扩展方法并在游戏脚本中调用。

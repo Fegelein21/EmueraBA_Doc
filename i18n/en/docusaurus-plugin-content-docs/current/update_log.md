@@ -6,15 +6,69 @@ sidebar_label: Update Log
 # Update Log {#UpdateLog}
 
 ----
+### 2026-03-31
+
+Updated all AI-translated English, Japanese, and Korean documentation.
+
+Declaration of [**`Extended Variables`**](/#ExtendedVariableType) now supports simultaneous definition with the `CHARADATA` keyword.
+
+The length of the `RANDDATA` array is no longer limited and can be modified in the `csv/VariableSize.CSV` file.
+
+Added a new **`Mute automatically when window is minimized`** configuration item in the `Audio` session window. This configuration item is enabled by default.
+
+Added the [**`GDRAWNINEPATCH`**](new_com#gdrawninepatch) command for drawing nine-patch images.
+
+The [**`CURRENTBGM`**](new_com#currentbgm) command has been changed to obtain a list of currently playing background music names. The parameter format and return value type of this command have been changed.
+
+The parameter format of the [**`PLAYBGM`**](modify_com#playbgm) command has been changed. Additionally, a `groupID` parameter has been added to specify the playback group number for background music.
+
+The parameter format of the [**`PLAYSOUND`**](modify_com#playsound) command has been changed.
+
+The [**`PAUSEBGM`**](new_com#pausebgm) command now has a `groupID` parameter added to specify the background music group number you want to pause.
+
+The [**`STOPBGM`**](modify_com#stopbgm) command now has a `groupID` parameter added to specify the background music group number you want to stop.
+
+----
+### 2026-03-04
+
+Added [**`Plugin Functionality`**](/#PluginFunc), which allows adding extension methods by reading external DLL plugins without modifying the launcher itself, and calling them in game scripts.
+
+Mods now support reading preset files in the `csv` folder: `.csv` `Chara*.csv` `VarExt*.csv`.
+
+The `resources` folder now supports reading font files. Simply place font files directly as in the `font` folder.
+
+The fourth parameter of one parameter format of the [**`REGEXPMATCH`**](modify_com#regexpmatch) command can now accept string-type referable arrays, lists, and hash lists.
+
+The fourth parameter of the [**`ENUMFILES`**](modify_com#enumfiles) command can now accept string-type referable arrays, lists, and hash lists.
+
+----
+### 2026-02-16
+
+The `Emuera Interface Language` configuration item has been moved to the `Help` menu bar on the main interface.
+
+Related changes to FORM syntax:
+
+- When using interpolation variables, it is no longer necessary to distinguish between curly braces (`{STR}`) and percentage signs (`%STR%`) based on their variable type.
+- Added alignment keyword **`CENTER`**, which can center-align text within a specified character length. For example, `{"Confirm", 6, CENTER}` will be formatted as `" Confirm "`.
+- Numerical expressions can be passed as alignment parameters. For example, `{"Confirm", 6, 1 + 1}` will be formatted as `" Confirm "`.  
+  Specific numerical values and their meanings are as follows:
+  - 0 = Left alignment, equivalent to the `LEFT` keyword.
+  - 1 = Right alignment, equivalent to the `RIGHT` keyword.
+  - 2 = Center alignment, equivalent to the `CENTER` keyword.
+
+Added the [**`ARRAYREVERSE`**](new_com#arrayreverse) command for reverse ordering of elements within a specified range of an array or list.
+
+----
 ### 2026-01-23
 
 Updated all AI-translated English, Japanese, and Korean documents.
 
-- Improvements to the ERD Keyword feature:
-    - When the keyword index value is omitted, the system automatically assigns an unused index value to that keyword.  
-      **Warning: Variables declared with SAVEDATA are not recommended to omit index values to avoid game save data corruption.**
-    - When an existing keyword name is entered as an index value, it will directly reference that keyword's index value.
-- Please refer to the `ERD Keyword Feature Example` in [**`Program and Instruction Compatibility Changes`**](/#CompatibilityChanges) for usage of these improvements.
+Related changes to ERD keyword functionality:
+
+- When omitting keyword index values, the system will automatically assign an unused index value to that keyword.  
+  **Warning: Variables declared with `SAVEDATA` are not recommended to omit index values to avoid game save data corruption.**
+- When filling in an existing keyword name as an index value, it will directly reference that keyword's index value.
+- Please refer to the `ERD Keyword Functionality Example` in [**`Syntax, Command, and Program Compatibility Changes`**](/#CompatibilityChanges) to understand the usage of these improved functionalities.
 
 [**`TRYTOINT`**](new_com#trytoint) The instruction adds a second parameter `outValue` to specify the integer variable that receives the conversion result. If omitted, `RESULT:1` will be used to receive the conversion result.
 
@@ -129,7 +183,7 @@ Added the [**`ARRAYRESIZE`**](new_com#arrayresize) instruction to resize specifi
 
 Added [**`Extended Variable Types`**](/#ExtendedVariableType), supporting variable types such as Lists, Hash Lists, and Dictionaries.
 
-Character-type two-dimensional arrays now support omitting the first parameter (when the **`キャラクタ変数の引数を補完しない`** (Do Not Auto-Complete Character Variable Parameters) setting is not enabled).
+Character-type two-dimensional arrays now support omitting the first parameter (when the **`キャラクタ変数の引数を補完しない`** (Do not automatically complete character variable parameters) configuration item is not enabled).
 
 The [**`ERDNAME`**](modify_com#erdname) instruction, when omitting the third parameter, will now look up the keyword for the last dimension subscript of the array.
 
