@@ -6,6 +6,17 @@ sidebar_label: 更新日志
 # 更新日志 {#UpdateLog}
 
 ----
+### 2026-06-15
+
+`resources` 文件夹中的csv文件支持使用双引号输入格式，可参阅 [**`模组功能`**](/#ModuleFunc) 中的 `文件路径与示例内容` 部分以了解该输入格式的用法。
+
+新增 [**`STRCONVERT`**](new_com#strconvert) 指令，用于将需要转换的文本按照处理选项进行处理，处理选项包括全角/半角字符互转、日文假名类型转换、简繁中文字符转换。
+
+新增 [**`GETANIMETIMER`**](new_com#getanimetimer) 指令，用于获取动画计时器的当前状态。
+
+[**`SETANIMETIMER`**](modify_com#setanimetimer) 指令新增1种参数格式以支持指定动画计时器的持续时间。
+
+----
 ### 2026-03-31
 
 更新了所有AI翻译的英文、日文和韩文文档。
@@ -35,7 +46,7 @@ sidebar_label: 更新日志
 
 模组支持读取 `csv` 文件夹中的预设文件：`.csv` `Chara*.csv` `VarExt*.csv`。
 
-`resources` 文件夹支持读取字体文件，只需像 `font` 文件夹那样直接将字体文件放入即可。
+`resources` 文件夹支持读取字体文件，只需像 `font` 文件夹那样直接放入字体文件即可。
 
 [**`REGEXPMATCH`**](modify_com#regexpmatch) 指令的其中一种参数格式的第4参数可传入字符串型可引用数组、列表、哈希列表。
 

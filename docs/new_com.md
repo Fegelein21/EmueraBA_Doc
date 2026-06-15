@@ -144,6 +144,49 @@ PRINTSL STRAPPEND("__", "aaa", 222, 33)		;打印“aaa__222__33”
 :::
 
 ----
+#### STRCONVERT
+
+**`str STRCONVERT str text, int option`**
+
+用于将指定的文本按照处理选项进行字符转换处理，处理选项包括全角/半角字符互转、日文假名类型转换、简繁中文字符转换。
+
+:::tip[参数]
+- **str text**
+  - 指定需要转换的文本。
+- **int option**
+  - 指定处理选项：
+    -  `1P0` = 半角字符 → 全角字符。
+    -  `1P1` = 全角字符 → 半角字符。
+      -  `1P0 - 1P1` 为互斥选项，同时指定时仅数值最低的选项生效。
+    -  `1P2` = 平假名 → 片假名。
+    -  `1P3` = 片假名 → 平假名。
+      -  `1P2 - 1P3` 为互斥选项，同时指定时仅数值最低的选项生效。
+    -  `1P4` = 简体中文 → 標準繁體。
+    -  `1P5` = 简体中文 → 台灣正體。
+    -  `1P6` = 简体中文 → 香港繁體。
+    -  `1P7` = 標準繁體 → 台灣正體。
+    -  `1P8` = 標準繁體 → 香港繁體。
+    -  `1P9` = 標準繁體 → 日文新字體。
+      -  `1P4 - 1P9` 为互斥选项，同时指定时仅数值最低的选项生效。
+    -  `1P10` = 与 `1P4 - 1P9` 选项一同指定时反转其转换操作，例如 `简体中文 → 標準繁體` 反转成 `標準繁體 → 简体中文` 。
+:::
+
+:::tip[返回值]
+- **RESULTS:0**
+  - 返回转换的字符串结果。
+:::
+
+:::note[使用例]
+```
+LOCALS:0 '= "abc123 アイウ ﾡﾢﾣ 标准"
+LOCALS:0 '= STRCONVERT(LOCALS:0, 1P0 | 1P3 | 1P4)
+LOCALS:1 '= STRCONVERT(LOCALS:0, 1P1 | 1P2 | 1P4 | 1P10)
+PRINTSL LOCALS:0		; 打印“ａｂｃ１２３　あいう　ㄱㄲㄳ　標準”
+PRINTSL LOCALS:1		; 打印“abc123 ｱｲｳ ﾡﾢﾣ 标准”
+```
+:::
+
+----
 #### STRFINDUW
 
 **`int STRFINDUW str text, str word(, int start = 0)`**
@@ -388,8 +431,8 @@ PRINTSL STRTRIM(" 111 AAA  22  ", " 12", 1)		;打印“AAA  22  ”。
 
 :::note[使用例]
 ```
-PRINTSL SUBSTRINGUW("A👪BAB👪A", 0, 4)		;打印“A👪BA”
-PRINTSL SUBSTRINGUW("A👪BAB👪A", 5)		;打印“👪A”
+PRINTSL SUBSTRINGUW("1👪234👪5", 0, 4)		;打印“1👪23”
+PRINTSL SUBSTRINGUW("1👪234👪5", 5)		;打印“👪5”
 ```
 :::
 
@@ -1387,6 +1430,21 @@ PRINTVL ARRAYFIND(CARRAY_2D:TARGET:3:0, 22, 5)		;检索角色TARGET的 CARRAY_2D
 - **RESULT:0**
   - 对于数组：返回成功复制的元素数。获取的元素数受限于数组的长度。
   - 对于列表、哈希列表：返回目标变量中的元素总数。
+:::
+
+----
+### 画面控制 {#ScreenControl}
+
+----
+#### GETANIMETIMER
+
+**`int GETANIMETIMER`**
+
+用于获取动画计时器的当前状态。
+
+:::tip[返回值]
+- **RESULT:0**
+  - 指示动画计时器是否已启用，已启用时返回 `非0`。
 :::
 
 ----

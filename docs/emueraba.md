@@ -31,7 +31,9 @@ slug: /
 
 支持截图功能，可通过菜单栏中的 `帮助 → 截图按钮` 来将当前的画面保存为文件，或通过新增的 [**`GSNAPSHOT`**](new_com#gsnapshot) 指令来获取当前画面的图像数据。
 
-`resources` 文件夹支持读取字体文件，只需像 `font` 文件夹那样直接将字体文件放入即可。
+`resources` 文件夹支持读取字体文件，只需像 `font` 文件夹那样直接放入字体文件即可。
+
+`resources` 文件夹中的csv文件支持使用双引号输入格式，可参阅 [**`模组功能`**](#ModuleFunc) 中的 `文件路径与示例内容` 部分以了解该输入格式的用法。
 
 `RANDDATA` 数组的长度不再限制，可在 `csv/VariableSize.CSV` 文件中修改。
 
@@ -52,22 +54,23 @@ slug: /
 - 在 `mod` 文件夹下新建一个**模组文件夹**，文件夹名称不限，例如 `MyMod`。
 - 在 `MyMod` 文件夹下新建名为 `_mod.csv` 的**模组标识文件**，并根据下述表格中的属性填写内容：
 
-|属性         |描述|
-|:---:        |---|
-|ID           |该模组的唯一标识。若该标识为空或是与其他模组重名，则模组不会被识别。**请确保ID名称符合函数命名规范，且制定后不建议二次修改**。|
-|Name         |该模组的显示名称。|
-|Authors      |该模组的作者名称。|
-|Cover        |该模组的显示封面。若要读取模组内的图像，可填写 `{0}` 作为模组所在路径，例如 `{0}resources/cover.png`|
-|Description  |该模组的显示简介，可换行续写。**请确保Description属性写在其他属性之后**。|
+| 属性                | 描述 |
+| :---:               | --- |
+| ID                  | 该模组的唯一标识。若该标识为空或是与其他模组重名，则模组不会被识别。**请确保ID名称符合函数命名规范，且制定后不建议二次修改**。 |
+| Name                | 该模组的显示名称。 |
+| Author or Authors   | 该模组的作者名称。 |
+| Cover               | 该模组的显示封面。若要读取模组内的图像，可填写 `{0}` 作为模组所在路径，例如 `{0}resources/cover.png` |
+| Desc or Description | 该模组的显示简介。 |
 
 ```csv title="文件路径与示例内容：mod/MyMod/_mod.csv"
-ID,MyMod
-Name,我的mod v1.0
-Authors,Tom & Jerry
-Cover,{0}resources/cover.png
-Description,我的mod的简介
-我的mod的简介1
-我的mod的简介2
+ID, MyMod
+Name, "我的mod v1.0"
+Authors, "Tom, Jerry"
+Cover, "{0}resources/cover.png"
+Description, "
+这是一个示例模组。
+作者为\"Tom\"和\"Jerry\"。
+就这样。"
 ```
 
 接下来，您可以在模组文件夹中添加如下资源文件：
